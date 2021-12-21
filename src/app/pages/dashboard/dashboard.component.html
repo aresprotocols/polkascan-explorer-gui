@@ -1,43 +1,125 @@
 <div class="columns">
     <div class="column is-12">
-        <app-polkascan-header></app-polkascan-header>
-
-        <section class="is-12" id="search">
-            <div class="card">
-                <div class="card-content">
-                    <div class="content">
-                        <form (ngSubmit)="search()">
-                        <div class="control has-icons-left has-icons-right">
-                            <input class="input is-large" type="text" [(ngModel)]="blockSearchText" [ngModelOptions]="{standalone: true}" [placeholder]="'PlaceHolderSearch' | translate">
-                            <span class="icon is-medium is-left">
-                              <i class="fa fa-search"></i>
-                            </span>
-                            <span class="icon is-medium is-right">
-                              <i *ngIf="blockSearchText" class="fa fa-check"></i>
-                            </span>
-                        </div>
-                      </form>
-                    </div>
-                </div>
+        <div class="dashboard-header">
+          <div class="chain-data column is-3">
+            <div class="title">
+              Chain Data
             </div>
-        </section>
-
+            <div class="chain-data-items">
+              <div class="chain-data-item">
+                <div>
+                  <img src="../../../assets/icons/blocks.png" alt="" width="24" height="24">
+                </div>
+                <div>
+                  <div class="item-title">Finalized Blocks</div>
+                  <div class="numbers">10,544,432</div>
+                </div>
+              </div>
+              <div class="chain-data-item">
+                <div>
+                  <img src="../../../assets/icons/signed.png" alt="" width="24" height="24">
+                </div>
+                <div>
+                  <div class="item-title">Signed Extrinsics</div>
+                  <div class="numbers">2,920,292</div>
+                </div>
+              </div>
+              <div class="chain-data-item">
+                <div>
+                  <img src="../../../assets/icons/transfers.png" alt="" width="24" height="24">
+                </div>
+                <div>
+                  <div class="item-title">Transfers</div>
+                  <div class="numbers">1,397,024</div>
+                </div>
+              </div>
+              <div class="chain-data-item">
+                <div>
+                  <img src="../../../assets/icons/holders.png" alt="" width="24" height="24">
+                </div>
+                <div>
+                  <div class="item-title">Holders</div>
+                  <div class="numbers">229,504</div>
+                </div>
+              </div>
+              <div class="chain-data-item">
+                <div>
+                  <img src="../../../assets/icons/total.png" alt="" width="24" height="24">
+                </div>
+                <div>
+                  <div class="item-title">Total Issuance</div>
+                  <div class="numbers">11.791M</div>
+                </div>
+              </div>
+              <div class="chain-data-item">
+                <div>
+                  <img src="../../../assets/icons/staked.png" alt="" width="24" height="24">
+                </div>
+                <div>
+                  <div class="item-title">Staked Value</div>
+                  <div class="numbers">5.369M (45.5%)</div>
+                </div>
+              </div>
+              <div class="chain-data-item">
+                <div>
+                  <img src="../../../assets/icons/validators.png" alt="" width="24" height="24">
+                </div>
+                <div>
+                  <div class="item-title">Validators</div>
+                  <div class="numbers">1,000/1,000</div>
+                </div>
+              </div>
+              <div class="chain-data-item">
+                <div>
+                  <img src="../../../assets/icons/rate.png" alt="" width="24" height="24">
+                </div>
+                <div>
+                  <div class="item-title">Inflation Rate</div>
+                  <div class="numbers">7.25%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="token-status column is-3">
+            <div>
+              <img src="../../../assets/icons/logo02.png" alt="">
+            </div>
+            <div class="status-items">
+              <div class="status-title">
+                Token Status
+              </div>
+              <div class="status-item1">
+                <div class="status-item">
+                  <div class="status-item-title">Rank</div>
+                  <div class="status-item-num">1010</div>
+                </div>
+                <div class="status-item">
+                  <div class="status-item-title">Market Cap</div>
+                  <div class="status-item-num">$8.13 M USD</div>
+                </div>
+              </div>
+              <div class="status-item">
+                <div class="status-item-title">24H Volume</div>
+                <div class="status-item-num">$2.59 M USD</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <app-polkascan-header></app-polkascan-header>
         <section class="columns">
             <div class="column is-6 last-blocks" id="last-blocks">
                 <div class="card dashboard-card">
                   <a routerLink="{{ networkURLPrefix }}/block">
                     <header class="card-header">
-                        <p class="card-header-title">
-                            {{ 'DashBoard.Last blocks' | translate }}
-                        </p>
-                        <a [routerLink]="" fragment="last-blocks" class="card-header-icon" aria-label="more options">
-                          <span class="icon">
-                            <i class="fa fa-cube" aria-hidden="true"></i>
-                          </span>
-                        </a>
+                      <a [routerLink]="" fragment="last-blocks" class="card-header-icon" aria-label="more options">
+                        <img src="../../../assets/icons/block.png" alt="" width="28" height="28">
+                      </a>
+                      <p class="card-header-title">
+                          {{ 'DashBoard.Last blocks' | translate }}
+                      </p>
                     </header>
                   </a>
-                    <div class="card-table">
+                  <div class="card-table">
                         <div class="content">
                             <table class="table is-fullwidth is-striped">
                                 <thead>
@@ -69,14 +151,12 @@
               <div class="card dashboard-card">
                   <a routerLink="{{ networkURLPrefix }}/balances/transfer">
                     <header class="card-header">
+                      <a [routerLink]="" fragment="last-transfers" class="card-header-icon" aria-label="more options">
+                        <img src="../../../assets/icons/transfers.png" alt="" width="28" height="28">
+                      </a>
                         <p class="card-header-title">
                             {{ 'DashBoard.Last balance transfers' | translate }}
                         </p>
-                        <a [routerLink]="" fragment="last-transfers" class="card-header-icon" aria-label="more options">
-                          <span class="icon">
-                            <i class="fa fa-exchange-alt" aria-hidden="true"></i>
-                          </span>
-                        </a>
                     </header>
                   </a>
                     <div class="card-table">

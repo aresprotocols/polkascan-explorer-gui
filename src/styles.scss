@@ -3,11 +3,13 @@ html, body {
   font-size: 16px;
   line-height: 1.5;
   height: 100%;
-  background: #ECF0F3;
+  background: #EAEEFF;
 }
 nav.navbar {
   border-top: 4px solid #276cda;
   margin-bottom: 1rem;
+  align-items: flex-start;
+  z-index: auto;
 }
 .navbar-item.brand-text {
   font-weight: 300;
@@ -44,7 +46,7 @@ nav.navbar {
   margin-bottom: 2rem;
 }
 .card-header-title {
-  color: #8F99A3;
+  color: #2E4765;
   font-weight: 400;
   font-size: 1.2em;
 }
@@ -699,8 +701,12 @@ nav.navbar {
 }
 
 nav.navbar.networks {
-  background: #000;
+  background-image: url("./assets/head_bcg.png");
+  background-size: 100% 100%;
   margin-bottom: 0;
+  height: 12.5rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .no-items {
@@ -782,4 +788,15 @@ nav.navbar.networks {
             }
         }
     }
+}
+
+
+@media screen and (min-width: 1408px) {
+  .container {
+    max-width: 1450px;
+  }
+}
+
+.container {
+  min-height: 65vh;
 }

@@ -40,3 +40,87 @@
   padding-right: 10px;
   padding-top: 2px;
 }
+
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+
+.nav-ares-price {
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: #FFFFFF;
+}
+
+
+.container {
+  flex-grow: 0;
+}
+
+#navMenu-networks {
+  z-index: 999;
+}
+
+
+
+.card-content {
+  width: 70%;
+  margin: 0 auto;
+}
+
+
+.input {
+  border-radius: 15px;
+  height: 3rem;
+  font-size: 1rem;
+}
+
+
+.content {
+  position: relative;
+}
+
+.fa-search {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1rem;
+}
+
+
+.search-button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100px;
+  height: 3rem;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  border: none;
+  background: #003799;
+  color: #FFF;
+  font-weight: bold;
+}
+
+
+.app_footer {
+  background: #EAEEFF;
+  text-align: center;
+}
+
+.app_footer .desc {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.2rem;
+  color: #2E4765;
+  margin-top: 1.5rem;
+}
+
+
+.app_footer .copyright {
+  background: #003799;
+  color: #FFF;
+  margin-top: 2rem;
+  font-size: 1rem;
+  padding: 0.5rem;
+}

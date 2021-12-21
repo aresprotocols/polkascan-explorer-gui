@@ -21,9 +21,14 @@
   <nav class="navbar networks is-black">
       <div class="container">
           <div class="navbar-brand">
-              <a class="navbar-item brand-text" routerLink="/" (click)="resetNetwork()">
-                <img src="assets/logo.png" width="120">
-              </a>
+              <div class="navbar-logo">
+                <a class="navbar-item brand-text" routerLink="/" (click)="resetNetwork()">
+                  <img src="assets/logo_white.png" width="120">
+                </a>
+                <span class="nav-ares-price">
+                  ARES $0.052367(+1.67%)
+                </span>
+              </div>
               <div class="is-hidden-desktop network-name">
                 <i *ngIf="currentNetwork?.attributes.chain_type == 'para'" class="fa fa-project-diagram network-icon current-network"  [style.color]="'#' + currentNetwork?.attributes.color_code" title="Parachain"></i>
                 <i *ngIf="currentNetwork?.attributes.chain_type == 'relay'" class="fa fa-globe network-icon current-network" [style.color]="'#' + currentNetwork?.attributes.color_code" title="Relay chain"></i>
@@ -37,6 +42,91 @@
           </div>
           <div id="navMenu-networks" class="navbar-menu" [ngClass]="{'is-active': showNavigation}">
             <div class="navbar-end">
+                <a class="navbar-item" routerLink="/{{ currentNetwork?.attributes.network_id }}">
+                  {{ 'NavBar.Dashboard' | translate }}
+                </a>
+                <div class="navbar-item has-dropdown" [ngClass]="{'is-hoverable': showSubmenus}">
+                  <a class="navbar-link">
+                    {{ 'NavBar.Chain' | translate }}
+                  </a>
+                  <div class="navbar-dropdown" (click)="toggleSubmenus()">
+                    <a class="navbar-item" routerLink="/{{currentNetwork?.attributes.network_id}}/block">
+                      {{ 'NavBar.item_Blocks' | translate }}
+                    </a>
+                    <a class="navbar-item" routerLink="/{{ currentNetwork?.attributes.network_id }}/transaction">
+                      {{ 'NavBar.item_Transactions' | translate }}
+                    </a>
+                    <a class="navbar-item" routerLink="/{{ currentNetwork?.attributes.network_id }}/inherent">
+                      {{ 'NavBar.item_Inherents' | translate }}
+                    </a>
+                    <a class="navbar-item" routerLink="/{{ currentNetwork?.attributes.network_id }}/event">
+                      {{ 'NavBar.item_Events' | translate }}
+                    </a>
+                    <a class="navbar-item" routerLink="/{{ currentNetwork?.attributes.network_id }}/log">
+                      {{ 'NavBar.item_Logs' | translate }}
+                    </a>
+                  </div>
+                </div>
+                <div class="navbar-item has-dropdown" [ngClass]="{'is-hoverable': showSubmenus}">
+                  <a class="navbar-link">
+                    {{ 'NavBar.Accounts' | translate }}
+                  </a>
+                  <div class="navbar-dropdown" (click)="toggleSubmenus()">
+                    <a class="navbar-item" routerLink="/{{ currentNetwork?.attributes.network_id }}/account">
+                      {{ 'NavBar.item_Accounts' | translate }}
+                    </a>
+                    <hr class="navbar-divider">
+                    <a class="navbar-item" routerLink="/{{ currentNetwork?.attributes.network_id }}/account/validators">
+                      {{ 'NavBar.item_Validator Accounts' | translate }}
+                    </a>
+                    <a class="navbar-item" routerLink="/{{ currentNetwork?.attributes.network_id }}/account/nominators">
+                      {{ 'NavBar.item_Nominator Accounts' | translate }}
+                    </a>
+                    <a class="navbar-item" routerLink="/{{ currentNetwork?.attributes.network_id }}/account/council">
+                      {{ 'NavBar.item_Council Accounts' | translate }}
+                    </a>
+                    <a class="navbar-item" routerLink="/{{ currentNetwork?.attributes.network_id }}/account/tech-comm">
+                      {{ 'NavBar.item_Techcomm Accounts' | translate }}
+                    </a>
+                    <a class="navbar-item" routerLink="/{{ currentNetwork?.attributes.network_id }}/account/registrars">
+                      {{ 'NavBar.item_Registrar Accounts' | translate }}
+                    </a>
+                    <a class="navbar-item" routerLink="/{{ currentNetwork?.attributes.network_id }}/account/treasury">
+                      {{ 'NavBar.item_Treasury Accounts' | translate }}
+                    </a>
+                    <a class="navbar-item" routerLink="/{{ currentNetwork?.attributes.network_id }}/account/sudo">
+                      {{ 'NavBar.item_Sudo Accounts' | translate }}
+                    </a>
+                    <hr class="navbar-divider">
+                    <a class="navbar-item" routerLink="/{{ currentNetwork?.attributes.network_id }}/account/identities">
+                      {{ 'NavBar.item_Identities' | translate }}
+                    </a>
+                    <a class="navbar-item" routerLink="/{{ networkId }}/indices/account">
+                      {{ 'NavBar.item_Indices' | translate }}
+                    </a>
+                    <hr class="navbar-divider">
+                    <a class="navbar-item" routerLink="/{{ networkId }}/balances/transfer">
+                      {{ 'NavBar.item_Transfers' | translate }}
+                    </a>
+                  </div>
+                </div>
+                <div class="navbar-item has-dropdown" [ngClass]="{'is-hoverable': showSubmenus}">
+                  <a class="navbar-link">
+                    {{ 'NavBar.Runtime' | translate }}
+                  </a>
+                  <div class="navbar-dropdown" (click)="toggleSubmenus()">
+                    <a class="navbar-item" routerLink="/{{ currentNetwork?.attributes.network_id }}/runtime-module">
+                      {{ 'NavBar.item_Modules' | translate }}
+                    </a>
+                    <a class="navbar-item" routerLink="/{{ currentNetwork?.attributes.network_id }}/runtime-type">
+                      {{ 'NavBar.item_Types' | translate }}
+                    </a>
+                    <hr class="navbar-divider">
+                    <a class="navbar-item" routerLink="/{{ currentNetwork?.attributes.network_id }}/runtime">
+                      {{ 'NavBar.item_Upgrade_history' | translate }}
+                    </a>
+                  </div>
+                </div>
                 <div class="navbar-item has-dropdown" [ngClass]="{'is-hoverable': showSubmenus}">
                   <a class="navbar-link is-hidden-touch">
                     <i *ngIf="currentNetwork?.attributes.chain_type == 'para'" class="fa fa-project-diagram network-icon current-network"  [style.color]="'#' + currentNetwork?.attributes.color_code" title="Parachain"></i>
@@ -53,7 +143,7 @@
                 </div>
                 <div class="navbar-item has-dropdown" [ngClass]="{'is-hoverable': showSubmenus}">
                   <a class="navbar-link">
-                      <i class="fa fa-language language-icon" aria-hidden="true"></i> {{ langsTitle(selectedLanguage) }}
+                    {{ langsTitle(selectedLanguage) }}
                   </a>
                   <div class="navbar-dropdown" (click)="toggleSubmenus()">
                     <ul *ngFor="let lang of langs">
@@ -68,16 +158,44 @@
             </div>
           </div>
       </div>
+      <section class="column is-12" id="search">
+      <div class="card-content">
+        <div class="content">
+          <form (ngSubmit)="search()">
+            <div class="control has-icons-left has-icons-right">
+              <input class="input is-large" type="text" [(ngModel)]="blockSearchText" [ngModelOptions]="{standalone: true}" [placeholder]="'PlaceHolderSearch' | translate">
+              <span class="icon is-medium is-left">
+                    <i class="fa fa-search"></i>
+                  </span>
+              <span class="icon is-medium is-right">
+                  </span>
+            </div>
+          </form>
+          <button class="search-button">Search</button>
+        </div>
+      </div>
+    </section>
   </nav>
 
   <router-outlet></router-outlet>
   <article id="privacy-notice" class="message" *ngIf="showLegalMessage">
-  <div class="message-body">
-    <div class="columns">
-      <div class="column is-1"></div>
-      <div class="column is-8">{{ 'Global.DisclaimerTextPre' | translate }} <a routerLink="/legal/privacy-policy">{{ 'Global.DisclaimerTextPrivacyPolicy' | translate }}</a> {{ 'Global.DisclaimerTextAnd' | translate }} <a routerLink="/legal/terms-of-use">{{ 'Global.DisclaimerTextTermsOfUse' | translate }}</a>.</div>
-      <div class="column is-3 is-left"><button class="button is-primary" (click)="agreeTerms()" angulartics2On="click" angularticsAction="AgreeTerms">{{ 'Global.DisclaimerButton' | translate }}</button></div>
+    <div class="message-body">
+      <div class="columns">
+        <div class="column is-1"></div>
+        <div class="column is-8">{{ 'Global.DisclaimerTextPre' | translate }} <a routerLink="/legal/privacy-policy">{{ 'Global.DisclaimerTextPrivacyPolicy' | translate }}</a> {{ 'Global.DisclaimerTextAnd' | translate }} <a routerLink="/legal/terms-of-use">{{ 'Global.DisclaimerTextTermsOfUse' | translate }}</a>.</div>
+        <div class="column is-3 is-left"><button class="button is-primary" (click)="agreeTerms()" angulartics2On="click" angularticsAction="AgreeTerms">{{ 'Global.DisclaimerButton' | translate }}</button></div>
+      </div>
+    </div>
+  </article>
+  <div class="app_footer">
+    <div>
+      <img src="../assets/logo.png" alt="" width="200" height="200">
+    </div>
+    <div class="desc">
+      Ares is an on-chain-verified oracle protocol that provides secure and reliable data services for the Polkadot DeFi ecosystem.
+    </div>
+    <div class="copyright">
+      Copyright © 2021. Ares Protocol All rights reserved.  info@aresprotocol.io
     </div>
   </div>
-</article>
 </div>

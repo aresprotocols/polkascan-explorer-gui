@@ -18,11 +18,163 @@
 
 }
 
+.columns {
+  z-index: 10;
+}
+
 .dashboard-card .card-table {
-  max-height: 261px;
+  max-height: 450px;
   overflow-y: scroll;
 }
 
 .info-tiles a {
   color: #4a4a4a;
+}
+
+
+.dashboard-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: -2rem;
+  padding-bottom: 1rem;
+  min-height: 10rem;
+}
+
+.chain-data {
+  background: #FFFFFF;
+  box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.08);
+  border-radius: 15px;
+  padding: 1rem;
+  width: 70%;
+}
+
+.chain-data .title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2E4765;
+  margin-bottom: 1rem;
+}
+
+.chain-data-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  column-gap: 5rem;
+  row-gap: 0.6rem;
+}
+
+.chain-data-item {
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+  min-width: 150px;
+  padding: 0.5rem;
+}
+
+
+.item-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #9BA4CC;
+  line-height: 1rem;
+}
+
+.numbers {
+  font-size: 1rem;
+  font-weight: bold;
+  line-height: 1rem;
+  color: #2E4765;
+}
+
+
+.token-status {
+  display: flex;
+  width: 25%;
+  align-items: center;
+  background: #FFFFFF;
+  box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.08);
+  border-radius: 1rem;
+  padding: 1rem 1.5rem;
+  column-gap: 1rem;
+  min-width: 356px;
+}
+
+.status-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2E4765;
+}
+
+.status-items {
+  display: flex;
+  flex-flow: column;
+  row-gap: 0.5rem;
+}
+
+.status-item1 {
+  display: flex;
+  column-gap: 1rem;
+}
+
+.status-item-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #A7AFD2;
+}
+
+
+.status-item-num {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #2E4765;
+}
+
+
+.card-header {
+  padding: 0.5rem 0;
+}
+
+
+.card-header-icon {
+  background: #EAEEFF;
+  border-radius: 50%;
+  height: 2rem;
+  width: 2rem;
+  img {
+    max-width: 224%;
+  }
+}
+
+.card-header-title {
+  font-size: 1rem;
+  padding: 0;
+}
+
+
+.dashboard-card {
+  padding: 0 1.5rem;
+}
+
+.table {
+
+}
+
+.table, .table th {
+  color: #2E4765
+}
+
+.table th {
+  font-weight: bold;
+}
+
+.button.is-primary {
+  background: #003799;
+  border-radius: 3px;
+  color: #FFF;
+  font-weight: 600;
+}
+
+.button.is-primary:hover {
+  background: #012d7a;
 }
