@@ -47,7 +47,7 @@ services:
       - DB_NAME=polkascan
       - SUBSTRATE_RPC_URL=wss://gladios.aresprotocol.io
       #      - TYPE_REGISTRY=default
-      - TYPE_REGISTRY_FILE=./registry.json
+      - TYPE_REGISTRY_FILE=/usr/src/app/app/type_registry/ares_types.json
       - SUBSTRATE_ADDRESS_TYPE=34
       - SUBSTRATE_METADATA_VERSION=9
       #      - BALANCE_SYSTEM_ACCOUNT_MIN_BLOCK=1375086
@@ -65,8 +65,8 @@ services:
       #      context: ../polkascan-pre-harvester
       dockerfile: Dockerfile
     image: polkascan/pre-harvester:latest
-    volumes:
-      - ./registry.json:/usr/src/app/registry.json
+    #volumes:
+    #  - ./registry.json:/usr/src/app/registry.json
     command: celery -A app.tasks worker --loglevel=info
     environment: *env
     depends_on:
@@ -125,9 +125,9 @@ services:
   #    command: --chain=kusama --db-cache=2048 --wasm-execution=Compiled --rpc-external --rpc-cors=all --ws-external --rpc-methods=Unsafe --pruning=archive
 
   explorer-gui:
-    image: polkascan/pre-explorer-gui:latest
+    image: polkascan/explorer-gui:latest
     build:
-      context: https://github.com/aresprotocols/polkascan-pre-explorer-gui.git
+      context: https://github.com/aresprotocols/polkascan-explorer-gui.git
       dockerfile: Dockerfile
       args:
         NETWORK_NAME: Ares
@@ -136,7 +136,7 @@ services:
         CHAIN_TYPE: relay
         NETWORK_TOKEN_SYMBOL: ares
         NETWORK_TOKEN_DECIMALS: 12
-        NETWORK_COLOR_CODE: 000000
+        NETWORK_COLOR_CODE: d32e79
         API_URL: http://localhost:8080/api/v1
         ENV_CONFIG: docker-pre
         NGINX_CONF: nginx/polkascan-prod.conf
