@@ -724,5 +724,8 @@
 		"Success": "Success",
 		"Transaction ID": "Transaction ID",
 		"Transactions": "Transactions"
-	}
+	},
+  "footer": {
+    "copyright": "Copyright © 2021. Ares Protocol All rights reserved.  info@aresprotocol.io"
+  }
 }

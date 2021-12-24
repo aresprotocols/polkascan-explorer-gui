@@ -31,6 +31,7 @@ import {delay, switchMap} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
 import { Angulartics2GoogleGlobalSiteTag } from 'angulartics2/gst';
 import {environment} from '../environments/environment';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -51,13 +52,17 @@ export class AppComponent implements OnInit, OnDestroy {
   private networkSubscription: Subscription;
   public showLegalMessage: boolean;
 
+  public aresPrice: number;
+  public aresPriceChange: number;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private translate: TranslateService,
     private networkService: NetworkService,
     private appConfigService: AppConfigService,
-    private angulartics: Angulartics2GoogleGlobalSiteTag
+    private angulartics: Angulartics2GoogleGlobalSiteTag,
+    private http: HttpClient
   ) {
     angulartics.startTracking();
     router.events.subscribe((val) => {
@@ -85,7 +90,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.currentNetwork = network;
       }
     });
-
+    this.getAresData();
   }
 
   agreeTerms() {
@@ -108,6 +113,15 @@ export class AppComponent implements OnInit, OnDestroy {
   toggleSubmenus() {
     this.showSubmenus = false;
     setTimeout(() => { this.showSubmenus = true; }, 300);
+  }
+
+  getAresData(): void {
+    this.http.get('https://api.aresprotocol.io/api/getAresAll')
+      .subscribe(res => {
+        const result = res;
+        this.aresPrice = result['data'].price;
+        this.aresPriceChange = result['data'].percent_change;
+      });
   }
 
   langsTitle(selectedLang: string) {

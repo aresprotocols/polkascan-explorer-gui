@@ -12,7 +12,7 @@
                 </div>
                 <div>
                   <div class="item-title">Finalized Blocks</div>
-                  <div class="numbers">10,544,432</div>
+                  <div class="numbers">{{ chainData.finalized_block ? chainData.finalized_block : ""}}</div>
                 </div>
               </div>
               <div class="chain-data-item">
@@ -21,7 +21,7 @@
                 </div>
                 <div>
                   <div class="item-title">Signed Extrinsics</div>
-                  <div class="numbers">2,920,292</div>
+                  <div class="numbers">{{chainData.total_extrinsics_signed ? chainData.total_extrinsics_signed : "0"}}</div>
                 </div>
               </div>
               <div class="chain-data-item">
@@ -30,7 +30,7 @@
                 </div>
                 <div>
                   <div class="item-title">Transfers</div>
-                  <div class="numbers">1,397,024</div>
+                  <div class="numbers">{{chainData.total_events_transfer ? chainData.total_events_transfer : "0"}}</div>
                 </div>
               </div>
               <div class="chain-data-item">
@@ -48,7 +48,7 @@
                 </div>
                 <div>
                   <div class="item-title">Total Issuance</div>
-                  <div class="numbers">11.791M</div>
+                  <div class="numbers">{{chainData.total_issuance ? (chainData.total_issuance / 1000000000).toFixed(2) : ""}}B</div>
                 </div>
               </div>
               <div class="chain-data-item">
@@ -57,7 +57,7 @@
                 </div>
                 <div>
                   <div class="item-title">Staked Value</div>
-                  <div class="numbers">5.369M (45.5%)</div>
+                  <div class="numbers">{{chainData.total_stake ? (chainData.total_stake/1000000000).toFixed(2) : "0"}}B (45.5%)</div>
                 </div>
               </div>
               <div class="chain-data-item">
@@ -66,7 +66,7 @@
                 </div>
                 <div>
                   <div class="item-title">Validators</div>
-                  <div class="numbers">1,000/1,000</div>
+                  <div class="numbers">{{chainData.total_validators ? chainData.total_validators : "0"}}</div>
                 </div>
               </div>
               <div class="chain-data-item">
@@ -75,13 +75,16 @@
                 </div>
                 <div>
                   <div class="item-title">Inflation Rate</div>
-                  <div class="numbers">7.25%</div>
+                  <div class="numbers">{{chainData.inflation ? chainData.inflation.toFixed(2) : "0"}}%</div>
                 </div>
               </div>
             </div>
           </div>
           <div class="token-status column is-3">
-            <div>
+            <div class="token-status-icon">
+              <div class="token-status-icon-shadow-i"></div>
+              <div class="token-status-icon-shadow-m"></div>
+              <div class="token-status-icon-shadow-o"></div>
               <img src="../../../assets/icons/logo02.png" alt="">
             </div>
             <div class="status-items">
@@ -91,16 +94,16 @@
               <div class="status-item1">
                 <div class="status-item">
                   <div class="status-item-title">Rank</div>
-                  <div class="status-item-num">1010</div>
+                  <div class="status-item-num">{{aresRank ? aresRank : ""}}</div>
                 </div>
                 <div class="status-item">
                   <div class="status-item-title">Market Cap</div>
-                  <div class="status-item-num">$8.13 M USD</div>
+                  <div class="status-item-num">$ {{aresCap ? (aresCap/1000000).toFixed(1) : ""}} M USD</div>
                 </div>
               </div>
               <div class="status-item">
                 <div class="status-item-title">24H Volume</div>
-                <div class="status-item-num">$2.59 M USD</div>
+                <div class="status-item-num">$ {{aresVol ? (aresVol/1000000).toFixed(1) : ""}} M USD</div>
               </div>
             </div>
           </div>

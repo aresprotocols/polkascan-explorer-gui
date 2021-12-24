@@ -46,7 +46,8 @@
   box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.08);
   border-radius: 15px;
   padding: 1rem;
-  width: 70%;
+  width: 71.5%;
+  margin-right: 10px;
 }
 
 .chain-data .title {
@@ -59,8 +60,8 @@
 .chain-data-items {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
-  column-gap: 5rem;
+  justify-content: flex-start;
+  column-gap: 1rem;
   row-gap: 0.6rem;
 }
 
@@ -68,9 +69,33 @@
   display: flex;
   align-items: center;
   column-gap: 0.5rem;
-  min-width: 150px;
+  min-width: 230px;
   padding: 0.5rem;
 }
+
+@media only screen and (max-width: 1600px) {
+  .chain-data-item {
+    width: 220px;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .dashboard-header {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+  }
+  .chain-data {
+    width: 100%;
+  }
+
+  .token-status {
+    width: 100% !important;
+  }
+}
+
+
+
 
 
 .item-title {
@@ -90,7 +115,7 @@
 
 .token-status {
   display: flex;
-  width: 25%;
+  width: 26%;
   align-items: center;
   background: #FFFFFF;
   box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.08);
@@ -98,6 +123,45 @@
   padding: 1rem 1.5rem;
   column-gap: 1rem;
   min-width: 356px;
+}
+
+.token-status-icon {
+  position: relative;
+  width: 120px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+  }
+}
+
+.token-status-icon-shadow-i {
+  position: absolute;
+  border-radius: 50%;
+  height: 76px;
+  width: 76px;
+  background: rgba(151, 195, 255, 0.5);
+}
+
+.token-status-icon-shadow-m {
+  position: absolute;
+  border-radius: 50%;
+  height: 110px;
+  width: 110px;
+  background: rgba(151, 195, 255, 0.3);
+}
+
+
+.token-status-icon-shadow-o {
+  position: absolute;
+  border-radius: 50%;
+  height: 140px;
+  width: 140px;
+  background: rgba(151, 195, 255, 0.2);
 }
 
 .status-title {
@@ -110,6 +174,7 @@
   display: flex;
   flex-flow: column;
   row-gap: 0.5rem;
+  margin-left: 20px;
 }
 
 .status-item1 {
@@ -148,7 +213,7 @@
 
 .card-header-title {
   font-size: 1rem;
-  padding: 0;
+  padding: 0 15px;
 }
 
 
@@ -177,4 +242,32 @@
 
 .button.is-primary:hover {
   background: #012d7a;
+}
+
+.table.is-striped tbody tr:not(.is-selected):nth-child(even) {
+  background: #FFF;
+}
+
+.card-table::-webkit-scrollbar-button {
+  background: rgba(255, 255, 255, 0);
+}
+
+
+.card-table::-webkit-scrollbar-thumb {
+  background: rgba(0, 55, 153, 1);
+}
+
+.card-table::-webkit-scrollbar-track-piece {
+  background: rgba(234, 238, 255, 1);
+}
+
+.card-table{
+  scrollbar-arrow-color:  rgba(255, 255, 255, 0) !important;
+  scrollbar-face-color: #333;
+  scrollbar-3dlight-color: #666;
+  scrollbar-highlight-color: rgba(0, 55, 153, 1);
+  scrollbar-shadow-color: #999;
+  scrollbar-darkshadow-color: #666;
+  scrollbar-track-color: rgba(234, 238, 255, 1);
+  scrollbar-base-color:#f8f8f8;
 }

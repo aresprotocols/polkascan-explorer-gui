@@ -60,6 +60,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public totalTransactionsDaychart$: Observable<AnalyticsChart>;
   public cumulativeAccountsDayChart$: Observable<AnalyticsChart>;
 
+  public aresRank: number;
+  public aresCap: number;
+  public aresVol: number;
+  public chainData: object = {};
+
   constructor(
     private blockService: BlockService,
     private balanceTransferService: BalanceTransferService,
@@ -98,6 +103,30 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.getBlocks();
       this.networkstats$ = this.networkstatsService.get('latest');
     });
+
+    this.getAresData();
+    this.getChainData();
+  }
+
+  getAresData(): void {
+    this.http.get('https://api.aresprotocol.io/api/getAresAll')
+      .subscribe(res => {
+        const result = res;
+        this.aresCap = result['data'].market_cap.toFixed(0);
+        this.aresRank = result['data'].rank;
+        this.aresVol = result['data'].volume.toFixed(0);
+      });
+  }
+
+
+  getChainData(): void {
+    const url = "/proxy/api/v1/chain";
+    this.http.get(url)
+      .subscribe(res => {
+        console.log(res);
+        this.chainData = res['data'];
+      });
+
   }
 
   getBlocks(): void {
