@@ -48,7 +48,7 @@
                 </div>
                 <div>
                   <div class="item-title">Total Issuance</div>
-                  <div class="numbers">{{chainData.total_issuance ? (chainData.total_issuance / 1000000000).toFixed(2) : ""}}B</div>
+                  <div class="numbers">{{chainData.total_issuance ? (chainData.total_issuance / 100000000000 / 1000000).toFixed(2) : ""}}M</div>
                 </div>
               </div>
               <div class="chain-data-item">
@@ -57,7 +57,7 @@
                 </div>
                 <div>
                   <div class="item-title">Staked Value</div>
-                  <div class="numbers">{{chainData.total_stake ? (chainData.total_stake/1000000000).toFixed(2) : "0"}}B (45.5%)</div>
+                  <div class="numbers">{{chainData.total_stake ? (chainData.total_stake/ 100000000000 / 1000000).toFixed(2) : "0"}}M (45.5%)</div>
                 </div>
               </div>
               <div class="chain-data-item">
