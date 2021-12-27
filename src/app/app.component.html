@@ -103,11 +103,11 @@
                     <a class="navbar-item" routerLink="/{{ currentNetwork?.attributes.network_id }}/account/identities">
                       {{ 'NavBar.item_Identities' | translate }}
                     </a>
-                    <a class="navbar-item" routerLink="/{{ networkId }}/indices/account">
+                    <a class="navbar-item" routerLink="/{{ currentNetwork?.attributes.network_id }}/indices/account">
                       {{ 'NavBar.item_Indices' | translate }}
                     </a>
                     <hr class="navbar-divider">
-                    <a class="navbar-item" routerLink="/{{ networkId }}/balances/transfer">
+                    <a class="navbar-item" routerLink="/{{ currentNetwork?.attributes.network_id }}/balances/transfer">
                       {{ 'NavBar.item_Transfers' | translate }}
                     </a>
                   </div>

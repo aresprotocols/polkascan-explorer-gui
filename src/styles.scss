@@ -396,11 +396,11 @@ nav.navbar {
   }
 
   .button.is-primary {
-    background-color: #003799;
+    background-color: #000;
   }
 
   .button.is-primary:hover {
-    background-color: #00328c;
+    background-color: #000;
   }
 
   .card-header-icon {
@@ -791,6 +791,14 @@ nav.navbar.networks {
   .container {
     max-width: 1450px;
   }
+}
+
+.button.is-primary {
+  background-color: #003799 !important;
+}
+
+.button.is-primary:hover {
+  background-color: #00328c !important;
 }
 
 .container {
