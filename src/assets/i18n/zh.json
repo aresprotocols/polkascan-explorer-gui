@@ -726,6 +726,23 @@
 		"Transactions": "交易"
 	},
   "footer": {
+    "siteDesc": "Ares是一个链上验证的预言机协议，为波卡及DeFi生态系统提供安全和可靠的数据服务。",
     "copyright": "Copyright © 2021. Ares Protocol 保留所有权利.  info@aresprotocol.io"
+  },
+  "chainData": {
+    "ChainData": "链数据",
+    "FinalizedBlocks": "己确认块高",
+    "SignedExtrinsics": "签名交易",
+    "Transfers": "转账",
+    "Holders": "持有账号",
+    "TotalIssuance": "总供应量",
+    "StakedValue": "质押",
+    "Validators": "验证人",
+    "InflationRate": "通胀率",
+    "TokenStatus": "状态",
+    "Rank": "排名",
+    "MarketCap": "市值",
+    "Volume": "流通量",
+    "Search": "搜索"
   }
 }

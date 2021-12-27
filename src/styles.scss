@@ -400,11 +400,11 @@ nav.navbar {
   }
 
   .button.is-primary {
-    background-color: #000000;
+    background-color: #003799;
   }
 
   .button.is-primary:hover {
-    background-color: #000000;
+    background-color: #00328c;
   }
 
   .card-header-icon {
@@ -799,4 +799,18 @@ nav.navbar.networks {
 
 .container {
   min-height: 65vh;
+}
+
+
+.fa-cube:before, .fa-book:before, .fa-file-signature:before, .fa-chart-line:before {
+  color: #089df5;
+}
+
+.fa-file-alt:before, .fa-id-card:before, .fa-exchange-alt:before, .fa-memory:before, .fa-database:before {
+  color: #089df5;
+}
+
+
+.fa-calendar-check:before, .fa-user:before, .fa-user-tag:before, .fa-cog:before, .fa-exclamation-triangle:before {
+  color: #089df5;
 }

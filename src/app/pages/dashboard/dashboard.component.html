@@ -3,7 +3,7 @@
         <div class="dashboard-header">
           <div class="chain-data column is-3">
             <div class="title">
-              Chain Data
+              {{ 'chainData.ChainData' | translate }}
             </div>
             <div class="chain-data-items">
               <div class="chain-data-item">
@@ -11,7 +11,7 @@
                   <img src="../../../assets/icons/blocks.png" alt="" width="24" height="24">
                 </div>
                 <div>
-                  <div class="item-title">Finalized Blocks</div>
+                  <div class="item-title">{{'chainData.FinalizedBlocks' | translate}}</div>
                   <div class="numbers">{{ chainData.finalized_block ? chainData.finalized_block : ""}}</div>
                 </div>
               </div>
@@ -20,7 +20,7 @@
                   <img src="../../../assets/icons/signed.png" alt="" width="24" height="24">
                 </div>
                 <div>
-                  <div class="item-title">Signed Extrinsics</div>
+                  <div class="item-title">{{"chainData.SignedExtrinsics" | translate }}</div>
                   <div class="numbers">{{chainData.total_extrinsics_signed ? chainData.total_extrinsics_signed : "0"}}</div>
                 </div>
               </div>
@@ -29,7 +29,7 @@
                   <img src="../../../assets/icons/transfers.png" alt="" width="24" height="24">
                 </div>
                 <div>
-                  <div class="item-title">Transfers</div>
+                  <div class="item-title">{{"chainData.Transfers" | translate}}</div>
                   <div class="numbers">{{chainData.total_events_transfer ? chainData.total_events_transfer : "0"}}</div>
                 </div>
               </div>
@@ -38,8 +38,8 @@
                   <img src="../../../assets/icons/holders.png" alt="" width="24" height="24">
                 </div>
                 <div>
-                  <div class="item-title">Holders</div>
-                  <div class="numbers">229,504</div>
+                  <div class="item-title">{{"chainData.Holders" | translate}}</div>
+                  <div class="numbers">{{chainData.total_account ? chainData.total_account  : "0"}}</div>
                 </div>
               </div>
               <div class="chain-data-item">
@@ -47,7 +47,7 @@
                   <img src="../../../assets/icons/total.png" alt="" width="24" height="24">
                 </div>
                 <div>
-                  <div class="item-title">Total Issuance</div>
+                  <div class="item-title">{{"chainData.TotalIssuance" | translate}}</div>
                   <div class="numbers">{{chainData.total_issuance ? (chainData.total_issuance / 100000000000 / 1000000).toFixed(2) : ""}}M</div>
                 </div>
               </div>
@@ -56,7 +56,7 @@
                   <img src="../../../assets/icons/staked.png" alt="" width="24" height="24">
                 </div>
                 <div>
-                  <div class="item-title">Staked Value</div>
+                  <div class="item-title">{{"chainData.StakedValue" | translate}}</div>
                   <div class="numbers">{{chainData.total_stake ? (chainData.total_stake/ 100000000000 / 1000000).toFixed(2) : "0"}}M (45.5%)</div>
                 </div>
               </div>
@@ -65,7 +65,7 @@
                   <img src="../../../assets/icons/validators.png" alt="" width="24" height="24">
                 </div>
                 <div>
-                  <div class="item-title">Validators</div>
+                  <div class="item-title">{{"chainData.Validators" | translate}}</div>
                   <div class="numbers">{{chainData.total_validators ? chainData.total_validators : "0"}}</div>
                 </div>
               </div>
@@ -74,7 +74,7 @@
                   <img src="../../../assets/icons/rate.png" alt="" width="24" height="24">
                 </div>
                 <div>
-                  <div class="item-title">Inflation Rate</div>
+                  <div class="item-title">{{"chainData.InflationRate" | translate}}</div>
                   <div class="numbers">{{chainData.inflation ? chainData.inflation.toFixed(2) : "0"}}%</div>
                 </div>
               </div>
@@ -89,20 +89,20 @@
             </div>
             <div class="status-items">
               <div class="status-title">
-                Token Status
+                {{"chainData.TokenStatus" | translate}}
               </div>
               <div class="status-item1">
                 <div class="status-item">
-                  <div class="status-item-title">Rank</div>
+                  <div class="status-item-title">{{"chainData.Rank" | translate}}</div>
                   <div class="status-item-num">{{aresRank ? aresRank : ""}}</div>
                 </div>
                 <div class="status-item">
-                  <div class="status-item-title">Market Cap</div>
+                  <div class="status-item-title">{{"chainData.MarketCap" | translate}}</div>
                   <div class="status-item-num">$ {{aresCap ? (aresCap/1000000).toFixed(1) : ""}} M USD</div>
                 </div>
               </div>
               <div class="status-item">
-                <div class="status-item-title">24H Volume</div>
+                <div class="status-item-title">24H {{"chainData.Volume" | translate}}</div>
                 <div class="status-item-num">$ {{aresVol ? (aresVol/1000000).toFixed(1) : ""}} M USD</div>
               </div>
             </div>

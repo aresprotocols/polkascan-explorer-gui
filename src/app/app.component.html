@@ -27,7 +27,7 @@
                 </a>
                 <span class="nav-ares-price">
                   ARES <span *ngIf="aresPrice">
-                  $ {{aresPrice}} ({{aresPriceChange > 0 ? "+" + aresPriceChange + "%" : "-" + aresPriceChange + "%"}})
+                  $ {{aresPrice}} ({{aresPriceChange > 0 ? "+" + aresPriceChange + "%" : aresPriceChange + "%"}})
                 </span>
                 </span>
               </div>
@@ -173,7 +173,7 @@
                   </span>
             </div>
           </form>
-          <button class="search-button">Search</button>
+          <button class="search-button">{{"chainData.Search" | translate}}</button>
         </div>
       </div>
     </section>
@@ -194,7 +194,7 @@
       <img src="../assets/logo.png" alt="" width="200" height="200">
     </div>
     <div class="desc">
-      Ares is an on-chain-verified oracle protocol that provides secure and reliable data services for the Polkadot DeFi ecosystem.
+      {{"footer.siteDesc" | translate}}
     </div>
     <div class="copyright">
       {{'footer.copyright' | translate}}

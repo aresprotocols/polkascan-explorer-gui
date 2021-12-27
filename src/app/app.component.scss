@@ -130,6 +130,10 @@
   background-color:rgba(255,255,255,0.1) !important;
 }
 
+.navbar-dropdown .navbar-item:hover {
+  background: linear-gradient(90deg, #D0E4FF 0%, rgba(208, 228, 255, 0) 100%);
+}
+
 
 
 .navbar-link:not(.is-arrowless)::after {

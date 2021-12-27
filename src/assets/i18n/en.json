@@ -726,6 +726,23 @@
 		"Transactions": "Transactions"
 	},
   "footer": {
+    "siteDesc": "Ares is an on-chain-verified oracle protocol that provides secure and reliable data services for the Polkadot DeFi ecosystem.\n",
     "copyright": "Copyright © 2021. Ares Protocol All rights reserved.  info@aresprotocol.io"
+  },
+  "chainData": {
+    "ChainData": "Chain Data",
+    "FinalizedBlocks": "Finalized Blocks",
+    "SignedExtrinsics": "Signed Extrinsics",
+    "Transfers": "Transfers",
+    "Holders": "Holders",
+    "TotalIssuance": "Total Issuance",
+    "StakedValue": "Staked Value",
+    "Validators": "Validators",
+    "InflationRate": "Inflation Rate",
+    "TokenStatus": "Token Status",
+    "Rank": "Rank",
+    "MarketCap": "Market Cap",
+    "Volume": "Volume",
+    "Search": "Search"
   }
 }
