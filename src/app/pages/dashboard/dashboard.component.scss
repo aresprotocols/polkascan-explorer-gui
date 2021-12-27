@@ -248,32 +248,19 @@
   background: #FFF;
 }
 
-.card-table::-webkit-scrollbar-button {
-  background: rgba(255, 255, 255, 0);
-}
-
-
-.card-table1::-webkit-scrollbar-thumb {
-  background: rgba(0, 55, 153, 1);
-}
-
-.card-table::-webkit-scrollbar-track-piece {
-  background: rgba(234, 238, 255, 1);
-}
-
-::-webkit-scrollbar-thumb {
+#card-table::-webkit-scrollbar-thumb {
   background: #ddd;
-  border: 2px solid red !important;
+  border: 2px solid red;
   border-radius: 5px;
 }
 
 .card-table{
-  scrollbar-arrow-color:  rgba(255, 255, 255, 0) !important;
-  scrollbar-face-color: #333 !important;
-  scrollbar-3dlight-color: #666 !important;
-  scrollbar-highlight-color: rgba(0, 55, 153, 1) !important;
-  scrollbar-shadow-color: #999 !important;
-  scrollbar-darkshadow-color: #666 !important;
-  scrollbar-track-color: rgba(234, 238, 255, 1) !important;
-  scrollbar-base-color:#f8f8f8 !important;
+  scrollbar-arrow-color:  rgba(255, 255, 255, 0);
+  scrollbar-face-color: #333;
+  scrollbar-3dlight-color: #666;
+  scrollbar-highlight-color: rgba(0, 55, 153, 1);
+  scrollbar-shadow-color: #999;
+  scrollbar-darkshadow-color: #666;
+  scrollbar-track-color: rgba(234, 238, 255, 1);
+  scrollbar-base-color:#f8f8f8;
 }

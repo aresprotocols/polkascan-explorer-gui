@@ -81,11 +81,7 @@ nav.navbar {
 }
 .dashboard-card .card-table {
   max-height: 250px;
-  overflow-y: scroll;
-}
-
-.card-table {
-  overflow-x: scroll;
+  overflow: auto;
 }
 
 .network-westend {

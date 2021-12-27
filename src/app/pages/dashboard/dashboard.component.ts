@@ -120,7 +120,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
 
   getChainData(): void {
-    const url = "/proxy/api/v1/chain";
+    const url = "/api/v1/chain";
     this.http.get(url)
       .subscribe(res => {
         console.log(res);
