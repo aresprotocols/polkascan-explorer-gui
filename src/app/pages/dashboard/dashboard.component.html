@@ -7,17 +7,17 @@
             </div>
             <div class="chain-data-items">
               <div class="chain-data-item">
-                <div>
+                <div class="chain-data-item-icon">
                   <img src="../../../assets/icons/blocks.png" alt="" width="24" height="24">
                 </div>
                 <div>
                   <div class="item-title">{{'chainData.FinalizedBlocks' | translate}}</div>
-                  <div class="numbers">{{ chainData.finalized_block ? chainData.finalized_block : ""}}</div>
+                  <div class="numbers">{{ chainData.finalized_block ? chainData.finalized_block : "0"}}</div>
                 </div>
               </div>
               <div class="chain-data-item">
-                <div>
-                  <img src="../../../assets/icons/signed.png" alt="" width="24" height="24">
+                <div class="chain-data-item-icon">
+                  <img src="../../../assets/icons/signed.png" alt="" width="22" height="24">
                 </div>
                 <div>
                   <div class="item-title">{{"chainData.SignedExtrinsics" | translate }}</div>
@@ -25,8 +25,8 @@
                 </div>
               </div>
               <div class="chain-data-item">
-                <div>
-                  <img src="../../../assets/icons/transfers.png" alt="" width="24" height="24">
+                <div class="chain-data-item-icon">
+                  <img src="../../../assets/icons/transfers.png" alt="" width="21" height="24">
                 </div>
                 <div>
                   <div class="item-title">{{"chainData.Transfers" | translate}}</div>
@@ -34,8 +34,8 @@
                 </div>
               </div>
               <div class="chain-data-item">
-                <div>
-                  <img src="../../../assets/icons/holders.png" alt="" width="24" height="24">
+                <div class="chain-data-item-icon">
+                  <img src="../../../assets/icons/holders.png" alt="" width="21" height="24">
                 </div>
                 <div>
                   <div class="item-title">{{"chainData.Holders" | translate}}</div>
@@ -43,16 +43,16 @@
                 </div>
               </div>
               <div class="chain-data-item">
-                <div>
-                  <img src="../../../assets/icons/total.png" alt="" width="24" height="24">
+                <div class="chain-data-item-icon">
+                  <img src="../../../assets/icons/total.png" alt="" width="23" height="24">
                 </div>
                 <div>
                   <div class="item-title">{{"chainData.TotalIssuance" | translate}}</div>
-                  <div class="numbers">{{chainData.total_issuance ? (chainData.total_issuance / 100000000000 / 1000000).toFixed(2) : ""}}M</div>
+                  <div class="numbers">{{chainData.total_issuance ? (chainData.total_issuance / 100000000000 / 1000000).toFixed(2) : "0"}}M</div>
                 </div>
               </div>
               <div class="chain-data-item">
-                <div>
+                <div class="chain-data-item-icon">
                   <img src="../../../assets/icons/staked.png" alt="" width="24" height="24">
                 </div>
                 <div>
@@ -61,8 +61,8 @@
                 </div>
               </div>
               <div class="chain-data-item">
-                <div>
-                  <img src="../../../assets/icons/validators.png" alt="" width="24" height="24">
+                <div class="chain-data-item-icon">
+                  <img src="../../../assets/icons/validators.png" alt="" width="22" height="24">
                 </div>
                 <div>
                   <div class="item-title">{{"chainData.Validators" | translate}}</div>
@@ -70,8 +70,8 @@
                 </div>
               </div>
               <div class="chain-data-item">
-                <div>
-                  <img src="../../../assets/icons/rate.png" alt="" width="24" height="24">
+                <div class="chain-data-item-icon">
+                  <img src="../../../assets/icons/rate.png" alt="" width="32" height="32">
                 </div>
                 <div>
                   <div class="item-title">{{"chainData.InflationRate" | translate}}</div>
@@ -154,9 +154,9 @@
               <div class="card dashboard-card">
                   <a routerLink="{{ networkURLPrefix }}/balances/transfer">
                     <header class="card-header">
-                      <a [routerLink]="" fragment="last-transfers" class="card-header-icon" aria-label="more options">
-                        <img src="../../../assets/icons/transfers.png" alt="" width="28" height="28">
-                      </a>
+                        <a [routerLink]="" fragment="last-transfers" class="card-header-icon" aria-label="more options">
+                          <img src="../../../assets/icons/transfers.png" alt="" width="28" height="28">
+                        </a>
                         <p class="card-header-title">
                             {{ 'DashBoard.Last balance transfers' | translate }}
                         </p>

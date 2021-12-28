@@ -3,13 +3,13 @@
     <div *ngIf="balanceTransfer$ | async as balanceTransfer">
         <section class="info-tiles">
           <div class="card events-card">
-              <header class="card-header">
-                  <p class="card-header-title">
+            <header class="card-header">
+              <a  class="card-header-icon" aria-label="more options">
+                <span class="icon"><i class="fa fa-exchange-alt fa-2x"></i></span>
+              </a>
+              <p class="card-header-title">
                       {{ 'BalanceTransfer.Balance transfer' | translate }} "{{ balanceTransfer.id }}"
                   </p>
-                  <a  class="card-header-icon" aria-label="more options">
-                 <span class="icon"><i class="fa fa-exchange-alt fa-2x"></i></span>
-                </a>
               </header>
               <div class="card-table" *ngIf="balanceTransfer.attributes">
                   <div class="content">

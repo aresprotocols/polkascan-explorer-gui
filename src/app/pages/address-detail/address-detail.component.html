@@ -3,14 +3,14 @@
      <section class="info-tiles" *ngIf="!balanceTransfers || balanceTransfers.data.length > 0">
        <div class="card" *ngIf="account">
             <header class="card-header">
+                <a [routerLink]="" fragment="transfers" class="card-header-icon" aria-label="more options">
+                    <span class="icon">
+                      <i class="fa fa-exchange-alt fa-2x" aria-hidden="true"></i>
+                    </span>
+                </a>
                 <p class="card-header-title">
                     {{ 'AddressDetail.Last 25 balance transfers sent by' | translate }} {{ account }}
                 </p>
-                  <a [routerLink]="" fragment="transfers" class="card-header-icon" aria-label="more options">
-                      <span class="icon">
-                        <i class="fa fa-exchange-alt fa-2x" aria-hidden="true"></i>
-                      </span>
-                    </a>
             </header>
             <div class="card-table">
                 <div class="content">

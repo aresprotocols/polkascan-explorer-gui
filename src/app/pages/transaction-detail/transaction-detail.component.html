@@ -3,14 +3,14 @@
       <app-loading-box *ngIf="extrinsic.is_loading && !resourceNotFound"></app-loading-box>
       <div class="card" *ngIf="resourceNotFound">
           <header class="card-header">
+              <a  class="card-header-icon" aria-label="more options">
+                 <span class="icon">
+                    <i class="fa fa-file-signature fa-2x" aria-hidden="true"></i>
+                  </span>
+              </a>
               <p class="card-header-title">
                   {{ 'transaction-detail.Transaction not found' | translate }}
               </p>
-              <a  class="card-header-icon" aria-label="more options">
-               <span class="icon">
-                  <i class="fa fa-file-signature fa-2x" aria-hidden="true"></i>
-                </span>
-              </a>
           </header>
           <div class="card-table">
               <div class="content">
@@ -32,14 +32,14 @@
         <section id="events" *ngIf="extrinsic.relationships.events?.data.length > 0">
               <div class="card ">
                   <header class="card-header">
+                      <a [routerLink]="" fragment="events" class="card-header-icon" aria-label="more options">
+                          <span class="icon">
+                            <i class="fa fa-calendar-check fa-2x" aria-hidden="true"></i>
+                          </span>
+                      </a>
                       <p class="card-header-title">
                           {{ 'transaction-detail.Triggered Events' | translate }}
                       </p>
-                      <a [routerLink]="" fragment="events" class="card-header-icon" aria-label="more options">
-                        <span class="icon">
-                          <i class="fa fa-calendar-check fa-2x" aria-hidden="true"></i>
-                        </span>
-                      </a>
                   </header>
                   <div class="card-table">
                       <div class="content">

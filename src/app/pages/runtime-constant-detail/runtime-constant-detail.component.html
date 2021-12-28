@@ -6,12 +6,12 @@
         <section>
           <div class="card">
               <header class="card-header">
-                  <p class="card-header-title">
+                <a  class="card-header-icon" aria-label="more options">
+                  <span class="icon"><i class="fa fa-memory fa-2x"></i></span>
+                </a>
+                <p class="card-header-title">
                       {{ 'runtime-constant-detail.Constant' | translate }} "{{ runtimeConstant.attributes.name }}"
                   </p>
-                  <a  class="card-header-icon" aria-label="more options">
-                 <span class="icon"><i class="fa fa-memory fa-2x"></i></span>
-                </a>
               </header>
               <div class="card-table" *ngIf="runtimeConstant">
                   <div class="content">

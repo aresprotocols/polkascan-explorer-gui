@@ -4,6 +4,11 @@
         <section>
             <div class="card ">
                 <header class="card-header">
+                    <a [routerLink]="" fragment="list" class="card-header-icon" aria-label="more options">
+                        <span class="icon">
+                          <i class="fa fa-id-card fa-2x" aria-hidden="true"></i>
+                        </span>
+                    </a>
                     <ng-container [ngSwitch]="title">
                       <p class="card-header-title" *ngSwitchCase="'Validators'">
                         {{ 'AccountList.Validators' | translate }}
@@ -33,11 +38,6 @@
                           {{ 'AccountList.Accounts' | translate }}
                       </p>
                     </ng-container>
-                    <a [routerLink]="" fragment="list" class="card-header-icon" aria-label="more options">
-                      <span class="icon">
-                        <i class="fa fa-id-card fa-2x" aria-hidden="true"></i>
-                      </span>
-                    </a>
                 </header>
                 <div class="card-table">
                     <div class="content">

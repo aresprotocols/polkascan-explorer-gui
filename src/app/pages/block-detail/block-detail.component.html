@@ -3,14 +3,14 @@
   <app-loading-box *ngIf="block.is_loading && !resourceNotFound"></app-loading-box>
   <div class="card" *ngIf="resourceNotFound">
       <header class="card-header">
+          <a  class="card-header-icon" aria-label="more options">
+             <span class="icon">
+                <i class="fa fa-cube fa-2x" aria-hidden="true"></i>
+              </span>
+          </a>
           <p class="card-header-title">
               {{ 'Block-Detail.Block not found' | translate }}
           </p>
-          <a  class="card-header-icon" aria-label="more options">
-           <span class="icon">
-              <i class="fa fa-cube fa-2x" aria-hidden="true"></i>
-            </span>
-          </a>
       </header>
       <div class="card-table">
           <div class="content">
@@ -23,12 +23,12 @@
     <section class="info-tiles">
       <div class="card events-card">
           <header class="card-header">
+              <a [routerLink]="" fragment="details" class="card-header-icon" aria-label="more options">
+                <span class="icon"><i class="fa fa-cube fa-2x"></i></span>
+              </a>
               <p class="card-header-title">
                   {{ 'Block-Detail.Block' | translate }} #{{ block.id }}
               </p>
-            <a [routerLink]="" fragment="details" class="card-header-icon" aria-label="more options">
-             <span class="icon"><i class="fa fa-cube fa-2x"></i></span>
-            </a>
           </header>
           <div class="card-table" id="details" *ngIf="block">
               <div class="content">

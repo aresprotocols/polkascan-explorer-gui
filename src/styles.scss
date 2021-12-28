@@ -700,7 +700,7 @@ nav.navbar.networks {
   background-image: url("./assets/head_bcg.png");
   background-size: 100% 100%;
   margin-bottom: 0;
-  height: 12.5rem;
+  height: 14rem;
   display: flex;
   flex-direction: column;
 }
@@ -789,7 +789,7 @@ nav.navbar.networks {
 
 @media screen and (min-width: 1408px) {
   .container {
-    max-width: 1450px;
+    max-width: 1250px;
   }
 }
 
@@ -806,15 +806,20 @@ nav.navbar.networks {
 }
 
 
-.fa-cube:before, .fa-book:before, .fa-file-signature:before, .fa-chart-line:before {
-  color: #089df5;
+.fa-cube:before, .fa-book:before, .fa-file-signature:before, .fa-chart-line:before, fa-cogs:before {
+  color: #003799;
 }
 
 .fa-file-alt:before, .fa-id-card:before, .fa-exchange-alt:before, .fa-memory:before, .fa-database:before {
-  color: #089df5;
+  color: #003799;
 }
 
 
 .fa-calendar-check:before, .fa-user:before, .fa-user-tag:before, .fa-cog:before, .fa-exclamation-triangle:before {
-  color: #089df5;
+  color: #003799;
+}
+
+
+.fa-2x {
+  font-size: 1.5em;
 }

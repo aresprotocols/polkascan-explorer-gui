@@ -6,12 +6,12 @@
         <section>
           <div class="card">
               <header class="card-header">
-                  <p class="card-header-title">
+                <a  class="card-header-icon" aria-label="more options">
+                  <span class="icon"><i class="fa fa-database fa-2x"></i></span>
+                </a>
+                <p class="card-header-title">
                       {{ 'runtime-storage-detail.Storage function' | translate }} "{{ runtimeStorage.attributes.name }}"
                   </p>
-                  <a  class="card-header-icon" aria-label="more options">
-                 <span class="icon"><i class="fa fa-database fa-2x"></i></span>
-                </a>
               </header>
               <div class="card-table" *ngIf="runtimeStorage">
                   <div class="content">

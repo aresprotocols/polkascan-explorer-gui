@@ -4,9 +4,13 @@
         <section>
             <div class="card ">
                 <header class="card-header">
+                    <a [routerLink]="" fragment="list"  aria-label="more options" class="card-header-icon">
+                          <span class="icon">
+                            <i class="fa fa-calendar-check fa-2x" aria-hidden="true"></i>
+                          </span>
+                    </a>
                     <div class="card-header-title">
                         <p>{{ 'Event-list.Events' | translate }}</p>
-
                     </div>
 
                     <div class="card-header-icon">
@@ -41,11 +45,6 @@
                           </div>
                         </div>
                       </div>
-                      <a [routerLink]="" fragment="list"  aria-label="more options">
-                        <span class="icon">
-                          <i class="fa fa-calendar-check fa-2x" aria-hidden="true"></i>
-                        </span>
-                      </a>
                     </div>
                 </header>
                 <div class="card-table">

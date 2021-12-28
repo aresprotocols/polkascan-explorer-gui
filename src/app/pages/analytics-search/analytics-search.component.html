@@ -4,12 +4,12 @@
         <section class="is-12" id="search">
             <div class="card">
                 <header class="card-header">
-                    <p class="card-header-title">{{ 'Analytics-Search.Search' | translate }}</p>
                     <a [routerLink]="" fragment="search" class="card-header-icon" aria-label="more options">
-                      <span class="icon">
-                        <i class="fa fa-search fa-2x" aria-hidden="true"></i>
-                      </span>
+                        <span class="icon">
+                          <i class="fa fa-search fa-2x" aria-hidden="true"></i>
+                        </span>
                     </a>
+                    <p class="card-header-title">{{ 'Analytics-Search.Search' | translate }}</p>
                 </header>
                 <div class="card-content">
                     <div class="content">
@@ -32,14 +32,14 @@
         <section class="is-12" id="no-result" *ngIf="currentSearchQuery && loadingCount == 0">
             <div class="card">
                 <header class="card-header">
-                    <p class="card-header-title">
-                      {{ 'Analytics-Search.No results' | translate }}
-                    </p>
-                    <a [routerLink]="" fragment="search" class="card-header-icon" aria-label="more options">
+                  <a [routerLink]="" fragment="search" class="card-header-icon" aria-label="more options">
                       <span class="icon">
                         <i class="fa fa-search fa-2x" aria-hidden="true"></i>
                       </span>
-                    </a>
+                  </a>
+                  <p class="card-header-title">
+                    {{ 'Analytics-Search.No results' | translate }}
+                  </p>
                 </header>
                 <div class="card-content">
                     <div class="content">

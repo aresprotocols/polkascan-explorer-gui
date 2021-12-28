@@ -69,8 +69,21 @@
   display: flex;
   align-items: center;
   column-gap: 0.5rem;
-  min-width: 230px;
+  min-width: 190px;
   padding: 0.5rem;
+}
+
+.chain-data-item-icon {
+  background: #EAEEFF;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    margin: auto;
+  }
 }
 
 @media only screen and (max-width: 1600px) {
@@ -241,7 +254,7 @@
 }
 
 .button.is-primary:hover {
-  background: #012d7a;
+  background: #00286F;
 }
 
 .table.is-striped tbody tr:not(.is-selected):nth-child(even) {

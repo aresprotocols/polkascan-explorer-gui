@@ -1,11 +1,11 @@
           <div class="card events-card" *ngIf="preimage">
               <header class="card-header">
+                  <a  class="card-header-icon" aria-label="more options">
+                    <span class="icon"><i class="fa fa-file-code fa-2x"></i></span>
+                  </a>
                   <p class="card-header-title">
                       {{ 'Democracy-preimage-detail.Proposal Preimage' | translate }} 0x{{ preimage.attributes.hash }}
                   </p>
-                  <a  class="card-header-icon" aria-label="more options">
-                 <span class="icon"><i class="fa fa-file-code fa-2x"></i></span>
-                </a>
               </header>
               <div class="card-table">
                   <div class="content">

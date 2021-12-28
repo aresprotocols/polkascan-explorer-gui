@@ -41,10 +41,21 @@
   padding-top: 2px;
 }
 
+.navbar {
+  padding-top: 1rem;
+}
 
 .navbar-logo {
   display: flex;
   align-items: center;
+}
+
+.navbar-logo .navbar-item {
+  img {
+    width: 160px;
+    height: 34px;
+    max-height: 34px;
+  }
 }
 
 .nav-ares-price {
@@ -65,7 +76,7 @@
 
 
 .card-content {
-  width: 70%;
+  width: 55%;
   margin: 0 auto;
 }
 

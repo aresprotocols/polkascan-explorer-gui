@@ -6,14 +6,14 @@
         <section class="info-tiles">
           <div class="card events-card">
               <header class="card-header">
-                  <p class="card-header-title">
+                <a [routerLink]="" fragment="details" class="card-header-icon" aria-label="more options">
+                    <span class="icon">
+                      <i class="fa fa-cog fa-2x" aria-hidden="true"></i>
+                    </span>
+                </a>
+                <p class="card-header-title">
                       {{ 'runtime-module-detail.Runtime module' | translate }} "{{ runtimeModule.attributes.name }}" {{ 'runtime-module-detail.for runtime' | translate }} # {{ runtimeModule.attributes.spec_version }}
                   </p>
-                  <a [routerLink]="" fragment="details" class="card-header-icon" aria-label="more options">
-                      <span class="icon">
-                        <i class="fa fa-cog fa-2x" aria-hidden="true"></i>
-                      </span>
-                    </a>
               </header>
               <div class="card-table" *ngIf="runtimeModule">
                   <div class="content">
@@ -36,14 +36,14 @@
         <section *ngIf="runtimeModule.relationships.calls.data.length > 0" id="call-functions">
             <div class="card ">
                 <header class="card-header">
-                    <p class="card-header-title">
-                        {{ 'runtime-module-detail.Call functions' | translate }}
-                    </p>
-                    <a [routerLink]="" fragment="call-functions" class="card-header-icon" aria-label="more options">
+                  <a [routerLink]="" fragment="call-functions" class="card-header-icon" aria-label="more options">
                       <span class="icon">
                         <i class="fa fa-file-alt fa-2x" aria-hidden="true"></i>
                       </span>
-                    </a>
+                  </a>
+                  <p class="card-header-title">
+                        {{ 'runtime-module-detail.Call functions' | translate }}
+                    </p>
                 </header>
                 <div class="card-table">
                     <div class="content">
@@ -77,14 +77,14 @@
         <section *ngIf="runtimeModule.relationships.events.data.length > 0" id="events">
             <div class="card ">
                 <header class="card-header">
-                    <p class="card-header-title">
-                        {{ 'runtime-module-detail.Events' | translate }}
-                    </p>
-                    <a [routerLink]="" fragment="events" class="card-header-icon" aria-label="more options">
+                  <a [routerLink]="" fragment="events" class="card-header-icon" aria-label="more options">
                       <span class="icon">
                         <i class="fa fa-calendar-check fa-2x" aria-hidden="true"></i>
                       </span>
-                    </a>
+                  </a>
+                  <p class="card-header-title">
+                        {{ 'runtime-module-detail.Events' | translate }}
+                    </p>
                 </header>
                 <div class="card-table">
                     <div class="content">
@@ -118,14 +118,14 @@
         <section *ngIf="runtimeModule.relationships.storage.data.length > 0" id="storage-functions">
             <div class="card ">
                 <header class="card-header">
-                    <p class="card-header-title">
-                        {{ 'runtime-module-detail.Storage functions' | translate }}
-                    </p>
-                    <a [routerLink]="" fragment="storage-functions" class="card-header-icon" aria-label="more options">
+                  <a [routerLink]="" fragment="storage-functions" class="card-header-icon" aria-label="more options">
                       <span class="icon">
                         <i class="fa fa-database fa-2x" aria-hidden="true"></i>
                       </span>
-                    </a>
+                  </a>
+                  <p class="card-header-title">
+                        {{ 'runtime-module-detail.Storage functions' | translate }}
+                    </p>
                 </header>
                 <div class="card-table">
                     <div class="content">
@@ -156,14 +156,14 @@
         <section *ngIf="runtimeModule.relationships.constants.data.length > 0" id="constants">
             <div class="card ">
                 <header class="card-header">
-                    <p class="card-header-title">
-                        {{ 'runtime-module-detail.Constants' | translate }}
-                    </p>
-                    <a [routerLink]="" fragment="constants" class="card-header-icon" aria-label="more options">
+                  <a [routerLink]="" fragment="constants" class="card-header-icon" aria-label="more options">
                       <span class="icon">
                         <i class="fa fa-memory fa-2x" aria-hidden="true"></i>
                       </span>
-                    </a>
+                  </a>
+                  <p class="card-header-title">
+                        {{ 'runtime-module-detail.Constants' | translate }}
+                    </p>
                 </header>
                 <div class="card-table">
                     <div class="content">
@@ -196,14 +196,14 @@
         <section *ngIf="runtimeModule.relationships.errors.data.length > 0" id="errors">
             <div class="card ">
                 <header class="card-header">
-                    <p class="card-header-title">
-                        {{ 'runtime-module-detail.Errors' | translate }}
-                    </p>
-                    <a [routerLink]="" fragment="constants" class="card-header-icon" aria-label="more options">
+                  <a [routerLink]="" fragment="constants" class="card-header-icon" aria-label="more options">
                       <span class="icon">
                         <i class="fa fa-exclamation-triangle fa-2x" aria-hidden="true"></i>
                       </span>
-                    </a>
+                  </a>
+                  <p class="card-header-title">
+                        {{ 'runtime-module-detail.Errors' | translate }}
+                    </p>
                 </header>
                 <div class="card-table">
                     <div class="content">
