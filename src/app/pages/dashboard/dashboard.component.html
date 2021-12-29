@@ -169,7 +169,7 @@
                                   <tr>
                                     <th></th>
                                     <th class="is-hidden-mobile">{{ 'DashBoard.Sender' | translate }}</th>
-                                    <th>{{ 'DashBoard.Destination' | translate }}</th>
+                                    <th >{{ 'DashBoard.Destination' | translate }}</th>
                                     <th>{{ 'DashBoard.Amount' | translate }}</th>
                                     <th></th>
                                   </tr>
@@ -178,7 +178,7 @@
                                     <tr *ngFor="let balanceTransfer of balanceTransfers.data; trackBy: balanceTransfers.trackBy">
                                         <td width="5%"><i class="fa fa-exchange-alt"></i></td>
                                         <td class="is-hidden-mobile"><a routerLink="{{ networkURLPrefix }}/account/{{ balanceTransfer.attributes.sender.attributes.address }}" class="address-overview-format"><app-address [account]="balanceTransfer.attributes.sender"></app-address></a></td>
-                                        <td><a routerLink="{{ networkURLPrefix }}/account/{{ balanceTransfer.attributes.destination.attributes.address }}" class="address-overview-format"><app-address [account]="balanceTransfer.attributes.destination"></app-address></a></td>
+                                        <td ><a routerLink="{{ networkURLPrefix }}/account/{{ balanceTransfer.attributes.destination.attributes.address }}" class="address-overview-format"><app-address [account]="balanceTransfer.attributes.destination"></app-address></a></td>
                                         <td>{{ formatBalance(balanceTransfer.attributes.value) | number:'1.0-15' }} {{ networkTokenSymbol }}</td>
                                         <td width="5%"><a class="button is-small is-primary" routerLink="{{ networkURLPrefix }}/balances/transfer/{{ balanceTransfer.id }}">{{ 'DashBoard.Details' | translate }}</a></td>
                                     </tr>

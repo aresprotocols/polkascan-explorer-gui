@@ -733,7 +733,7 @@ nav.navbar.networks {
   .name, .index {
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 130px;
+    max-width: 90px;
   }
 }
 
@@ -789,7 +789,7 @@ nav.navbar.networks {
 
 @media screen and (min-width: 1408px) {
   .container {
-    max-width: 1250px;
+    max-width: 1320px;
   }
 }
 
