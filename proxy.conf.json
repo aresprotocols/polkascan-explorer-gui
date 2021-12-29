@@ -1,6 +1,6 @@
 {
   "/proxy": {
-    "target": "http://45.77.243.246:8080",
+    "target": "https://aresscan.aresprotocol.io",
     "secure": false,
     "pathRewrite": {
       "^/api": ""
