@@ -731,7 +731,7 @@
   },
   "chainData": {
     "ChainData": "链数据",
-    "FinalizedBlocks": "己确认块高",
+    "FinalizedBlocks": "已确认块高",
     "SignedExtrinsics": "签名交易",
     "Transfers": "转账",
     "Holders": "持有账号",
