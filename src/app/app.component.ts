@@ -55,6 +55,9 @@ export class AppComponent implements OnInit, OnDestroy {
   public aresPrice: number;
   public aresPriceChange: number;
 
+  blockSearchText: string;
+  public networkURLPrefix: string;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -76,10 +79,11 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
+    this.blockSearchText = '';
     if (environment.jsonApiDiscoveryRootUrl) {
       this.networkService.all({remotefilter: {visible: true}}).subscribe(networks => {
         this.networks = networks;
+        this.networkURLPrefix = this.appConfigService.getUrlPrefix();
       });
     }
 
@@ -156,6 +160,15 @@ export class AppComponent implements OnInit, OnDestroy {
         return 'हिन्दी';
       default:
         return 'English';
+    }
+  }
+
+
+  search(): void {
+    // Strip whitespace from search text
+    this.blockSearchText = this.blockSearchText.trim();
+    if (this.blockSearchText !== '') {
+      this.router.navigate([this.networkURLPrefix, 'analytics', 'search', this.blockSearchText]);
     }
   }
 

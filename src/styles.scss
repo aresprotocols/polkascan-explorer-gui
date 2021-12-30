@@ -5,6 +5,23 @@ html, body {
   height: 100%;
   background: #EAEEFF;
 }
+
+.card-table::-webkit-scrollbar{
+  width: 6px;
+  height: 6px;
+  border-radius: 33px;
+  background-color: #EAEEFF;
+}
+
+
+/*定义滑块：内阴影+圆角*/
+.card-table::-webkit-scrollbar-thumb
+{
+  border-radius: 10px;
+  background-color: #b4c4e7;
+}
+
+
 nav.navbar {
   border-top: 4px solid #276cda;
   margin-bottom: 1rem;
@@ -82,6 +99,10 @@ nav.navbar {
 .dashboard-card .card-table {
   max-height: 250px;
   overflow: auto;
+}
+
+.content table td, .content table th {
+  border-bottom: 1px solid #D4D8EA !important;
 }
 
 .network-westend {
@@ -806,17 +827,20 @@ nav.navbar.networks {
 }
 
 
-.fa-cube:before, .fa-book:before, .fa-file-signature:before, .fa-chart-line:before, fa-cogs:before {
+.fa-cube:before, .fa-book:before, .fa-file-signature:before, .fa-chart-line:before, fa-cogs:before, .fa-stream:before {
   color: #003799;
+  margin-left: 15px;
 }
 
-.fa-file-alt:before, .fa-id-card:before, .fa-exchange-alt:before, .fa-memory:before, .fa-database:before {
+.fa-file-alt:before, .fa-id-card:before, .fa-exchange-alt:before, .fa-memory:before, .fa-database:before, .fa-cogs:before {
   color: #003799;
+  margin-left: 15px;
 }
 
 
 .fa-calendar-check:before, .fa-user:before, .fa-user-tag:before, .fa-cog:before, .fa-exclamation-triangle:before {
   color: #003799;
+  margin-left: 15px;
 }
 
 

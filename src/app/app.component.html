@@ -167,13 +167,12 @@
             <div class="control has-icons-left has-icons-right">
               <input class="input is-large" type="text" [(ngModel)]="blockSearchText" [ngModelOptions]="{standalone: true}" [placeholder]="'PlaceHolderSearch' | translate">
               <span class="icon is-medium is-left left_icon">
-                    <i class="fa fa-search"></i>
-                  </span>
-              <span class="icon is-medium is-right">
-                  </span>
+                <i class="fa fa-search"></i>
+              </span>
+              <span class="icon is-medium is-right"></span>
             </div>
+            <button class="search-button" type="submit">{{"chainData.Search" | translate}}</button>
           </form>
-          <button class="search-button">{{"chainData.Search" | translate}}</button>
         </div>
       </div>
     </section>

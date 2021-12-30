@@ -1,7 +1,7 @@
 <div class="columns">
     <div class="column is-12">
-        <div class="dashboard-header">
-          <div class="chain-data column is-3">
+        <div class="dashboard-header columns">
+          <div class="chain-data column is-9">
             <div class="title">
               {{ 'chainData.ChainData' | translate }}
             </div>
@@ -98,12 +98,12 @@
                 </div>
                 <div class="status-item">
                   <div class="status-item-title">{{"chainData.MarketCap" | translate}}</div>
-                  <div class="status-item-num">$ {{aresCap ? (aresCap/1000000).toFixed(1) : ""}} M USD</div>
+                  <div class="status-item-num">$ {{aresCap ? (aresCap/1000000).toFixed(1) : ""}} M</div>
                 </div>
               </div>
               <div class="status-item">
                 <div class="status-item-title">24H {{"chainData.Volume" | translate}}</div>
-                <div class="status-item-num">$ {{aresVol ? (aresVol/1000000).toFixed(1) : ""}} M USD</div>
+                <div class="status-item-num">$ {{aresVol ? (aresVol/1000000).toFixed(1) : ""}} M</div>
               </div>
             </div>
           </div>
