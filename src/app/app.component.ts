@@ -83,7 +83,6 @@ export class AppComponent implements OnInit, OnDestroy {
     if (environment.jsonApiDiscoveryRootUrl) {
       this.networkService.all({remotefilter: {visible: true}}).subscribe(networks => {
         this.networks = networks;
-        this.networkURLPrefix = this.appConfigService.getUrlPrefix();
       });
     }
 
@@ -92,6 +91,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.networkSubscription = this.appConfigService.getCurrentNetwork().pipe(delay(0)).subscribe( network => {
       if (network) {
         this.currentNetwork = network;
+        this.networkURLPrefix = this.appConfigService.getUrlPrefix();
       }
     });
     this.getAresData();
@@ -166,6 +166,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   search(): void {
     // Strip whitespace from search text
+    console.log(this.blockSearchText);
+    // console.log(this.networkURLPrefix);
     this.blockSearchText = this.blockSearchText.trim();
     if (this.blockSearchText !== '') {
       this.router.navigate([this.networkURLPrefix, 'analytics', 'search', this.blockSearchText]);
