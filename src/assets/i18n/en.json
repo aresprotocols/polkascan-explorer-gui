@@ -446,7 +446,8 @@
 		"item_Treasury Accounts": "Treasuries",
 		"item_Types": "Types",
 		"item_Upgrade_history": "Upgrade history",
-		"item_Validator Accounts": "Validators"
+		"item_Validator Accounts": "Validators",
+    "Faucet": "Faucet"
 	},
 	"Network-overview": {
 		"Explore": "Explore",

@@ -446,7 +446,8 @@
 		"item_Treasury Accounts": "财政",
 		"item_Types": "类型",
 		"item_Upgrade_history": "升级历史记录",
-		"item_Validator Accounts": "验证人"
+		"item_Validator Accounts": "验证人",
+    "Faucet": "水龙头"
 	},
 	"Network-overview": {
 		"Explore": "探索",
