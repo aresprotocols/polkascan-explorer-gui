@@ -23,19 +23,35 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
+// see also: getBuilderConfiguration
+
+// export const environment = {
+//   production: false,
+//   jsonApiDiscoveryRootUrl: 'https://discovery-32.polkascan.io',
+//   jsonApiRootUrl: null,
+//   network: {
+//     name: null,
+//     networkId: null,
+//     networkType: null,
+//     chainType: null,
+//     tokenSymbol: null,
+//     tokenDecimals: null,
+//     colorCode: null
+//   }
+// };
 
 export const environment = {
-  production: false,
-  jsonApiDiscoveryRootUrl: 'https://discovery-32.polkascan.io',
-  jsonApiRootUrl: null,
+  production: true,
+  jsonApiDiscoveryRootUrl: null,
+  jsonApiRootUrl: 'https://aresscan.aresprotocol.io/api/v1',
   network: {
-    name: null,
-    networkId: null,
-    networkType: null,
-    chainType: null,
-    tokenSymbol: null,
-    tokenDecimals: null,
-    colorCode: null
+    name: 'Ares',
+    networkId: 'ares',
+    networkType: 'pre',
+    chainType: 'relay',
+    tokenSymbol: 'ARES',
+    tokenDecimals: 12,
+    colorCode: '000000'
   }
 };
 

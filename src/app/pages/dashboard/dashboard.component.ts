@@ -120,10 +120,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
 
   getChainData(): void {
-    const url = "/api/v1/chain";
+    const url = this.appConfigService.getNetworkApiUrlRoot() + "/chain";
     this.http.get(url)
       .subscribe(res => {
-        console.log(res);
         this.chainData = res['data'];
       });
 
