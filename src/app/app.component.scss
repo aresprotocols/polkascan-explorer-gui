@@ -116,6 +116,20 @@
 }
 
 
+@media screen and (max-width: 750px) {
+  #search {
+    width: 100%;
+    padding: 0.75em 0;
+  }
+  .card-content {
+    width: 100%;
+  }
+  .navbar-logo {
+    flex-direction: column;
+  }
+}
+
+
 .app_footer {
   background: #EAEEFF;
   text-align: center;
