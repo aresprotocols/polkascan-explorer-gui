@@ -1,0 +1,52 @@
+<div class="columns">
+  <div class="column is-12">
+    <app-polkascan-header></app-polkascan-header>
+    <section>
+      <div class="card ">
+        <header class="card-header">
+          <a [routerLink]="" fragment="list" class="card-header-icon" aria-label="more options">
+              <span class="icon">
+                <i class="fa fa-database fa-2x" aria-hidden="true"></i>
+              </span>
+          </a>
+          <p class="card-header-title">
+            {{ 'DashBoard.Data of on-chain assets' | translate }}
+            <span class="card-header-tips">77 trade pairs</span>
+          </p>
+        </header>
+        <div class="card-table">
+          <div class="content">
+            <app-loading-box *ngIf="showLoading && (!blocks || blocks.is_loading)"></app-loading-box>
+            <table class="table is-fullwidth is-striped" *ngIf="blocks && blocks.data.length > 0">
+              <thead>
+              <tr>
+                <th></th>
+                <th>{{ 'DashBoard.Trading pairs' | translate }}</th>
+                <th class="is-hidden-mobile">{{ 'DashBoard.Request interval(block)' | translate }}</th>
+                <th class="is-hidden-mobile">{{ 'DashBoard.Precision' | translate }}</th>
+                <th>{{ 'DashBoard.On-chain price' | translate }}</th>
+                <th>{{ 'DashBoard.Timestamp' | translate }}</th>
+                <th></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let asset of assets.data; trackBy: assets.trackBy">
+                <td width="10%"><a routerLink="{{ networkURLPrefix }}/block/{{ block.id }}">{{ block.attributes.id }}</a></td>
+                <td class="is-hidden-mobile"><span rel="tooltip" title="{{ block.attributes.datetime | date:'medium'}}">{{ block.attributes.datetime | timeago }}</span></td>
+                <td class="is-hidden-mobile"><div class="hash-format">{{ block.attributes.hash }}</div></td>
+                <td>{{ block.attributes.count_extrinsics_signed }}</td>
+                <td>{{ block.attributes.count_events_module }}</td>
+                <td width="5%"><a class="button is-small is-primary" routerLink="{{ networkURLPrefix }}/block/{{ block.id }}">{{ 'Block-List.Details' | translate }}</a></td>
+              </tr>
+              </tbody>
+            </table>
+            <div class="no-items" *ngIf="blocks && blocks.data.length == 0 && !blocks.is_loading">{{ 'Block-List.No items' | translate }}</div>
+          </div>
+        </div>
+        <footer class="card-footer">
+          <a routerLink="." [queryParams]="{ page: currentPage + 1}" class="card-footer-item">{{ 'Block-List.View next' | translate }}</a>
+        </footer>
+      </div>
+    </section>
+  </div>
+</div>

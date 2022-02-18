@@ -80,6 +80,10 @@ import {TreasuryProposalDetailComponent} from './pages/treasury-proposal-detail/
 import {DemocracyPreimageListComponent} from './pages/democracy-preimage-list/democracy-preimage-list.component';
 import {DemocracyPreimageDetailComponent} from './pages/democracy-preimage-detail/democracy-preimage-detail.component';
 import {ExtrinsicParamDownloadComponent} from './pages/extrinsic-param-download/extrinsic-param-download.component';
+import {AssetsOnChainComponent} from './pages/assets-on-chain/assets-on-chain.component';
+import { RequestOnChainComponent } from './pages/request-on-chain/request-on-chain.component';
+import {UnRewardsComponent} from './pages/un_rewards/un-rewards.component';
+import {EraRewardsComponent} from './pages/era_rewards/era-rewards.component';
 
 const routes: Routes = [
   { path: '', component: NetworkOverviewComponent, },
@@ -174,6 +178,10 @@ const routes: Routes = [
       { path: 'analytics/search/:query', component: AnalyticsSearchComponent},
       { path: 'analytics/charts', component: AnalyticsChartsComponent },
       { path: 'analytics/chart/:id', component: AnalyticsChartDetailComponent },
+      { path: 'onchain/assets', component: AssetsOnChainComponent },
+      { path: 'onchain/request', component: RequestOnChainComponent },
+      { path: 'un-rewards', component: UnRewardsComponent },
+      { path: 'era-rewards', component: EraRewardsComponent },
     ]},
   { path: 'settings', component: SettingsComponent},
   { path: '404', component: NotFoundComponent},

@@ -51,7 +51,7 @@ export const environment = {
     chainType: 'relay',
     tokenSymbol: 'ARES',
     tokenDecimals: 12,
-    colorCode: '000000'
+    colorCode: '2e4765'
   }
 };
 

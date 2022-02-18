@@ -37,7 +37,7 @@ export class AnalyticsChartService extends Service<AnalyticsChart> {
 
     public resource = AnalyticsChart;
     public type = 'chart';
-    public path = 'analytics/chart';
+    public path = 'charts';
 
     public jsonApiRootUrl;
 

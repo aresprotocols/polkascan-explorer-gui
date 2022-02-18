@@ -23,7 +23,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DocumentCollection} from 'ngx-jsonapi';
 import {Block} from '../../classes/block.class';
-import {interval, Observable, Subscription} from 'rxjs';
+import {interval, Observable, Subscription, of} from 'rxjs';
 import {Networkstats} from '../../classes/networkstats.class';
 import {BlockService} from '../../services/block.service';
 import {NetworkstatsService} from '../../services/networkstats.service';
@@ -44,6 +44,7 @@ import {AnalyticsChartService} from '../../services/analytics-chart.service';
 export class DashboardComponent implements OnInit, OnDestroy {
 
   public blocks: DocumentCollection<Block>;
+  public chainAssets: DocumentCollection<Block>;
   public balanceTransfers: DocumentCollection<BalanceTransfer>;
   public networkstats$: Observable<Networkstats>;
 
@@ -87,14 +88,29 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.networkstats$ = this.networkstatsService.get('latest');
 
       // Retrieve charts
-      if (environment.jsonApiDiscoveryRootUrl) {
+      // if (environment.jsonApiDiscoveryRootUrl) {
 
-        this.networkColor = '#' + network.attributes.color_code;
+      this.networkColor = '#' + network.attributes.color_code;
+      this.analyticsChartService.all().subscribe(chartData => {
+        console.log(chartData.data[0]);
+        chartData.data.forEach(chart => {
+          if (chart.id === 'utcday-extrinsics_signed-sum-line-14') {
+            this.totalTransactionsDaychart$ = of(chart);
+          }
 
-        this.totalTransactionsDaychart$ = this.analyticsChartService.get('utcday-extrinsics_signed-sum-line-14');
-        this.cumulativeAccountsDayChart$ = this.analyticsChartService.get('utcday-accounts_new-sum-line-14');
-        this.averageBlocktimeDaychart$ = this.analyticsChartService.get('utcday-blocktime-avg-line-14');
-      }
+          if (chart.id === 'utcday-accounts_new-sum-line-14') {
+            this.cumulativeAccountsDayChart$ = of(chart);
+          }
+
+          if (chart.id === 'utcday-blocktime-avg-line-14') {
+            this.averageBlocktimeDaychart$ = of(chart);
+          }
+        });
+      });
+
+      // this.totalTransactionsDaychart$ = this.analyticsChartService.get('utcday-extrinsics_signed-sum-line-14');
+      // this.cumulativeAccountsDayChart$ = this.analyticsChartService.get('utcday-accounts_new-sum-line-14');
+      // this.averageBlocktimeDaychart$ = this.analyticsChartService.get('utcday-blocktime-avg-line-14');
     });
 
     const blockUpdateCounter = interval(6000);
@@ -132,6 +148,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.blockService.all({
       page: {number: 0}
     }).subscribe(blocks => (this.blocks = blocks));
+
 
     this.balanceTransferService.all({
       page: {number: 0}
