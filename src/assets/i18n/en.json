@@ -764,6 +764,7 @@
     "Rank": "Rank",
     "MarketCap": "Market Cap",
     "Volume": "Volume",
-    "Search": "Search"
+    "Search": "Search",
+    "treasuryBurn": "treasuryBurn"
   }
 }

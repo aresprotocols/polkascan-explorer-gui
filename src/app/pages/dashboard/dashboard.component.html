@@ -7,16 +7,6 @@
             </div>
             <div class="chain-data-items">
               <!--routerLink="{{ networkURLPrefix }}/account/{{ balanceTransfer.attributes.sender.attributes.address }}"-->
-              <a class="chain-data-item"
-                 routerLink="{{ networkURLPrefix }}/block">
-                <div class="chain-data-item-icon">
-                  <img src="../../../assets/icons/blocks.png" alt="" width="24" height="24">
-                </div>
-                <div>
-                  <div class="item-title">{{'chainData.FinalizedBlocks' | translate}}</div>
-                  <div class="numbers">{{ chainData.finalized_block ? chainData.finalized_block : "0"}}</div>
-                </div>
-              </a>
               <a class="chain-data-item" routerLink="{{ networkURLPrefix }}/transaction">
                 <div class="chain-data-item-icon">
                   <img src="../../../assets/icons/signed.png" alt="" width="22" height="24">
@@ -80,6 +70,16 @@
                   <div class="numbers">{{chainData.inflation ? chainData.inflation.toFixed(2) : "0"}}%</div>
                 </div>
               </div>
+              <a class="chain-data-item"
+                 routerLink="{{ networkURLPrefix }}/block">
+                <div class="chain-data-item-icon">
+                  <img src="../../../assets/icons/blocks.png" alt="" width="24" height="24">
+                </div>
+                <div>
+                  <div class="item-title">{{'chainData.treasuryBurn' | translate}}</div>
+                  <div class="numbers">{{ chainData.total_treasury_burn ? chainData.total_treasury_burn : "0"}}</div>
+                </div>
+              </a>
             </div>
           </div>
           <div class="token-status column is-3">
