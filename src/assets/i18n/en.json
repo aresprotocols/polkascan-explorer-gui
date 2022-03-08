@@ -290,6 +290,7 @@
     "Request interval(block)": "Request interval(block)",
     "On-chain price": "On-chain price",
     "ID for order": "ID for order",
+    "Precision": "Precision",
     "Assembled result": "Assembled result",
     "Status": "Status",
     "Rewards for era": "Rewards for era",

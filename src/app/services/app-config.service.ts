@@ -55,6 +55,8 @@ import {TechCommProposalService} from './tech-comm-proposal.service';
 import {TreasuryProposalService} from './treasury-proposal.service';
 import {DemocracyPreimageService} from './democracy-preimage.service';
 import {RuntimeErrorService} from './runtime-error.service';
+import {ChainAssetsService} from './chain-assets.service';
+import {ChainRequestService} from './chain-request.service';
 
 const STORAGE_KEY = 'polkascan-config';
 
@@ -102,6 +104,8 @@ export class AppConfigService {
     private runtimeConstantService: RuntimeConstantService,
     private runtimeErrorService: RuntimeErrorService,
     private analyticsChartService: AnalyticsChartService,
+    private chainAssetsService: ChainAssetsService,
+    private chainRequestService: ChainRequestService,
     @Inject(LOCAL_STORAGE) private storage: StorageService
   ) { }
 
@@ -158,7 +162,8 @@ export class AppConfigService {
       this.runtimeConstantService.jsonApiRootUrl = network.attributes.api_url_root;
       this.runtimeErrorService.jsonApiRootUrl = network.attributes.api_url_root;
       this.analyticsChartService.jsonApiRootUrl = network.attributes.api_url_root;
-
+      this.chainAssetsService.jsonApiRootUrl = network.attributes.api_url_root;
+      this.chainRequestService.jsonApiRootUrl = network.attributes.api_url_root;
       this.networkURLPrefix = '/' + network.attributes.network_id;
 
       this.networkName = network.attributes.name;

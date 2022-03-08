@@ -1,9 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from 'rxjs';
+import {interval, Subscription} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import {AppConfigService} from '../../services/app-config.service';
 import {DocumentCollection} from 'ngx-jsonapi';
 import {Block} from '../../classes/block.class';
+import {HttpClient} from '@angular/common/http';
+import { ChainRequest } from 'src/app/classes/chain-request.class';
 
 
 @Component({
@@ -19,12 +21,14 @@ export class RequestOnChainComponent implements OnInit, OnDestroy {
   currentPage = 1;
   private fragmentSubsription: Subscription;
   private networkSubscription: Subscription;
+  private requestSubsription: Subscription;
   public networkURLPrefix: string;
-  public assets: DocumentCollection<Block>;
+  public chainRequest: ChainRequest [];
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private appConfigService: AppConfigService
+    private appConfigService: AppConfigService,
+    private http: HttpClient
   ) {
 
   }
@@ -41,16 +45,28 @@ export class RequestOnChainComponent implements OnInit, OnDestroy {
         this.getOnChainRequest(this.currentPage);
       });
 
+
+      const counter = interval(60000);
+      this.requestSubsription = counter.subscribe( n => {
+        this.showLoading = false;
+        this.getOnChainRequest(this.currentPage);
+      });
+
     });
   }
 
-
-  ngOnDestroy(): void {
-  }
-
-
   getOnChainRequest(page: number) {
     console.log('get on chain asset page:', page);
+    const url = this.appConfigService.getNetworkApiUrlRoot() + "/oracle/requests?"  + 'page[number]=' + page + '&page[size]=25';
+    this.http.get(url)
+      .subscribe(res => {
+        this.chainRequest = res['data'];
+      });
   }
 
+  ngOnDestroy(): void {
+    this.networkSubscription.unsubscribe();
+    this.requestSubsription.unsubscribe();
+    this.fragmentSubsription.unsubscribe();
+  }
 }

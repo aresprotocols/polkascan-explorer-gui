@@ -221,12 +221,16 @@
                           <th></th>
                         </tr>
                       </thead>
-                      <tbody *ngIf="blocks">
-                      <tr *ngFor="let block of blocks.data; trackBy: blocks.trackBy">
-                        <td><a routerLink="{{ networkURLPrefix }}/block/{{ block.id }}">{{ block.id }}</a></td>
-                        <td class="is-hidden-mobile"><span *ngIf="block.attributes.datetime" rel="tooltip" title="{{ block.attributes.datetime | date:'medium'}}">{{ block.attributes.datetime | timeago }}</span></td>
-                        <td>{{ block.attributes.count_extrinsics_signed }}</td>
-                        <td>{{ block.attributes.count_events_module }}</td>
+                      <tbody *ngIf="chainAssets">
+                      <tr *ngFor="let asset of chainAssets">
+                        <td>{{ asset.symbol }}</td>
+                        <td class="is-hidden-mobile">
+                          <!--<span *ngIf="block.attributes.datetime" rel="tooltip" title="{{ block.attributes.datetime | date:'medium'}}">-->
+                          <!--  </span>-->
+                          {{ asset.interval}}
+                        </td>
+                        <td>{{ asset.precision }}</td>
+                        <td>${{ asset.price }}</td>
                       </tr>
                       </tbody>
                     </table>
@@ -263,12 +267,12 @@
                       <th></th>
                     </tr>
                     </thead>
-                    <tbody *ngIf="blocks">
-                    <tr *ngFor="let block of blocks.data; trackBy: blocks.trackBy">
-                      <td><a routerLink="{{ networkURLPrefix }}/block/{{ block.id }}">{{ block.id }}</a></td>
-                      <td class="is-hidden-mobile"><span *ngIf="block.attributes.datetime" rel="tooltip" title="{{ block.attributes.datetime | date:'medium'}}">{{ block.attributes.datetime | timeago }}</span></td>
-                      <td width="20%"><i class="fa fa-check-circle"></i></td>
-                    </tr>
+                    <tbody *ngIf="chainRequest.length > 0">
+                      <tr *ngFor="let request of chainRequest;">
+                        <td><a routerLink="{{ networkURLPrefix }}/block/{{ request.attributes.created_at }}">{{ request.attributes.created_at }}</a></td>
+                        <td class="is-hidden-mobile"><span *ngIf="request.attributes.prepayment" rel="tooltip" title="{{ request.attributes.prepayment | date:'medium'}}">{{ request.attributes.prepayment}}</span></td>
+                        <td width="20%"><i class="fa fa-check-circle"></i></td>
+                      </tr>
                     </tbody>
                   </table>
                 </div>
@@ -277,7 +281,7 @@
           </div>
         </section>
 
-        <section class="columns" *ngIf="chainAssets">
+        <section class="columns" *ngIf="chainEraRequest.length > 0">
           <div class="column is-6 last-blocks">
             <div class="card dashboard-card">
               <a routerLink="{{ networkURLPrefix }}/era-rewards">
@@ -308,13 +312,13 @@
                       <th></th>
                     </tr>
                     </thead>
-                    <tbody *ngIf="blocks">
-                    <tr *ngFor="let block of blocks.data; trackBy: blocks.trackBy">
-                      <td><a routerLink="{{ networkURLPrefix }}/block/{{ block.id }}">{{ block.id }}</a></td>
-                      <td width="22%" class="is-hidden-mobile"><span *ngIf="block.attributes.datetime" rel="tooltip" title="{{ block.attributes.datetime | date:'medium'}}">{{ block.attributes.datetime | timeago }}</span></td>
-                      <td>{{ block.attributes.count_extrinsics_signed }}</td>
-                      <td>{{ block.attributes.count_events_module }}</td>
-                      <td>{{ block.attributes.count_events_module }}</td>
+                    <tbody *ngIf="chainEraRequest">
+                    <tr *ngFor="let request of chainEraRequest">
+                      <td><a routerLink="{{ networkURLPrefix }}/block/{{ request.id }}">{{ request.attributes.era }}</a></td>
+                      <td width="22%" class="is-hidden-mobile"><span *ngIf="request.attributes.era_total_fee" rel="tooltip" title="{{ request.attributes.era_total_fee}}">{{ request.attributes.era_total_fee}}</span></td>
+                      <td>{{ request.attributes.era_total_requests }}</td>
+                      <td>{{ request.attributes.era_total_points }}</td>
+                      <td>{{ request.attributes.total_eras }}</td>
                     </tr>
                     </tbody>
                   </table>

@@ -289,7 +289,7 @@
     "Trading pairs": "交易对",
     "Request interval(block)": "请求间隔(区块)",
     "On-chain price": "链上价格",
-    "ID for order": "订单IDr",
+    "ID for order": "订单ID",
     "Assembled result": "聚合结果",
     "Status": "请求状态",
     "Rewards for era": "时区奖励",
@@ -303,7 +303,7 @@
     "Validator": "验证人",
     "Reward": "奖励",
     "Claim": "奖励",
-    "Timestamp": "Timestamp"
+    "Timestamp": "时间"
 	},
 	"Democracy-preimage-detail": {
 		"Author": "发起人",

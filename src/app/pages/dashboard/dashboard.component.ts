@@ -26,6 +26,7 @@ import {Block} from '../../classes/block.class';
 import {interval, Observable, Subscription, of} from 'rxjs';
 import {Networkstats} from '../../classes/networkstats.class';
 import {BlockService} from '../../services/block.service';
+import {ChainAssetsService} from '../../services/chain-assets.service';
 import {NetworkstatsService} from '../../services/networkstats.service';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
@@ -35,6 +36,9 @@ import {AppConfigService} from '../../services/app-config.service';
 import {environment} from '../../../environments/environment';
 import {AnalyticsChart} from '../../classes/analytics-chart.class';
 import {AnalyticsChartService} from '../../services/analytics-chart.service';
+import { ChainAssets } from 'src/app/classes/chain-asstes.class';
+import {ChainRequestService} from '../../services/chain-request.service';
+import {ChainRequest} from '../../classes/chain-request.class';
 
 @Component({
   selector: 'app-dashboard',
@@ -44,7 +48,7 @@ import {AnalyticsChartService} from '../../services/analytics-chart.service';
 export class DashboardComponent implements OnInit, OnDestroy {
 
   public blocks: DocumentCollection<Block>;
-  public chainAssets: DocumentCollection<Block>;
+  // public chainAssets: DocumentCollection<ChainAssets>;
   public balanceTransfers: DocumentCollection<BalanceTransfer>;
   public networkstats$: Observable<Networkstats>;
 
@@ -65,6 +69,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public aresCap: number;
   public aresVol: number;
   public chainData: object = {};
+  public chainAssets: ChainAssets[] = [];
+  public chainRequest: ChainRequest[] = [];
+  public chainEraRequest: object [] = [];
+  public chainReward: object [] = [];
 
   constructor(
     private blockService: BlockService,
@@ -72,6 +80,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private networkstatsService: NetworkstatsService,
     private appConfigService: AppConfigService,
     private analyticsChartService: AnalyticsChartService,
+    private chainAssetsService: ChainAssetsService,
+    private chainRequestService: ChainRequestService,
     private router: Router,
     private http: HttpClient) {
 
@@ -92,7 +102,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
       this.networkColor = '#' + network.attributes.color_code;
       this.analyticsChartService.all().subscribe(chartData => {
-        console.log(chartData.data[0]);
         chartData.data.forEach(chart => {
           if (chart.id === 'utcday-extrinsics_signed-sum-line-14') {
             this.totalTransactionsDaychart$ = of(chart);
@@ -107,7 +116,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
           }
         });
       });
-
+      // this.chainAssetsService.all().subscribe( assets => {
+      //   console.log('assets', assets);
+      // });
+      this.getChainAsset();
+      this.getChainRequest();
+      this.getChainEraRequest();
+      this.getChainReward();
       // this.totalTransactionsDaychart$ = this.analyticsChartService.get('utcday-extrinsics_signed-sum-line-14');
       // this.cumulativeAccountsDayChart$ = this.analyticsChartService.get('utcday-accounts_new-sum-line-14');
       // this.averageBlocktimeDaychart$ = this.analyticsChartService.get('utcday-blocktime-avg-line-14');
@@ -142,6 +157,51 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.chainData = res['data'];
       });
 
+  }
+
+  getChainAsset(): void {
+    const url = this.appConfigService.getNetworkApiUrlRoot() + "/oracle/symbols";
+    this.http.get(url)
+      .subscribe(res => {
+        res['data'].forEach(item => {
+          item.price = item.price / 10000;
+        });
+        this.chainAssets = res['data'];
+        console.log('aaaa', res, this.chainAssets[0].symbol);
+      });
+  }
+
+  getChainRequest(): void {
+    const url = this.appConfigService.getNetworkApiUrlRoot() + "/oracle/requests";
+    this.http.get(url)
+      .subscribe(res => {
+        this.chainRequest = res['data'];
+        res['data'].forEach(item => {
+          item.attributes.prepayment = item.attributes.prepayment / 1000000000000;
+        });
+        console.log('requestaa', this.chainRequest);
+      });
+  }
+
+  getChainEraRequest(): void {
+    const url = this.appConfigService.getNetworkApiUrlRoot() + "/oracle/era_requests";
+    this.http.get(url)
+      .subscribe(res => {
+        this.chainEraRequest = res['data'];
+        res['data'].forEach(item => {
+          item.attributes.era_total_fee = item.attributes.era_total_fee / 1000000000000;
+        });
+        console.log('request', this.chainEraRequest);
+      });
+  }
+
+  getChainReward(): void {
+    const url = this.appConfigService.getNetworkApiUrlRoot() + "/oracle/reward";
+    this.http.get(url)
+      .subscribe(res => {
+        this.chainReward = res['data'];
+        console.log('reward:', this.chainReward);
+      });
   }
 
   getBlocks(): void {
