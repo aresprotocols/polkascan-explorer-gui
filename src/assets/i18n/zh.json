@@ -303,7 +303,19 @@
     "Validator": "验证人",
     "Reward": "奖励",
     "Claim": "奖励",
-    "Timestamp": "时间"
+    "Timestamp": "时间",
+    "Validator Audit": "Validator Audit",
+    "Validator id": "Validator id",
+    "Ares-Authority": "Ares-Authority",
+    "Event Block": "Event Block",
+    "Result": "Result",
+    "Order ID": "Order ID",
+    "Requester": "Requester",
+    "Apply block": "Apply block",
+    "Quantity": "Quantity",
+    "Request pairs": "Request pairs",
+    "Prepaid": "Prepaid",
+    "Final Payment": "Final Payment"
 	},
 	"Democracy-preimage-detail": {
 		"Author": "发起人",

@@ -126,6 +126,8 @@ import {AssetsOnChainComponent} from './pages/assets-on-chain/assets-on-chain.co
 import {RequestOnChainComponent} from './pages/request-on-chain/request-on-chain.component';
 import {UnRewardsComponent} from './pages/un_rewards/un-rewards.component';
 import {EraRewardsComponent} from './pages/era_rewards/era-rewards.component';
+import {HideMiddleStr} from './pipes/hide-middle-str';
+import {ValidatorOnChainComponent} from './pages/validator-on-chain/validator-on-chain.component';
 
 export class MyClock extends TimeagoClock {
   tick(then: number): Observable<number> {
@@ -212,7 +214,9 @@ export class MyClock extends TimeagoClock {
     AssetsOnChainComponent,
     RequestOnChainComponent,
     UnRewardsComponent,
-    EraRewardsComponent
+    EraRewardsComponent,
+    ValidatorOnChainComponent,
+    HideMiddleStr
   ],
   imports: [
     BrowserModule,

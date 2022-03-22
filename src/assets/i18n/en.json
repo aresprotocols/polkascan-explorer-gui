@@ -305,7 +305,19 @@
     "Reward": "Reward",
     "Claim": "Claim",
     "Timestamp": "Timestamp",
-    "Click to claim": "Click to claim"
+    "Click to claim": "Click to claim",
+    "Validator Audit": "Validator Audit",
+    "Validator id": "Validator id",
+    "Ares-Authority": "Ares-Authority",
+    "Event Block": "Event Block",
+    "Result": "Result",
+    "Order ID": "Order ID",
+    "Requester": "Requester",
+    "Apply block": "Apply block",
+    "Quantity": "Quantity",
+    "Request pairs": "Request pairs",
+    "Prepaid": "Prepaid",
+    "Final Payment": "Final Payment"
 	},
 	"Democracy-preimage-detail": {
 		"Author": "Author",

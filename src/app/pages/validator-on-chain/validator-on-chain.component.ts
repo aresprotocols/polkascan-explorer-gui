@@ -8,12 +8,12 @@ import { ChainRequest } from 'src/app/classes/chain-request.class';
 
 @Component({
   selector: 'app-request-on-chain',
-  templateUrl: './request-on-chain.component.html',
-  styleUrls: ['./request-on-chain.component.scss']
+  templateUrl: './validator-on-chain.component.html',
+  styleUrls: ['./validator-on-chain.component.scss']
 })
 
 
-export class RequestOnChainComponent implements OnInit, OnDestroy {
+export class ValidatorOnChainComponent implements OnInit, OnDestroy {
 
   public showLoading: boolean;
   currentPage = 1;
