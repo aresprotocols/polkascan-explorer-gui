@@ -267,12 +267,12 @@
                       <th></th>
                     </tr>
                     </thead>
-                    <tbody *ngIf="chainRequest.length > 0">
-                      <tr *ngFor="let request of chainRequest;">
-                        <td><a routerLink="{{ networkURLPrefix }}/block/{{ request.attributes.created_at }}">{{ request.attributes.created_at }}</a></td>
-                        <td class="is-hidden-mobile"><span *ngIf="request.attributes.prepayment" rel="tooltip" title="{{ request.attributes.prepayment | date:'medium'}}">{{ request.attributes.prepayment}}</span></td>
-                        <td width="20%"><i class="fa fa-check-circle"></i></td>
-                        <td width="20%"><i class="fa fa-check-circle"></i></td>
+                    <tbody *ngIf="validator.length > 0">
+                      <tr *ngFor="let v of validator;">
+                        <td>{{ v.validator | hideMiddleStr}}</td>
+                        <td class="is-hidden-mobile">{{ v.ares_authority | hideMiddleStr}}</td>
+                        <td width="20%"><a routerLink="{{ networkURLPrefix }}/block/{{ v.block_number}}">{{v.block_number}}</a></td>
+                        <td width="20%">{{v.status}}</td>
                       </tr>
                     </tbody>
                   </table>

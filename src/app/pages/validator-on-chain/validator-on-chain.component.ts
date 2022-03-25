@@ -21,7 +21,7 @@ export class ValidatorOnChainComponent implements OnInit, OnDestroy {
   private networkSubscription: Subscription;
   private requestSubsription: Subscription;
   public networkURLPrefix: string;
-  public chainRequest: ChainRequest [];
+  public validator: object [] = [];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -40,25 +40,25 @@ export class ValidatorOnChainComponent implements OnInit, OnDestroy {
       this.fragmentSubsription = this.activatedRoute.queryParams.subscribe(params => {
         this.showLoading = true;
         this.currentPage = +params.page || 1;
-        this.getOnChainRequest(this.currentPage);
+        this.getValidator(this.currentPage);
       });
 
 
       const counter = interval(60000);
       this.requestSubsription = counter.subscribe( n => {
         this.showLoading = false;
-        this.getOnChainRequest(this.currentPage);
+        this.getValidator(this.currentPage);
       });
 
     });
   }
 
-  getOnChainRequest(page: number) {
-    console.log('get on chain asset page:', page);
-    const url = this.appConfigService.getNetworkApiUrlRoot() + "/oracle/requests?"  + 'page[number]=' + page + '&page[size]=25';
+  getValidator(page: number) {
+    console.log('get on chain validator page:', page);
+    const url = this.appConfigService.getNetworkApiUrlRoot() + "/oracle/pre_check_tasks?"  + 'page[number]=' + page + '&page[size]=25';
     this.http.get(url)
       .subscribe(res => {
-        this.chainRequest = res['data'];
+        this.validator = res['data'];
       });
   }
 

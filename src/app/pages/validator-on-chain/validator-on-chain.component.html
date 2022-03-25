@@ -16,8 +16,8 @@
         </header>
         <div class="card-table">
           <div class="content">
-            <app-loading-box *ngIf="showLoading && (!chainRequest)"></app-loading-box>
-            <table class="table is-fullwidth is-striped" *ngIf="chainRequest && chainRequest.length > 0">
+            <app-loading-box *ngIf="showLoading && (!validator)"></app-loading-box>
+            <table class="table is-fullwidth is-striped" *ngIf="validator && validator.length > 0">
               <thead>
               <tr>
                 <th></th>
@@ -29,14 +29,12 @@
               </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let request of chainRequest">
+              <tr *ngFor="let v of validator">
                 <td></td>
-                <td width="10%"><a routerLink="{{ networkURLPrefix }}/block/{{ request.id }}">{{ request.attributes.created_at }}</a></td>
-                <td class="is-hidden-mobile"><span rel="tooltip" title="{{ request.attributes.created_at | date:'medium'}}">{{ request.attributes.created_at | timeago }}</span></td>
-                <td>{{ request.attributes.created_at }}</td>
-                <td width="5%">
-                    {{ request.attributes.created_at }}
-                </td>
+                <td width="10%">{{ v.validator }}</td>
+                <td class="is-hidden-mobile">{{ v.ares_authority}}</td>
+                <td width="20%"><a routerLink="{{ networkURLPrefix }}/block/{{ v.block_number}}">{{v.block_number}}</a></td>
+                <td width="20%">{{v.status}}</td>
               </tr>
               </tbody>
             </table>

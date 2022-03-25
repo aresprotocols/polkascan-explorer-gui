@@ -9,7 +9,7 @@ export class HideMiddleStr  implements PipeTransform {
    * @return 处理完成的数据
    */
   transform(value: string, ...args: any[]): any {
-    const frontLen = 20;
+    const frontLen = 10;
     const endLen = 10;
     let newStr = '';
     for (let i = 0; i < 3; i++) {

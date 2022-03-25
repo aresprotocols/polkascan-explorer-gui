@@ -73,6 +73,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public chainRequest: ChainRequest[] = [];
   public chainEraRequest: object [] = [];
   public chainReward: object [] = [];
+  public validator: object [] = [];
 
   constructor(
     private blockService: BlockService,
@@ -123,6 +124,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.getChainRequest();
       this.getChainEraRequest();
       this.getChainReward();
+      this.getValidator();
       // this.totalTransactionsDaychart$ = this.analyticsChartService.get('utcday-extrinsics_signed-sum-line-14');
       // this.cumulativeAccountsDayChart$ = this.analyticsChartService.get('utcday-accounts_new-sum-line-14');
       // this.averageBlocktimeDaychart$ = this.analyticsChartService.get('utcday-blocktime-avg-line-14');
@@ -201,6 +203,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
       .subscribe(res => {
         this.chainReward = res['data'];
         console.log('reward:', this.chainReward);
+      });
+  }
+
+  getValidator(): void {
+    const url = this.appConfigService.getNetworkApiUrlRoot() + "/oracle/pre_check_tasks";
+    this.http.get(url)
+      .subscribe(res => {
+        this.validator = res['data'];
+        console.log('pre_check_tasks:', this.validator);
       });
   }
 
