@@ -41,6 +41,7 @@
                 <div>
                   <div class="item-title">{{"chainData.TotalIssuance" | translate}}</div>
                   <div class="numbers">{{chainData.total_issuance ? (chainData.total_issuance / 1000000000000 / 1000000).toFixed(2) : "0"}}M</div>
+                  <!--<div class="numbers">{{chainData.total_issuance ｜ShiftedByLeft12}}M</div>-->
                 </div>
               </div>
               <div class="chain-data-item">
@@ -49,7 +50,10 @@
                 </div>
                 <div>
                   <div class="item-title">{{"chainData.StakedValue" | translate}}</div>
-                  <div class="numbers">{{chainData.total_stake ? (chainData.total_stake/ 1000000000000 / 1000000).toFixed(2) : "0"}}M (45.5%)</div>
+                  <div class="numbers">
+                    {{chainData.total_stake ? (chainData.total_stake/ 1000000000000 / 1000000).toFixed(2) : "0"}}M
+                    (45.5%)
+                  </div>
                 </div>
               </div>
               <a class="chain-data-item" routerLink="{{ networkURLPrefix }}/account/validators">
@@ -77,7 +81,7 @@
                 </div>
                 <div>
                   <div class="item-title">{{'chainData.treasuryBurn' | translate}}</div>
-                  <div class="numbers">{{ chainData.total_treasury_burn ? chainData.total_treasury_burn : "0"}}</div>
+                  <div class="numbers">{{chainData.total_treasury_burn ? (chainData.total_treasury_burn / 1000000000000 / 1000000).toFixed(2) : "0"}}M</div>
                 </div>
               </a>
             </div>
@@ -191,7 +195,7 @@
                 </div>
             </div>
         </section>
-        <section class="columns"  *ngIf="chainAssets">
+        <section class="columns"  *ngIf="chainAssets" style="display: none">
           <div class="column is-6 last-blocks">
               <div class="card dashboard-card">
                 <a routerLink="{{ networkURLPrefix }}/onchain/assets">

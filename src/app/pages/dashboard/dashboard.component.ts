@@ -167,7 +167,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
           item.price = item.price / 10000;
         });
         this.chainAssets = res['data'];
-        console.log('aaaa', res, this.chainAssets[0].symbol);
       });
   }
 
@@ -179,7 +178,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
         res['data'].forEach(item => {
           item.attributes.prepayment = item.attributes.prepayment / 1000000000000;
         });
-        console.log('requestaa', this.chainRequest);
       });
   }
 
@@ -191,7 +189,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
         res['data'].forEach(item => {
           item.attributes.era_total_fee = item.attributes.era_total_fee / 1000000000000;
         });
-        console.log('request', this.chainEraRequest);
       });
   }
 
@@ -200,7 +197,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.http.get(url)
       .subscribe(res => {
         this.chainReward = res['data'];
-        console.log('reward:', this.chainReward);
       });
   }
 

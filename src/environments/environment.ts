@@ -43,8 +43,8 @@
 export const environment = {
   production: true,
   jsonApiDiscoveryRootUrl: null,
-  // jsonApiRootUrl: 'https://aresscan.aresprotocol.io/api/v1',
-  jsonApiRootUrl: 'http://45.77.30.9:8080/api/v1',
+  jsonApiRootUrl: 'https://aresscan.aresprotocol.io/api/v1',
+  // jsonApiRootUrl: 'http://45.77.30.9:8080/api/v1',
   network: {
     name: 'Ares',
     networkId: 'ares',
