@@ -73,6 +73,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public chainRequest: ChainRequest[] = [];
   public chainEraRequest: object [] = [];
   public chainReward: object [] = [];
+  isLoadingEraRequest = false;
+  isLoadingChart = false;
 
   constructor(
     private blockService: BlockService,
@@ -101,28 +103,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
       // if (environment.jsonApiDiscoveryRootUrl) {
 
       this.networkColor = '#' + network.attributes.color_code;
-      this.analyticsChartService.all().subscribe(chartData => {
-        chartData.data.forEach(chart => {
-          if (chart.id === 'utcday-extrinsics_signed-sum-line-14') {
-            this.totalTransactionsDaychart$ = of(chart);
-          }
 
-          if (chart.id === 'utcday-accounts_new-sum-line-14') {
-            this.cumulativeAccountsDayChart$ = of(chart);
-          }
-
-          if (chart.id === 'utcday-blocktime-avg-line-14') {
-            this.averageBlocktimeDaychart$ = of(chart);
-          }
-        });
-      });
       // this.chainAssetsService.all().subscribe( assets => {
       //   console.log('assets', assets);
       // });
-      this.getChainAsset();
-      this.getChainRequest();
-      this.getChainEraRequest();
-      this.getChainReward();
+
+      // this.getChainAsset();
+      // this.getChainRequest();
+      // this.getChainEraRequest();
+      // this.getChainReward();
+
       // this.totalTransactionsDaychart$ = this.analyticsChartService.get('utcday-extrinsics_signed-sum-line-14');
       // this.cumulativeAccountsDayChart$ = this.analyticsChartService.get('utcday-accounts_new-sum-line-14');
       // this.averageBlocktimeDaychart$ = this.analyticsChartService.get('utcday-blocktime-avg-line-14');
@@ -137,6 +127,25 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     this.getAresData();
     this.getChainData();
+
+    window.addEventListener('scroll', (event) => {
+      let scrollTop = 0;
+      if (document.documentElement && document.documentElement.scrollTop) {
+        scrollTop = document.documentElement.scrollTop;
+      } else if (document.body) {
+        scrollTop = document.body.scrollTop;
+      }
+
+      if (scrollTop > 200 && this.chainEraRequest.length === 0 && !this.isLoadingEraRequest) {
+        this.getChainEraRequest();
+      }
+
+      if (scrollTop > 300 && !this.averageBlocktimeDaychart$ && !this.isLoadingChart) {
+        this.getChart();
+      }
+
+      console.log(scrollTop);
+    });
   }
 
   getAresData(): void {
@@ -157,6 +166,25 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.chainData = res['data'];
       });
 
+  }
+
+  getChart() {
+    this.isLoadingChart = true;
+    this.analyticsChartService.all().subscribe(chartData => {
+      chartData.data.forEach(chart => {
+        if (chart.id === 'utcday-extrinsics_signed-sum-line-14') {
+          this.totalTransactionsDaychart$ = of(chart);
+        }
+
+        if (chart.id === 'utcday-accounts_new-sum-line-14') {
+          this.cumulativeAccountsDayChart$ = of(chart);
+        }
+
+        if (chart.id === 'utcday-blocktime-avg-line-14') {
+          this.averageBlocktimeDaychart$ = of(chart);
+        }
+      });
+    });
   }
 
   getChainAsset(): void {
@@ -182,6 +210,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   getChainEraRequest(): void {
+    this.isLoadingEraRequest = true;
     const url = this.appConfigService.getNetworkApiUrlRoot() + "/oracle/era_requests";
     this.http.get(url)
       .subscribe(res => {

@@ -285,7 +285,7 @@
           </div>
         </section>
 
-        <section class="columns" *ngIf="chainEraRequest.length > 0">
+        <section class="columns">
           <div class="column is-6 last-blocks">
             <div class="card dashboard-card">
               <a routerLink="{{ networkURLPrefix }}/era-rewards">
@@ -326,6 +326,8 @@
                     </tr>
                     </tbody>
                   </table>
+                  <app-loading-box *ngIf="chainEraRequest.length === 0"></app-loading-box>
+
                 </div>
               </div>
             </div>
@@ -378,7 +380,7 @@
 
         <section class="info-tiles">
           <div class="tile is-ancestor has-text-centered">
-              <div class="tile is-parent" *ngIf="totalTransactionsDaychart$ | async as chart">
+              <div class="tile is-parent is-4" *ngIf="totalTransactionsDaychart$ | async as chart">
                   <article class="tile is-child box">
                     <app-loading-box *ngIf="chart.is_loading"></app-loading-box>
                     <app-chart *ngIf="!chart.is_loading"
