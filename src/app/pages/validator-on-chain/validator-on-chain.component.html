@@ -1,0 +1,50 @@
+<div class="columns">
+  <div class="column is-12">
+    <app-polkascan-header></app-polkascan-header>
+    <section>
+      <div class="card ">
+        <header class="card-header">
+          <a [routerLink]="" fragment="list" class="card-header-icon" aria-label="more options">
+              <span class="icon">
+                <i class="fa fa-database fa-2x" aria-hidden="true"></i>
+              </span>
+          </a>
+          <p class="card-header-title">
+            {{ 'DashBoard.Validator Audit' | translate }}
+            <span class="card-header-tips"></span>
+          </p>
+        </header>
+        <div class="card-table">
+          <div class="content">
+            <app-loading-box *ngIf="showLoading && (!validator)"></app-loading-box>
+            <table class="table is-fullwidth is-striped" *ngIf="validator && validator.length > 0">
+              <thead>
+              <tr>
+                <th></th>
+                <th>{{ 'DashBoard.Validator id' | translate }}</th>
+                <th class="is-hidden-mobile">{{ 'DashBoard.Ares-Authority' | translate }}</th>
+                <th class="is-hidden-mobile">{{ 'DashBoard.Event Block' | translate }}</th>
+                <th>{{ 'DashBoard.Result' | translate }}</th>
+                <th></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let v of validator">
+                <td></td>
+                <td width="10%">{{ v.validator }}</td>
+                <td class="is-hidden-mobile">{{ v.ares_authority}}</td>
+                <td width="20%"><a routerLink="{{ networkURLPrefix }}/block/{{ v.block_number}}">{{v.block_number}}</a></td>
+                <td width="20%">{{v.status}}</td>
+              </tr>
+              </tbody>
+            </table>
+            <!--<div class="no-items" *ngIf="blocks && blocks.data.length == 0 && !blocks.is_loading">{{ 'Block-List.No items' | translate }}</div>-->
+          </div>
+        </div>
+        <footer class="card-footer">
+          <a routerLink="." [queryParams]="{ page: currentPage + 1}" class="card-footer-item">{{ 'Block-List.View next' | translate }}</a>
+        </footer>
+      </div>
+    </section>
+  </div>
+</div>

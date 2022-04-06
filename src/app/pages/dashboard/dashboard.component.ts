@@ -75,6 +75,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public chainReward: object [] = [];
   isLoadingEraRequest = false;
   isLoadingChart = false;
+  public validator: object [] = [];
 
   constructor(
     private blockService: BlockService,
@@ -108,10 +109,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
       //   console.log('assets', assets);
       // });
 
-      // this.getChainAsset();
-      // this.getChainRequest();
+      this.getChainAsset();
+      this.getChainRequest();
       // this.getChainEraRequest();
-      // this.getChainReward();
+      this.getChainReward();
+      this.getValidator();
 
       // this.totalTransactionsDaychart$ = this.analyticsChartService.get('utcday-extrinsics_signed-sum-line-14');
       // this.cumulativeAccountsDayChart$ = this.analyticsChartService.get('utcday-accounts_new-sum-line-14');
@@ -143,8 +145,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
       if (scrollTop > 300 && !this.averageBlocktimeDaychart$ && !this.isLoadingChart) {
         this.getChart();
       }
-
-      console.log(scrollTop);
     });
   }
 
@@ -205,6 +205,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.chainRequest = res['data'];
         res['data'].forEach(item => {
           item.attributes.prepayment = item.attributes.prepayment / 1000000000000;
+          item.attributes.payment = item.attributes.payment / 1000000000000;
+          item.attributes.keys = item.attributes.result ? Object.keys(item.attributes.result) : "-";
         });
       });
   }
@@ -225,7 +227,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
     const url = this.appConfigService.getNetworkApiUrlRoot() + "/oracle/reward";
     this.http.get(url)
       .subscribe(res => {
-        this.chainReward = res['data'];
+        this.chainReward = res['data']['data'];
+        res['data']['data'].forEach(item => {
+          item.reward = (item.reward / 1000000000000).toFixed(2);
+        });
+      });
+  }
+
+  getValidator(): void {
+    const url = this.appConfigService.getNetworkApiUrlRoot() + "/oracle/pre_check_tasks";
+    this.http.get(url)
+      .subscribe(res => {
+        this.validator = res['data'];
       });
   }
 

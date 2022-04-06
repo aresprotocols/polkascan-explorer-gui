@@ -21,20 +21,33 @@
               <thead>
               <tr>
                 <th></th>
-                <th>{{ 'DashBoard.ID for order' | translate }}</th>
-                <th class="is-hidden-mobile">{{ 'DashBoard.Assembled result' | translate }}</th>
-                <th class="is-hidden-mobile">{{ 'DashBoard.Requests status' | translate }}</th>
-                <th>{{ 'DashBoard.Timestamp' | translate }}</th>
+                <th>{{ 'DashBoard.Order ID' | translate }}</th>
+                <th>{{ 'DashBoard.Requester' | translate }}</th>
+                <th>{{ 'DashBoard.Apply block' | translate }}</th>
+                <th>{{ 'DashBoard.Quantity' | translate }}</th>
+                <th>{{ 'DashBoard.Request pairs' | translate }}</th>
+                <th>{{ 'DashBoard.Prepaid' | translate }}</th>
+                <th>{{ 'DashBoard.Final Payment' | translate }}</th>
+                <th>{{ 'DashBoard.Assembled result' | translate }}</th>
+                <th>{{ 'DashBoard.Status' | translate }}</th>
                 <th></th>
               </tr>
               </thead>
               <tbody>
               <tr *ngFor="let request of chainRequest">
                 <td></td>
-                <td width="10%"><a routerLink="{{ networkURLPrefix }}/block/{{ request.id }}">{{ request.attributes.created_at }}</a></td>
-                <td class="is-hidden-mobile"><span rel="tooltip" title="{{ request.attributes.created_at | date:'medium'}}">{{ request.attributes.created_at | timeago }}</span></td>
-                <td>{{ request.attributes.created_at }}</td>
-                <td width="5%"><a class="button is-small is-primary" routerLink="{{ networkURLPrefix }}/block/{{ request.id }}">{{ 'Block-List.Details' | translate }}</a></td>
+                <td >
+                  <a routerLink="{{ networkURLPrefix }}/block/{{ request.attributes.order_id }}">{{ request.attributes.order_id | hideMiddleStr}}</a>
+                </td>
+                <td>{{request.attributes.auth}}</td>
+                <td>{{request.attributes.created_at}}</td>
+                <td>{{request.attributes.ended_at}}</td>
+                <td width="20%">{{request.attributes.symbols}}</td>
+                <td>{{request.attributes.prepayment}}</td>
+                <td>{{request.attributes.payment}}</td>
+                <td class="is-hidden-mobile" width="20%">
+                  <span *ngIf="request.attributes.result" rel="tooltip" title="{{ request.attributes.result}}">{{ request.attributes.result}}</span></td>
+                <td width="20%"><i class="fa fa-check-circle"></i></td>
               </tr>
               </tbody>
             </table>

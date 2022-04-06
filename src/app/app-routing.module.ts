@@ -84,6 +84,7 @@ import {AssetsOnChainComponent} from './pages/assets-on-chain/assets-on-chain.co
 import { RequestOnChainComponent } from './pages/request-on-chain/request-on-chain.component';
 import {UnRewardsComponent} from './pages/un_rewards/un-rewards.component';
 import {EraRewardsComponent} from './pages/era_rewards/era-rewards.component';
+import {ValidatorOnChainComponent} from './pages/validator-on-chain/validator-on-chain.component';
 
 const routes: Routes = [
   { path: '', component: NetworkOverviewComponent, },
@@ -182,6 +183,7 @@ const routes: Routes = [
       { path: 'onchain/request', component: RequestOnChainComponent },
       { path: 'un-rewards', component: UnRewardsComponent },
       { path: 'era-rewards', component: EraRewardsComponent },
+      { path: 'onchain/validator', component: ValidatorOnChainComponent },
     ]},
   { path: 'settings', component: SettingsComponent},
   { path: '404', component: NotFoundComponent},

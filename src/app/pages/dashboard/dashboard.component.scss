@@ -311,3 +311,27 @@
   scrollbar-track-color: rgba(234, 238, 255, 1);
   scrollbar-base-color:#f8f8f8;
 }
+
+.pair-item {
+  background: #D5E7FF;
+  padding: 1px 2px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  display: inline-block;
+}
+
+.result-item {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.result-item-key{
+  display: flex;
+  align-items: baseline;
+  column-gap: 5px;
+  .fa-sort-down {
+    color: #003799;
+    display: block;
+  }
+}

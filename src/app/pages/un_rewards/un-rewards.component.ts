@@ -62,12 +62,14 @@ export class UnRewardsComponent implements OnInit, OnDestroy {
 
 
   getUnRewards(page: number) {
-    console.log('get on chain asset page:', page);
-    console.log('get on chain asset page:', page);
     const url = this.appConfigService.getNetworkApiUrlRoot() + "/oracle/reward?"  + 'page[number]=' + page + '&page[size]=25';
     this.http.get(url)
       .subscribe(res => {
-        this.unRewards = res['data'];
+        console.log(res);
+        this.unRewards = res['data']['data'];
+        res['data']['data'].forEach(item => {
+          item.reward = (item.reward / 1000000000000).toFixed(2);
+        });
       });
   }
 

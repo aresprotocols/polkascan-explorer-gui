@@ -2,8 +2,6 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {interval, Subscription} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import {AppConfigService} from '../../services/app-config.service';
-import {DocumentCollection} from 'ngx-jsonapi';
-import {Block} from '../../classes/block.class';
 import {HttpClient} from '@angular/common/http';
 import { ChainRequest } from 'src/app/classes/chain-request.class';
 

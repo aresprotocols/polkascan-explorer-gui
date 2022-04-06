@@ -195,7 +195,7 @@
                 </div>
             </div>
         </section>
-        <section class="columns"  *ngIf="chainAssets" style="display: none">
+        <section class="columns"  *ngIf="chainAssets">
           <div class="column is-6 last-blocks">
               <div class="card dashboard-card">
                 <a routerLink="{{ networkURLPrefix }}/onchain/assets">
@@ -205,7 +205,7 @@
                     </a>
                     <p class="card-header-title">
                       {{ 'DashBoard.Data of on-chain assets' | translate }}
-                      <span class="card-header-tips">77 trade pairs</span>
+                      <span class="card-header-tips">{{chainData.total_symbols}} trade pairs</span>
                     </p>
 
                     <a href="javascript:void(0)" class="card-header-right">
@@ -245,14 +245,13 @@
 
           <div class="column is-6 last-blocks">
             <div class="card dashboard-card">
-              <a routerLink="{{ networkURLPrefix }}/onchain/request">
+              <a routerLink="{{ networkURLPrefix }}/onchain/validator">
                 <header class="card-header">
                   <a [routerLink]="" fragment="last-blocks" class="card-header-icon" aria-label="more options">
                     <i class="fa fa-database"></i>
                   </a>
                   <p class="card-header-title">
-                    {{ 'DashBoard.Data of on-chain request' | translate }}
-                    <span class="card-header-tips">205 request</span>
+                    {{ 'DashBoard.Validator Audit' | translate }}
                   </p>
 
                   <a href="javascript:void(0)" class="card-header-right">
@@ -265,17 +264,19 @@
                   <table class="table is-fullwidth is-striped">
                     <thead>
                     <tr>
-                      <th>{{ 'DashBoard.ID for order' | translate }}</th>
-                      <th>{{ 'DashBoard.Assembled result' | translate }}</th>
-                      <th>{{ 'DashBoard.Status' | translate }}</th>
+                      <th>{{ 'DashBoard.Validator id' | translate }}</th>
+                      <th>{{ 'DashBoard.Ares-Authority' | translate }}</th>
+                      <th>{{ 'DashBoard.Event Block' | translate }}</th>
+                      <th>{{ 'DashBoard.Result' | translate }}</th>
                       <th></th>
                     </tr>
                     </thead>
-                    <tbody *ngIf="chainRequest.length > 0">
-                      <tr *ngFor="let request of chainRequest;">
-                        <td><a routerLink="{{ networkURLPrefix }}/block/{{ request.attributes.created_at }}">{{ request.attributes.created_at }}</a></td>
-                        <td class="is-hidden-mobile"><span *ngIf="request.attributes.prepayment" rel="tooltip" title="{{ request.attributes.prepayment | date:'medium'}}">{{ request.attributes.prepayment}}</span></td>
-                        <td width="20%"><i class="fa fa-check-circle"></i></td>
+                    <tbody *ngIf="validator.length > 0">
+                      <tr *ngFor="let v of validator;">
+                        <td>{{ v.validator | hideMiddleStr}}</td>
+                        <td class="is-hidden-mobile">{{ v.ares_authority | hideMiddleStr}}</td>
+                        <td width="20%"><a routerLink="{{ networkURLPrefix }}/block/{{ v.block_number}}">{{v.block_number}}</a></td>
+                        <td width="20%">{{v.status}}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -295,7 +296,7 @@
                   </a>
                   <p class="card-header-title">
                     {{ 'DashBoard.Rewards for era' | translate }}
-                    <span class="card-header-tips">910 blocks</span>
+                    <span class="card-header-tips">{{chainData.total_price_requests}} blocks</span>
                   </p>
 
                   <a href="javascript:void(0)" class="card-header-right">
@@ -309,7 +310,7 @@
                     <thead>
                     <tr>
                       <th>{{ 'DashBoard.Era' | translate }}</th>
-                      <th class="is-hidden-mobile">{{ 'DashBoard.Request free' | translate }}</th>
+                      <th class="is-hidden-mobile">{{ 'DashBoard.Request fee' | translate }}</th>
                       <th>{{ 'DashBoard.Quotation node' | translate }}</th>
                       <th>{{ 'DashBoard.Generated points' | translate }}</th>
                       <th>{{ 'DashBoard.Reward/each point' | translate }}</th>
@@ -342,7 +343,7 @@
                   </a>
                   <p class="card-header-title">
                     {{ 'DashBoard.Unclaimed Rewards' | translate }}
-                    <span class="card-header-tips">72832 ARES</span>
+                    <span class="card-header-tips">{{chainData.total_price_requests}} ARES</span>
                   </p>
 
                   <a href="javascript:void(0)" class="card-header-right">
@@ -362,13 +363,87 @@
                       <th></th>
                     </tr>
                     </thead>
-                    <tbody *ngIf="blocks">
-                    <tr *ngFor="let block of blocks.data; trackBy: blocks.trackBy">
-                      <td><a routerLink="{{ networkURLPrefix }}/block/{{ block.id }}">{{ block.id }}</a></td>
-                      <td class="is-hidden-mobile"><span *ngIf="block.attributes.datetime" rel="tooltip" title="{{ block.attributes.datetime | date:'medium'}}">{{ block.attributes.datetime | timeago }}</span></td>
-                      <td>{{ block.attributes.count_extrinsics_signed }}</td>
+                    <tbody *ngIf="chainReward">
+                    <tr *ngFor="let reward of chainReward">
+                      <td><a routerLink="{{ networkURLPrefix }}/account/{{ reward.account }}">{{ reward.account | hideMiddleStr}}</a></td>
+                      <td class="is-hidden-mobile">
+                        {{reward.era}}
+                      </td>
+                      <td>{{ reward.reward }}</td>
                       <!--<td>{{ block.attributes.count_extrinsics_signed }}</td>-->
-                      <td width="5%"><a class="button is-small is-primary" routerLink="{{ networkURLPrefix }}/block/{{ block.id }}">{{ 'DashBoard.Click to claim' | translate }}</a></td>
+                      <td width="5%"><a class="button is-small is-primary" routerLink="{{ networkURLPrefix }}/account/{{ reward.account }}">{{ 'DashBoard.Click to claim' | translate }}</a></td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="columns">
+          <div class="column last-blocks">
+            <div class="card dashboard-card">
+              <a routerLink="{{ networkURLPrefix }}/onchain/request">
+                <header class="card-header">
+                  <a [routerLink]="" fragment="last-blocks" class="card-header-icon" aria-label="more options">
+                    <i class="fa fa-database"></i>
+                  </a>
+                  <p class="card-header-title">
+                    {{ 'DashBoard.Data of on-chain request' | translate }}
+                    <span class="card-header-tips">{{chainData.total_price_requests}} request</span>
+                  </p>
+
+                  <a href="javascript:void(0)" class="card-header-right">
+                    More Info <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                  </a>
+                </header>
+              </a>
+              <div class="card-table">
+                <div class="content">
+                  <table class="table is-fullwidth is-striped">
+                    <thead>
+                    <tr>
+                      <th>{{ 'DashBoard.Order ID' | translate }}</th>
+                      <th>{{ 'DashBoard.Requester' | translate }}</th>
+                      <th>{{ 'DashBoard.Apply block' | translate }}</th>
+                      <th>{{ 'DashBoard.Quantity' | translate }}</th>
+                      <th>{{ 'DashBoard.Request pairs' | translate }}</th>
+                      <th>{{ 'DashBoard.Prepaid' | translate }}</th>
+                      <th>{{ 'DashBoard.Final Payment' | translate }}</th>
+                      <th>{{ 'DashBoard.Assembled result' | translate }}</th>
+                      <th>{{ 'DashBoard.Status' | translate }}</th>
+                    </tr>
+                    </thead>
+                    <tbody *ngIf="chainRequest.length > 0">
+                    <tr *ngFor="let request of chainRequest;">
+                      <td >
+                        <a routerLink="{{ networkURLPrefix }}/block/{{ request.attributes.order_id }}">{{ request.attributes.order_id | hideMiddleStr}}</a>
+                      </td>
+                      <td>{{request.attributes.auth ? request.attributes.auth : "-"}}</td>
+                      <td>{{request.attributes.created_at}}</td>
+                      <td>{{request.attributes.ended_at}}</td>
+                      <td width="20%">
+                        <span *ngFor="let pair of request.attributes.symbols" class="pair-item">
+                          {{pair}}
+                        </span>
+                      </td>
+                      <td>{{request.attributes.prepayment}}</td>
+                      <td>{{request.attributes.payment}}</td>
+                      <td class="is-hidden-mobile" width="20%">
+                        <div *ngIf="request.attributes.result" class="result-item">
+                          <div *ngFor="let key of request.attributes.keys">
+                            <div class="result-item-key">
+                              {{ key | uppercase}}
+                              <!--<i class="fa fa-sort-down fa-2x"></i>-->
+                            </div>
+                            <div>
+                              price: {{ (request.attributes.result[key].price_data[0] / 10000) | number }}
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td width="20%"><i class="fa fa-check-circle"></i></td>
                     </tr>
                     </tbody>
                   </table>
