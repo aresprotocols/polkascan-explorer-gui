@@ -420,7 +420,7 @@
                       <td >
                         <a routerLink="{{ networkURLPrefix }}/block/{{ request.attributes.order_id }}">{{ request.attributes.order_id | hideMiddleStr}}</a>
                       </td>
-                      <td>{{request.attributes.auth ? request.attributes.auth : "-"}}</td>
+                      <td>{{request.attributes.requester}}</td>
                       <td>{{request.attributes.created_at}}</td>
                       <td>{{request.attributes.ended_at}}</td>
                       <td width="20%">

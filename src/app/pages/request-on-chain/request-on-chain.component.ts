@@ -59,6 +59,16 @@ export class RequestOnChainComponent implements OnInit, OnDestroy {
     this.http.get(url)
       .subscribe(res => {
         this.chainRequest = res['data'];
+        res['data'].forEach(item => {
+          item.attributes.prepayment = item.attributes.prepayment / 1000000000000;
+          item.attributes.payment = item.attributes.payment / 1000000000000;
+          item.attributes.keys = item.attributes.result ? Object.keys(item.attributes.result) : "-";
+          if (item.attributes.symbols.length > 0) {
+            item.attributes.requester = item.attributes.auth[item.attributes.symbols[0]].length;
+          } else {
+            item.attributes.requester = "-";
+          }
+        });
       });
   }
 

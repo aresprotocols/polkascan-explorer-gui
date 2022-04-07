@@ -11,3 +11,20 @@
   padding: 2px 5px;
   margin-left: 10px;
 }
+
+
+.result-item {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.result-item-key{
+  display: flex;
+  align-items: baseline;
+  column-gap: 5px;
+  .fa-sort-down {
+    color: #003799;
+    display: block;
+  }
+}

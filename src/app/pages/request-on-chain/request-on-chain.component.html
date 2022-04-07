@@ -39,14 +39,25 @@
                 <td >
                   <a routerLink="{{ networkURLPrefix }}/block/{{ request.attributes.order_id }}">{{ request.attributes.order_id | hideMiddleStr}}</a>
                 </td>
-                <td>{{request.attributes.auth}}</td>
+                <td>{{request.attributes.requester}}</td>
                 <td>{{request.attributes.created_at}}</td>
                 <td>{{request.attributes.ended_at}}</td>
                 <td width="20%">{{request.attributes.symbols}}</td>
                 <td>{{request.attributes.prepayment}}</td>
                 <td>{{request.attributes.payment}}</td>
                 <td class="is-hidden-mobile" width="20%">
-                  <span *ngIf="request.attributes.result" rel="tooltip" title="{{ request.attributes.result}}">{{ request.attributes.result}}</span></td>
+                  <div *ngIf="request.attributes.result" class="result-item">
+                    <div *ngFor="let key of request.attributes.keys">
+                      <div class="result-item-key">
+                        {{ key | uppercase}}
+                        <!--<i class="fa fa-sort-down fa-2x"></i>-->
+                      </div>
+                      <div>
+                        price: {{ (request.attributes.result[key].price_data[0] / 10000) | number }}
+                      </div>
+                    </div>
+                  </div>
+                </td>
                 <td width="20%"><i class="fa fa-check-circle"></i></td>
               </tr>
               </tbody>
