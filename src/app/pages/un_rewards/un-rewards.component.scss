@@ -11,3 +11,121 @@
   padding: 2px 5px;
   margin-left: 10px;
 }
+
+
+table  {
+  color: #2E4765;
+  thead {
+    tr th {
+      font-size: 15px;
+      font-weight: bold;
+      color: #2E4765;
+    }
+  }
+  tbody {
+    font-size: 14px;
+    font-weight: 400;
+    color: #2E4765;
+  }
+}
+
+
+.polkadot-guide {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 28, 078, 0.68);
+  z-index: 9999;
+  .content {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 630px;
+    background: #FFFFFF;
+    box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.08);
+    border-radius: 15px;
+  }
+  .content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 15px;
+    .fa {
+      cursor: pointer;
+    }
+  }
+  .content-title {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+  }
+  .content-body {
+    padding: 24px;
+    font-size: 14px;
+    line-height: 1.5715;
+    word-wrap: break-word;
+  }
+  .content-desc {
+    color: #3e5f86;
+  }
+  .content-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    a {
+      color: #1890ff;
+      text-decoration: none;
+      background-color: transparent;
+      outline: none;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    .installButton {
+      background: rgb(27,109,193);
+      border: none;
+      color: #FFF !important;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+  }
+}
+
+
+.only-your, .error {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 28, 078, 0.68);
+  z-index: 9999;
+  .content {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 630px;
+    background: #FFFFFF;
+    box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.08);
+    border-radius: 15px;
+  }
+  .content-header {
+    padding: 15px;
+    display: flex;
+    justify-content: end;
+    border-bottom: 1px solid #f0f0f0;
+    .fa {
+      cursor: pointer;
+    }
+  }
+  .content-desc {
+    padding: 20px;
+    text-align: center;
+  }
+}

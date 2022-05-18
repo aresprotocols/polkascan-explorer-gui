@@ -288,6 +288,7 @@
     "Data of on-chain assets": "Data of on-chain assets",
     "Trading pairs": "Trading pairs",
     "Request interval(block)": "Request interval(block)",
+    "Frequency (Seconds)": "Frequency (Seconds)",
     "On-chain price": "On-chain price",
     "ID for order": "ID for order",
     "Precision": "Precision",
@@ -317,7 +318,9 @@
     "Quantity": "Quantity",
     "Request pairs": "Request pairs",
     "Prepaid": "Prepaid",
-    "Final Payment": "Final Payment"
+    "Final Payment": "Final Payment",
+    "Warehouse inspection": "Warehouse inspection",
+    "Node type": "Node type"
 	},
 	"Democracy-preimage-detail": {
 		"Author": "Author",

@@ -11,23 +11,22 @@
           </a>
           <p class="card-header-title">
             {{ 'DashBoard.Data of on-chain assets' | translate }}
-            <span class="card-header-tips">77 trade pairs</span>
+            <span class="card-header-tips" *ngIf="tradePairsNum">{{tradePairsNum}} trade pairs</span>
           </p>
         </header>
         <div class="card-table">
           <div class="content">
             <app-loading-box *ngIf="showLoading && (!chainAssets)"></app-loading-box>
-            <table class="table is-fullwidth is-striped" *ngIf="chainAssets && chainAssets.length > 0">
+            <table class="table asset-table is-fullwidth is-striped" *ngIf="chainAssets && chainAssets.length > 0">
               <thead>
-              <tr>
-                <th></th>
-                <th>{{ 'DashBoard.Trading pairs' | translate }}</th>
-                <th class="is-hidden-mobile">{{ 'DashBoard.Request interval(block)' | translate }}</th>
-                <th class="is-hidden-mobile">{{ 'DashBoard.Precision' | translate }}</th>
-                <th>{{ 'DashBoard.On-chain price' | translate }}</th>
-                <th>{{ 'DashBoard.Timestamp' | translate }}</th>
-                <th></th>
-              </tr>
+                <tr>
+                  <th></th>
+                  <th>{{ 'DashBoard.Trading pairs' | translate }}</th>
+                  <th class="is-hidden-mobile">{{ 'DashBoard.Frequency (Seconds)' | translate }}</th>
+                  <th class="is-hidden-mobile">{{ 'DashBoard.Precision' | translate }}</th>
+                  <th>{{ 'DashBoard.On-chain price' | translate }}</th>
+                  <th>{{ 'DashBoard.Timestamp' | translate }}</th>
+                </tr>
               </thead>
               <tbody>
               <tr *ngFor="let asset of chainAssets">
@@ -39,9 +38,20 @@
                 </td>
                 <td class="is-hidden-mobile">{{ asset.interval }}</td>
                 <td class="is-hidden-mobile"><div class="hash-format">{{ asset.precision }}</div></td>
-                <td>${{ asset.price }}</td>
-                <td width="10%">
-                  {{ 'Block-List.Details' | translate }}
+                <td width="35%">
+                  <div class="result-item-key" (click)="showAuthInfo(asset.block_id + asset.created_at)">
+                    <span class="symbol-title">${{ asset.price }}</span>
+                    <i class="fa fa-caret-down fa-2x" *ngIf="asset.block_id + asset.created_at != showAuthInfoKey"></i>
+                    <i class="fa fa-caret-up fa-2x" *ngIf="asset.block_id + asset.created_at == showAuthInfoKey"></i>
+                  </div>
+                  <div class="symbol-info" *ngIf="asset.block_id + asset.created_at == showAuthInfoKey">
+                    <div *ngFor="let item of asset.auth">
+                      <div class="auth">{{item}}</div>
+                    </div>
+                  </div>
+                </td>
+                <td width="20%">
+                  {{ asset.created_at }}
                 </td>
               </tr>
               </tbody>

@@ -11,3 +11,132 @@
   padding: 2px 5px;
   margin-left: 10px;
 }
+
+
+.un-passed-info {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 28, 078, 0.68);
+  z-index: 9999;
+  .content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 42px 105px;
+    width: 830px;
+    min-height: 335px;
+    background: #FFFFFF;
+    box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.08);
+    border-radius: 15px;
+    .title {
+      font-size: 20px;
+      font-weight: 400;
+      color: #2E4765;
+      text-align: center;
+    }
+    .item {
+      display: flex;
+      align-items: center;
+      margin-top: 50px;
+      font-size: 16px;
+      color: #2E4765;
+      span {
+        width: 100px;
+      }
+      .fa-question-circle:before {
+        color: #003799;
+        margin-left: 5px;
+      }
+    }
+    .authorities {
+      margin-top: 30px;
+      span {
+        width: 260px;
+      }
+      input {
+        background: #D5E7FF;
+      }
+    }
+    .ft {
+      width: 100%;
+      margin-top: 44px;
+      .button {
+        display: block;
+        width: 100px;
+        height: 40px;
+        line-height: 28px;
+        margin: 0 auto;
+      }
+    }
+    .error {
+      text-align: center;
+      color: #DB4028;
+      margin-top: 35px;
+    }
+    .warning {
+      display: flex;
+      align-items: center;
+      column-gap: 10px;
+      padding: 10px;
+      border-radius: 11px;
+      color: #2E4765;
+      background: rgba(219, 159, 40, 0.15);
+      font-size: 15px;
+      margin-top: 25px;
+    }
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      cursor: pointer;
+    }
+    .loading {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      /deep/ .box {
+        height: 100%;
+        background: rgba(0, 28, 078, 0.68);
+      }
+    }
+  }
+}
+
+
+table  {
+  color: #2E4765;
+  thead {
+    tr th {
+      font-size: 15px;
+      font-weight: bold;
+      color: #2E4765;
+    }
+  }
+  tbody {
+    font-size: 14px;
+    font-weight: 400;
+    color: #2E4765;
+  }
+}
+
+
+.not-available {
+  color: #DB4028;
+  cursor: pointer;
+}
+
+.not-available-btn {
+  background: #DB4028;
+  padding: 4px;
+  color: #FFF;
+  border-radius: 5px;
+  &:hover {
+    background: #d9341a;
+  }
+}

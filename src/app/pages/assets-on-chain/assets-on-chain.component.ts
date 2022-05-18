@@ -1,9 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {interval, Subscription} from 'rxjs';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, ParamMap} from '@angular/router';
 import {AppConfigService} from '../../services/app-config.service';
 import {HttpClient} from '@angular/common/http';
 import {ChainAssets} from '../../classes/chain-asstes.class';
+import {switchMap} from 'rxjs/operators';
 
 
 @Component({
@@ -22,6 +23,9 @@ export class AssetsOnChainComponent implements OnInit, OnDestroy {
   private chainAssetsSubsription: Subscription;
   public networkURLPrefix: string;
   public chainAssets: ChainAssets[] = [];
+  public tradePairsNum: string;
+  public showAuthInfoKey: string;
+
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -33,6 +37,13 @@ export class AssetsOnChainComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.showLoading = true;
+
+    this.activatedRoute.paramMap.pipe().subscribe(params => {
+      if (params.get("num")) {
+        this.tradePairsNum = params.get("num");
+      }
+    });
+
 
     this.networkSubscription = this.appConfigService.getCurrentNetwork().subscribe( network => {
       this.networkURLPrefix = this.appConfigService.getUrlPrefix();
@@ -61,10 +72,16 @@ export class AssetsOnChainComponent implements OnInit, OnDestroy {
           item.price = item.price / 10000;
         });
         this.chainAssets = res['data'];
-        console.log('aaaa', res, this.chainAssets[0].symbol);
       });
   }
 
+  showAuthInfo(key: string) {
+    if (key === this.showAuthInfoKey) {
+      this.showAuthInfoKey = '';
+    } else {
+      this.showAuthInfoKey = key;
+    }
+  }
 
   ngOnDestroy(): void {
     this.networkSubscription.unsubscribe();

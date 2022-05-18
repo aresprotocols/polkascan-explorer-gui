@@ -328,10 +328,56 @@
 
 .result-item-key{
   display: flex;
-  align-items: baseline;
+  align-items: center;
   column-gap: 5px;
-  .fa-sort-down {
+  cursor: pointer;
+  .fa-caret-down, .fa-caret-up {
     color: #003799;
     display: block;
+  }
+  .symbol-title {
+    display: block;
+    min-width: 90px;
+  }
+}
+
+
+.chain-table {
+  font-size: 14px;
+  font-family: Montserrat;
+  font-weight: 400;
+  color: #2E4765;
+}
+
+.request-status {
+  .fa-check-circle:before {
+    color: #00A266;
+  }
+  .fa-clock:before {
+    color: #F4C33E;
+  }
+  .fa-times-circle:before {
+    color: #F34F4F;
+  }
+}
+
+.symbol-info {
+  font-size: 10px;
+  font-weight: 400;
+  color: #8992BC;
+  padding: 3px 0;
+}
+
+.card-icon {
+  width: 30px;
+  height: 30px;
+  line-height: 38px;
+  text-align: center;
+  border-radius: 50%;
+  display: block;
+  background: #EAEEFF;
+  img {
+    width: 20px;
+    height: 20px;
   }
 }

@@ -11,7 +11,7 @@
           </a>
           <p class="card-header-title">
             {{ 'DashBoard.Data of on-chain request' | translate }}
-            <span class="card-header-tips">77 request</span>
+            <span class="card-header-tips" *ngIf="requestsNum">{{requestsNum}} request</span>
           </p>
         </header>
         <div class="card-table">
@@ -30,39 +30,59 @@
                 <th>{{ 'DashBoard.Final Payment' | translate }}</th>
                 <th>{{ 'DashBoard.Assembled result' | translate }}</th>
                 <th>{{ 'DashBoard.Status' | translate }}</th>
-                <th></th>
               </tr>
               </thead>
               <tbody>
               <tr *ngFor="let request of chainRequest">
                 <td></td>
                 <td >
-                  <a routerLink="{{ networkURLPrefix }}/block/{{ request.attributes.order_id }}">{{ request.attributes.order_id | hideMiddleStr}}</a>
+                  {{ request.attributes.order_id | hideMiddleStr}}
                 </td>
                 <td>{{request.attributes.requester}}</td>
-                <td>{{request.attributes.created_at}}</td>
+                <td>
+                  <a routerLink="{{ networkURLPrefix }}/block/{{ request.attributes.created_at }}">
+                    {{request.attributes.created_at}}
+                  </a>
+                </td>
                 <td>{{request.attributes.ended_at}}</td>
-                <td width="20%">{{request.attributes.symbols}}</td>
+                <td width="20%">
+                  <span *ngFor="let pair of request.attributes.symbols" class="pair-item">
+                    {{pair}}
+                  </span>
+                </td>
                 <td>{{request.attributes.prepayment}}</td>
                 <td>{{request.attributes.payment}}</td>
-                <td class="is-hidden-mobile" width="20%">
+                <td class="is-hidden-mobile">
                   <div *ngIf="request.attributes.result" class="result-item">
                     <div *ngFor="let key of request.attributes.keys">
-                      <div class="result-item-key">
-                        {{ key | uppercase}}
-                        <!--<i class="fa fa-sort-down fa-2x"></i>-->
+                      <div class="result-item-key" (click)="showSymbolInfo(request.attributes.order_id+key)">
+                        <span class="symbol-title">{{ key | uppercase}}</span>
+                        <i class="fa fa-caret-down fa-2x" *ngIf="request.attributes.order_id+key != showSymbolInfoKey"></i>
+                        <i class="fa fa-caret-up fa-2x" *ngIf="request.attributes.order_id+key == showSymbolInfoKey"></i>
                       </div>
-                      <div>
-                        price: {{ (request.attributes.result[key].price_data[0] / 10000) | number }}
+                      <div class="symbol-info" *ngIf="request.attributes.order_id+key == showSymbolInfoKey">
+                        <div>
+                          <span>Count: [{{request.attributes.auth[key].length}}]</span>
+                          <span>[Full]</span>
+                        </div>
+                        <div>
+                          Block: {{request.attributes.ended_at}}
+                        </div>
+                        <div>
+                          Price: {{ (request.attributes.result[key].price_data[0] / 10000) | number }}
+                        </div>
                       </div>
                     </div>
                   </div>
                 </td>
-                <td width="20%"><i class="fa fa-check-circle"></i></td>
+                <td class="request-status">
+                  <i class="fa fa-check-circle" *ngIf="request.attributes.status == 1"></i>
+                  <i class="fa fa-clock" *ngIf="request.attributes.status == 2"></i>
+                  <i class="fa fa-times-circle" *ngIf="request.attributes.status == 0"></i>
+                </td>
               </tr>
               </tbody>
             </table>
-            <!--<div class="no-items" *ngIf="blocks && blocks.data.length == 0 && !blocks.is_loading">{{ 'Block-List.No items' | translate }}</div>-->
           </div>
         </div>
         <footer class="card-footer">

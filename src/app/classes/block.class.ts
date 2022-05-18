@@ -35,7 +35,10 @@ export class Block extends Resource {
         extrinsics_root: 'extrinsics_root',
         count_extrinsics: 'count_extrinsics',
         count_events: 'count_events',
-        runtime_id: 'runtime_id'
+        runtime_id: 'runtime_id',
+        count_extrinsics_signed: 'count_extrinsics_signed',
+        count_events_module: 'count_events_module',
+        datetime: 'datetime',
     };
 
     public relationships = {

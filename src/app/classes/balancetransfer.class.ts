@@ -24,6 +24,5 @@ import { Resource } from 'ngx-jsonapi';
 
 export class BalanceTransfer extends Resource {
   public attributes = {
-
   };
 }

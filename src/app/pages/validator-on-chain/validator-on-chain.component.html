@@ -1,4 +1,4 @@
-<div class="columns">
+<div class="">
   <div class="column is-12">
     <app-polkascan-header></app-polkascan-header>
     <section>
@@ -11,7 +11,7 @@
           </a>
           <p class="card-header-title">
             {{ 'DashBoard.Validator Audit' | translate }}
-            <span class="card-header-tips"></span>
+            <!--<span class="card-header-tips"></span>-->
           </p>
         </header>
         <div class="card-table">
@@ -24,6 +24,8 @@
                 <th>{{ 'DashBoard.Validator id' | translate }}</th>
                 <th class="is-hidden-mobile">{{ 'DashBoard.Ares-Authority' | translate }}</th>
                 <th class="is-hidden-mobile">{{ 'DashBoard.Event Block' | translate }}</th>
+                <th class="is-hidden-mobile">{{ 'DashBoard.Warehouse inspection' | translate }}</th>
+                <th class="is-hidden-mobile">{{ 'DashBoard.Node type' | translate }}</th>
                 <th>{{ 'DashBoard.Result' | translate }}</th>
                 <th></th>
               </tr>
@@ -32,13 +34,22 @@
               <tr *ngFor="let v of validator">
                 <td></td>
                 <td width="10%">{{ v.validator }}</td>
-                <td class="is-hidden-mobile">{{ v.ares_authority}}</td>
-                <td width="20%"><a routerLink="{{ networkURLPrefix }}/block/{{ v.block_number}}">{{v.block_number}}</a></td>
-                <td width="20%">{{v.status}}</td>
+                <td class="is-hidden-mobile" width="20%">{{ v.ares_authority | hideMiddleStr}}</td>
+                <td ><a routerLink="{{ networkURLPrefix }}/block/{{ v.block_number}}">{{v.block_number}}</a></td>
+                <td>
+                  Available
+                  <span class="not-available">Not Available </span>
+                </td>
+                <td>Authority</td>
+                <td (click)="showUnPassInfo(v.ares_authority)">
+                  {{v.status}}
+                  <span class="not-available not-available-btn">Unpassed</span>
+                </td>
               </tr>
               </tbody>
             </table>
-            <!--<div class="no-items" *ngIf="blocks && blocks.data.length == 0 && !blocks.is_loading">{{ 'Block-List.No items' | translate }}</div>-->
+            <!--<div class="no-items" *ngIf="validator && validator.length == 0 && !validator.is_loading">{{ 'Block-List.No items' | translate }}</div>-->
+            <app-loading-box *ngIf="validator.length === 0"></app-loading-box>
           </div>
         </div>
         <footer class="card-footer">
@@ -46,5 +57,61 @@
         </footer>
       </div>
     </section>
+  </div>
+  <div class="un-passed-info" *ngIf="isShowUnPassInfo">
+     <div class="content">
+        <div class="close" (click)="closeShowUnPassInfo()">
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </div>
+        <div class="title">Unpassed Info</div>
+
+        <div class="item">
+          <span>Host Key:</span> <input  class="input" type="text"  [(ngModel)]="HostKey"  />
+          <i class="fa fa-question-circle fa-lg" aria-hidden="true"></i>
+        </div>
+
+        <div class="item authorities">
+          <span>Associated Authorities:</span>
+          <input  class="input" type="text" value="{{selectedAuthorities}}"/>
+        </div>
+
+        <div class="ft">
+          <a class="button is-small is-primary" (click)="consult()">Consult</a>
+        </div>
+
+       <div *ngIf="HostKeyError === 'exceed'">
+         <div class="error">
+           Result: The set time did not exceed 1 era, please wait
+         </div>
+         <div class="warning">
+           <div><i class="fa fa-exclamation-circle" aria-hidden="true"></i></div>
+           <div>The locally set authority is in line with the on-chain session key, and the set time did not exceed 1 era; please wait for the result.</div>
+         </div>
+       </div>
+
+       <div *ngIf="HostKeyError === 'feedback'">
+         <div class="error">
+           Result: Submit feedback to the project party
+         </div>
+         <div class="warning">
+           <div><i class="fa fa-exclamation-circle" aria-hidden="true"></i></div>
+           <div>The locally set authority is in line with the on-chain session key,and the set time exceeded 1era; please submit feedback to the project party.</div>
+         </div>
+       </div>
+
+
+       <div *ngIf="HostKeyError === 'notMatch'">
+         <div class="error">
+           Result: Does not match on-chain settings
+         </div>
+         <div class="warning">
+           <div><i class="fa fa-exclamation-circle" aria-hidden="true"></i></div>
+           <div>Your locally set authority did not align with the on-chain validator; please reset the Sessionkey.</div>
+         </div>
+       </div>
+
+       <app-loading-box *ngIf="consultLoading" class="loading"></app-loading-box>
+
+     </div>
   </div>
 </div>

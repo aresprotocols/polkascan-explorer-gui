@@ -7,7 +7,7 @@ export class ShiftedByLeft12  implements PipeTransform {
    * @param args 附加参数
    * @return 处理完成的数据
    */
-  transform(value: number, ...args: any[]): number {
-    return value / (Math.pow(10, 12));
+  transform(value: number, ...args: any[]): any {
+    return (value / (Math.pow(10, 12))).toFixed(2);
   }
 }

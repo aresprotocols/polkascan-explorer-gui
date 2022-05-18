@@ -11,3 +11,54 @@
   padding: 2px 5px;
   margin-left: 10px;
 }
+
+.asset-table  {
+  color: #2E4765;
+  thead {
+    tr th {
+      font-size: 15px;
+      font-weight: bold;
+      color: #2E4765;
+    }
+  }
+  tbody {
+    font-size: 14px;
+    font-weight: 400;
+    color: #2E4765;
+  }
+}
+
+
+
+.result-item {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.result-item-key{
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+  cursor: pointer;
+  .fa-caret-down, .fa-caret-up {
+    color: #003799;
+    display: block;
+  }
+  .symbol-title {
+    display: block;
+    min-width: 90px;
+  }
+}
+
+.auth {
+  display: block;
+  width: 164px;
+  height: 18px;
+  font-size: 14px;
+  line-height: 20px;
+  font-family: Montserrat;
+  font-weight: 400;
+  color: #2E4765;
+  padding: 11px 0;
+}

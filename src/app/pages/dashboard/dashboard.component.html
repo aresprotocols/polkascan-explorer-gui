@@ -9,11 +9,11 @@
               <!--routerLink="{{ networkURLPrefix }}/account/{{ balanceTransfer.attributes.sender.attributes.address }}"-->
               <a class="chain-data-item" routerLink="{{ networkURLPrefix }}/transaction">
                 <div class="chain-data-item-icon">
-                  <img src="../../../assets/icons/signed.png" alt="" width="22" height="24">
+                  <img src="assets/icons/signed.png" alt="" width="22" height="24">
                 </div>
                 <div>
                   <div class="item-title">{{"chainData.SignedExtrinsics" | translate }}</div>
-                  <div class="numbers">{{chainData.total_extrinsics_signed ? chainData.total_extrinsics_signed : "0"}}</div>
+                  <div class="numbers">{{chainData?.total_extrinsics_signed ? chainData?.total_extrinsics_signed : "0"}}</div>
                 </div>
               </a>
               <a class="chain-data-item" routerLink="{{ networkURLPrefix }}/balances/transfer" >
@@ -22,7 +22,7 @@
                 </div>
                 <div>
                   <div class="item-title">{{"chainData.Transfers" | translate}}</div>
-                  <div class="numbers">{{chainData.total_events_transfer ? chainData.total_events_transfer : "0"}}</div>
+                  <div class="numbers">{{chainData?.total_events_transfer ? chainData?.total_events_transfer : "0"}}</div>
                 </div>
               </a>
               <a class="chain-data-item" routerLink="{{ networkURLPrefix }}/account">
@@ -31,7 +31,7 @@
                 </div>
                 <div>
                   <div class="item-title">{{"chainData.Holders" | translate}}</div>
-                  <div class="numbers">{{chainData.total_account ? chainData.total_account  : "0"}}</div>
+                  <div class="numbers">{{chainData?.total_account ? chainData?.total_account  : "0"}}</div>
                 </div>
               </a>
               <div class="chain-data-item">
@@ -40,8 +40,7 @@
                 </div>
                 <div>
                   <div class="item-title">{{"chainData.TotalIssuance" | translate}}</div>
-                  <div class="numbers">{{chainData.total_issuance ? (chainData.total_issuance / 1000000000000 / 1000000).toFixed(2) : "0"}}M</div>
-                  <!--<div class="numbers">{{chainData.total_issuance ｜ShiftedByLeft12}}M</div>-->
+                  <div class="numbers">{{chainData?.total_issuance ? ((chainData.total_issuance | ShiftedByLeft12 ) / 1000000).toFixed(2) : "0"}}M</div>
                 </div>
               </div>
               <div class="chain-data-item">
@@ -51,7 +50,7 @@
                 <div>
                   <div class="item-title">{{"chainData.StakedValue" | translate}}</div>
                   <div class="numbers">
-                    {{chainData.total_stake ? (chainData.total_stake/ 1000000000000 / 1000000).toFixed(2) : "0"}}M
+                    {{chainData?.total_stake ? ((chainData.total_stake | ShiftedByLeft12 ) / 1000000).toFixed(2) : "0"}}M
                     (45.5%)
                   </div>
                 </div>
@@ -62,7 +61,7 @@
                 </div>
                 <div>
                   <div class="item-title">{{"chainData.Validators" | translate}}</div>
-                  <div class="numbers">{{chainData.total_validators ? chainData.total_validators : "0"}}</div>
+                  <div class="numbers">{{chainData?.total_validators ? chainData?.total_validators : "0"}}</div>
                 </div>
               </a>
               <div class="chain-data-item">
@@ -71,7 +70,7 @@
                 </div>
                 <div>
                   <div class="item-title">{{"chainData.InflationRate" | translate}}</div>
-                  <div class="numbers">{{chainData.inflation ? chainData.inflation.toFixed(2) : "0"}}%</div>
+                  <div class="numbers">{{chainData?.inflation ? chainData?.inflation.toFixed(2) : "0"}}%</div>
                 </div>
               </div>
               <a class="chain-data-item"
@@ -81,7 +80,9 @@
                 </div>
                 <div>
                   <div class="item-title">{{'chainData.treasuryBurn' | translate}}</div>
-                  <div class="numbers">{{chainData.total_treasury_burn ? (chainData.total_treasury_burn / 1000000000000 / 1000000).toFixed(2) : "0"}}M</div>
+                  <div class="numbers">
+                    {{chainData?.total_treasury_burn ? ((chainData.total_treasury_burn | ShiftedByLeft12 ) / 1000000).toFixed(2) : "0"}}M
+                  </div>
                 </div>
               </a>
             </div>
@@ -120,8 +121,8 @@
                 <div class="card dashboard-card">
                   <a routerLink="{{ networkURLPrefix }}/block">
                     <header class="card-header">
-                      <a [routerLink]="" fragment="last-blocks" class="card-header-icon" aria-label="more options">
-                        <img src="../../../assets/icons/block.png" alt="" width="28" height="28">
+                      <a [routerLink]="" fragment="last-blocks" class="card-icon" aria-label="more options">
+                        <img src="assets/icons/block.png" alt="" width="28" height="28">
                       </a>
                       <p class="card-header-title">
                           {{ 'DashBoard.Last blocks' | translate }}
@@ -160,8 +161,8 @@
               <div class="card dashboard-card">
                   <a routerLink="{{ networkURLPrefix }}/balances/transfer">
                     <header class="card-header">
-                        <a [routerLink]="" fragment="last-transfers" class="card-header-icon" aria-label="more options">
-                          <img src="../../../assets/icons/transfers.png" alt="" width="28" height="28">
+                        <a [routerLink]="" fragment="last-transfers" class="card-icon" aria-label="more options">
+                          <img src="assets/icons/transfers.png" alt="" width="28" height="28">
                         </a>
                         <p class="card-header-title">
                             {{ 'DashBoard.Last balance transfers' | translate }}
@@ -198,14 +199,14 @@
         <section class="columns"  *ngIf="chainAssets">
           <div class="column is-6 last-blocks">
               <div class="card dashboard-card">
-                <a routerLink="{{ networkURLPrefix }}/onchain/assets">
+                <a routerLink="{{ networkURLPrefix }}/onchain/assets/{{chainData?.total_symbols}}">
                   <header class="card-header">
                     <a [routerLink]="" fragment="last-blocks" class="card-header-icon" aria-label="more options">
                       <i class="fa fa-database"></i>
                     </a>
                     <p class="card-header-title">
                       {{ 'DashBoard.Data of on-chain assets' | translate }}
-                      <span class="card-header-tips">{{chainData.total_symbols}} trade pairs</span>
+                      <span class="card-header-tips">{{chainData?.total_symbols}} trade pairs</span>
                     </p>
 
                     <a href="javascript:void(0)" class="card-header-right">
@@ -215,19 +216,19 @@
                 </a>
                 <div class="card-table">
                   <div class="content">
-                    <table class="table is-fullwidth is-striped">
+                    <table class="table chain-table is-fullwidth is-striped">
                       <thead>
                         <tr>
                           <th>{{ 'DashBoard.Trading pairs' | translate }}</th>
-                          <th class="is-hidden-mobile">{{ 'DashBoard.Request interval(block)' | translate }}</th>
-                          <th>{{ 'DashBoard.Transactions' | translate }}</th>
+                          <th class="is-hidden-mobile">{{ 'DashBoard.Frequency (Seconds)' | translate }}</th>
+                          <th>{{ 'DashBoard.Precision' | translate }}</th>
                           <th>{{ 'DashBoard.On-chain price' | translate }}</th>
                           <th></th>
                         </tr>
                       </thead>
                       <tbody *ngIf="chainAssets">
                       <tr *ngFor="let asset of chainAssets">
-                        <td>{{ asset.symbol }}</td>
+                        <td>{{ asset.symbol | uppercase }}</td>
                         <td class="is-hidden-mobile">
                           <!--<span *ngIf="block.attributes.datetime" rel="tooltip" title="{{ block.attributes.datetime | date:'medium'}}">-->
                           <!--  </span>-->
@@ -252,6 +253,7 @@
                   </a>
                   <p class="card-header-title">
                     {{ 'DashBoard.Validator Audit' | translate }}
+                    <span class="card-header-tips">{{chainData?.total_validators}} Validators</span>
                   </p>
 
                   <a href="javascript:void(0)" class="card-header-right">
@@ -261,7 +263,7 @@
               </a>
               <div class="card-table">
                 <div class="content">
-                  <table class="table is-fullwidth is-striped">
+                  <table class="table chain-table is-fullwidth is-striped">
                     <thead>
                     <tr>
                       <th>{{ 'DashBoard.Validator id' | translate }}</th>
@@ -289,14 +291,14 @@
         <section class="columns">
           <div class="column is-6 last-blocks">
             <div class="card dashboard-card">
-              <a routerLink="{{ networkURLPrefix }}/era-rewards">
+              <a routerLink="{{ networkURLPrefix }}/era-rewards/{{chainData?.total_price_requests}}">
                 <header class="card-header">
                   <a [routerLink]="" fragment="last-blocks" class="card-header-icon" aria-label="more options">
                     <i class="fa fa-database"></i>
                   </a>
                   <p class="card-header-title">
                     {{ 'DashBoard.Rewards for era' | translate }}
-                    <span class="card-header-tips">{{chainData.total_price_requests}} blocks</span>
+                    <span class="card-header-tips">{{chainData?.total_price_requests}} blocks</span>
                   </p>
 
                   <a href="javascript:void(0)" class="card-header-right">
@@ -306,7 +308,7 @@
               </a>
               <div class="card-table">
                 <div class="content">
-                  <table class="table is-fullwidth is-striped">
+                  <table class="table chain-table is-fullwidth is-striped">
                     <thead>
                     <tr>
                       <th>{{ 'DashBoard.Era' | translate }}</th>
@@ -314,12 +316,11 @@
                       <th>{{ 'DashBoard.Quotation node' | translate }}</th>
                       <th>{{ 'DashBoard.Generated points' | translate }}</th>
                       <th>{{ 'DashBoard.Reward/each point' | translate }}</th>
-                      <th></th>
                     </tr>
                     </thead>
                     <tbody *ngIf="chainEraRequest">
                     <tr *ngFor="let request of chainEraRequest">
-                      <td><a routerLink="{{ networkURLPrefix }}/block/{{ request.id }}">{{ request.attributes.era }}</a></td>
+                      <td>{{ request.attributes.era }}</td>
                       <td width="22%" class="is-hidden-mobile"><span *ngIf="request.attributes.era_total_fee" rel="tooltip" title="{{ request.attributes.era_total_fee}}">{{ request.attributes.era_total_fee}}</span></td>
                       <td>{{ request.attributes.era_total_requests }}</td>
                       <td>{{ request.attributes.era_total_points }}</td>
@@ -336,14 +337,14 @@
 
           <div class="column is-6 last-blocks">
             <div class="card dashboard-card">
-              <a routerLink="{{ networkURLPrefix }}/un-rewards">
+              <a routerLink="{{ networkURLPrefix }}/un-rewards/{{chainData?.total_price_requests}}">
                 <header class="card-header">
                   <a [routerLink]="" fragment="last-blocks" class="card-header-icon" aria-label="more options">
                     <i class="fa fa-database"></i>
                   </a>
                   <p class="card-header-title">
                     {{ 'DashBoard.Unclaimed Rewards' | translate }}
-                    <span class="card-header-tips">{{chainData.total_price_requests}} ARES</span>
+                    <span class="card-header-tips">{{chainData?.total_price_requests}} ARES</span>
                   </p>
 
                   <a href="javascript:void(0)" class="card-header-right">
@@ -353,26 +354,23 @@
               </a>
               <div class="card-table">
                 <div class="content">
-                  <table class="table is-fullwidth is-striped">
+                  <table class="table chain-table  is-fullwidth is-striped">
                     <thead>
-                    <tr>
-                      <th>{{ 'DashBoard.Validator' | translate }}</th>
-                      <th>{{ 'DashBoard.Era' | translate }}</th>
-                      <th>{{ 'DashBoard.Reward' | translate }}</th>
-                      <th>{{ 'DashBoard.Claim' | translate }}</th>
-                      <th></th>
-                    </tr>
+                      <tr>
+                        <th>{{ 'DashBoard.Validator' | translate }}</th>
+                        <th>{{ 'DashBoard.Era' | translate }}</th>
+                        <th>{{ 'DashBoard.Reward' | translate }}</th>
+                      </tr>
                     </thead>
                     <tbody *ngIf="chainReward">
-                    <tr *ngFor="let reward of chainReward">
-                      <td><a routerLink="{{ networkURLPrefix }}/account/{{ reward.account }}">{{ reward.account | hideMiddleStr}}</a></td>
-                      <td class="is-hidden-mobile">
-                        {{reward.era}}
-                      </td>
-                      <td>{{ reward.reward }}</td>
-                      <!--<td>{{ block.attributes.count_extrinsics_signed }}</td>-->
-                      <td width="5%"><a class="button is-small is-primary" routerLink="{{ networkURLPrefix }}/account/{{ reward.account }}">{{ 'DashBoard.Click to claim' | translate }}</a></td>
-                    </tr>
+                      <tr *ngFor="let reward of chainReward">
+                        <td><a routerLink="{{ networkURLPrefix }}/account/{{ reward.account }}">{{ reward.account | hideMiddleStr}}</a></td>
+                        <td class="is-hidden-mobile">
+                          {{reward.era}}
+                        </td>
+                        <td>{{ reward.reward }}</td>
+                        <!--<td>{{ block.attributes.count_extrinsics_signed }}</td>-->
+                      </tr>
                     </tbody>
                   </table>
                 </div>
@@ -384,14 +382,14 @@
         <section class="columns">
           <div class="column last-blocks">
             <div class="card dashboard-card">
-              <a routerLink="{{ networkURLPrefix }}/onchain/request">
+              <a routerLink="{{ networkURLPrefix }}/onchain/request/{{chainData?.total_price_requests}}">
                 <header class="card-header">
                   <a [routerLink]="" fragment="last-blocks" class="card-header-icon" aria-label="more options">
                     <i class="fa fa-database"></i>
                   </a>
                   <p class="card-header-title">
                     {{ 'DashBoard.Data of on-chain request' | translate }}
-                    <span class="card-header-tips">{{chainData.total_price_requests}} request</span>
+                    <span class="card-header-tips">{{chainData?.total_price_requests}} requests</span>
                   </p>
 
                   <a href="javascript:void(0)" class="card-header-right">
@@ -401,7 +399,7 @@
               </a>
               <div class="card-table">
                 <div class="content">
-                  <table class="table is-fullwidth is-striped">
+                  <table class="table chain-table is-fullwidth is-striped">
                     <thead>
                     <tr>
                       <th>{{ 'DashBoard.Order ID' | translate }}</th>
@@ -418,10 +416,14 @@
                     <tbody *ngIf="chainRequest.length > 0">
                     <tr *ngFor="let request of chainRequest;">
                       <td >
-                        <a routerLink="{{ networkURLPrefix }}/block/{{ request.attributes.order_id }}">{{ request.attributes.order_id | hideMiddleStr}}</a>
+                        {{ request.attributes.order_id | hideMiddleStr}}
                       </td>
                       <td>{{request.attributes.requester}}</td>
-                      <td>{{request.attributes.created_at}}</td>
+                      <td>
+                        <a routerLink="{{ networkURLPrefix }}/block/{{ request.attributes.created_at }}">
+                          {{request.attributes.created_at}}
+                        </a>
+                      </td>
                       <td>{{request.attributes.ended_at}}</td>
                       <td width="20%">
                         <span *ngFor="let pair of request.attributes.symbols" class="pair-item">
@@ -430,20 +432,31 @@
                       </td>
                       <td>{{request.attributes.prepayment}}</td>
                       <td>{{request.attributes.payment}}</td>
-                      <td class="is-hidden-mobile" width="20%">
+                      <td class="is-hidden-mobile">
                         <div *ngIf="request.attributes.result" class="result-item">
                           <div *ngFor="let key of request.attributes.keys">
-                            <div class="result-item-key">
-                              {{ key | uppercase}}
-                              <!--<i class="fa fa-sort-down fa-2x"></i>-->
+                            <div class="result-item-key" (click)="showSymbolInfo(request.attributes.order_id+key)">
+                               <span class="symbol-title">{{ key | uppercase}}</span>
+                                <i class="fa fa-caret-down fa-2x" *ngIf="request.attributes.order_id+key != showSymbolInfoKey"></i>
+                                <i class="fa fa-caret-up fa-2x" *ngIf="request.attributes.order_id+key == showSymbolInfoKey"></i>
                             </div>
-                            <div>
-                              price: {{ (request.attributes.result[key].price_data[0] / 10000) | number }}
+                            <div class="symbol-info" *ngIf="request.attributes.order_id+key == showSymbolInfoKey">
+                              <span>Count: [{{request.attributes.auth[key].length}}]</span>
+                              <div>
+                                Block: {{request.attributes.ended_at}}
+                              </div>
+                              <div>
+                                Price: {{ (request.attributes.result[key].price_data[0] / 10000) | number }}
+                              </div>
                             </div>
                           </div>
                         </div>
                       </td>
-                      <td width="20%"><i class="fa fa-check-circle"></i></td>
+                      <td class="request-status">
+                        <i class="fa fa-check-circle" *ngIf="request.attributes.status == 1"></i>
+                        <i class="fa fa-clock" *ngIf="request.attributes.status == 2"></i>
+                        <i class="fa fa-times-circle" *ngIf="request.attributes.status == 0"></i>
+                      </td>
                     </tr>
                     </tbody>
                   </table>

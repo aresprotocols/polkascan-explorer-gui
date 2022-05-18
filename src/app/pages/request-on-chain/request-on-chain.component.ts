@@ -22,6 +22,8 @@ export class RequestOnChainComponent implements OnInit, OnDestroy {
   private requestSubsription: Subscription;
   public networkURLPrefix: string;
   public chainRequest: ChainRequest [];
+  public showSymbolInfoKey: string;
+  public requestsNum: string;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -33,6 +35,12 @@ export class RequestOnChainComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.showLoading = true;
+
+    this.activatedRoute.paramMap.pipe().subscribe(params => {
+      if (params.get("num")) {
+        this.requestsNum = params.get("num");
+      }
+    });
 
     this.networkSubscription = this.appConfigService.getCurrentNetwork().subscribe( network => {
       this.networkURLPrefix = this.appConfigService.getUrlPrefix();
@@ -70,6 +78,14 @@ export class RequestOnChainComponent implements OnInit, OnDestroy {
           }
         });
       });
+  }
+
+  showSymbolInfo(id: string) {
+    if (id === this.showSymbolInfoKey) {
+      this.showSymbolInfoKey = '';
+    } else {
+      this.showSymbolInfoKey = id;
+    }
   }
 
   ngOnDestroy(): void {

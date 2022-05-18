@@ -47,7 +47,8 @@ export class ChartComponent implements OnInit {
   chart: Chart;
 
 
-  constructor(private ref: ChangeDetectorRef, private appConfigService: AppConfigService) { }
+  constructor(private ref: ChangeDetectorRef, private appConfigService: AppConfigService) {
+  }
 
   public renderChart(chartData) {
     const options = {

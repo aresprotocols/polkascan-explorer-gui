@@ -68,14 +68,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public aresRank: number;
   public aresCap: number;
   public aresVol: number;
-  public chainData: object = {};
+  public chainData: {[key: string]: any};
   public chainAssets: ChainAssets[] = [];
   public chainRequest: ChainRequest[] = [];
-  public chainEraRequest: object [] = [];
-  public chainReward: object [] = [];
+  public chainEraRequest: {[key: string]: any}[] = [];
+  public chainReward: {[key: string]: any}[] = [];
   isLoadingEraRequest = false;
   isLoadingChart = false;
-  public validator: object [] = [];
+  public validator: {[key: string]: any}[] = [];
+  public showSymbolInfoKey: string;
 
   constructor(
     private blockService: BlockService,
@@ -269,6 +270,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   public formatBalance(balance: number) {
     return balance / Math.pow(10, this.networkTokenDecimals);
+  }
+
+  showSymbolInfo(id: string) {
+    if (id === this.showSymbolInfoKey) {
+      this.showSymbolInfoKey = '';
+    } else {
+      this.showSymbolInfoKey = id;
+    }
   }
 
   ngOnDestroy() {

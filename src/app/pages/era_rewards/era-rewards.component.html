@@ -11,7 +11,7 @@
           </a>
           <p class="card-header-title">
             {{ 'DashBoard.Rewards for era' | translate }}
-            <span class="card-header-tips">910 blocks</span>
+            <span class="card-header-tips" *ngIf="blocksNum">{{blocksNum}} blocks</span>
           </p>
         </header>
         <div class="card-table">
@@ -32,7 +32,9 @@
               <tbody>
               <tr *ngFor="let data of reward">
                 <td></td>
-                <td width="10%"><a routerLink="{{ networkURLPrefix }}/block/{{ data.id }}">{{ data.attributes.era }}</a></td>
+                <td width="10%">
+                    {{ data.attributes.era }}
+                </td>
                 <td class="is-hidden-mobile">
                   <span rel="tooltip" title="{{ data.attributes.era_total_fee | date:'medium'}}">
                     {{ data.attributes.era_total_fee}}
