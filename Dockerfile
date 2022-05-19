@@ -2,11 +2,11 @@
 # We label our stage as ‘builder’
 FROM node:14-alpine as builder
 
-COPY package.json package-lock.json ./
+COPY package.json yarn.lock ./
 
 ## Storing node modules on a separate layer will prevent unnecessary npm installs at each build
 RUN apk add --no-cache python2 g++ make && \
-    npm ci && mkdir /ng-app && mv ./node_modules ./ng-app
+    yarn install && mkdir /ng-app && mv ./node_modules ./ng-app
 
 WORKDIR /ng-app
 
