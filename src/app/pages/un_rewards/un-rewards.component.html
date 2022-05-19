@@ -34,7 +34,7 @@
                 <td>{{ reward.era }}</td>
                 <td>{{ reward.reward }}</td>
                 <td>
-                  <a class="button is-small is-primary" (click)="claim(reward.account)">{{ 'DashBoard.Click to claim' | translate }}</a>
+                  <a class="button is-small is-primary" (click)="getAccounts()">{{ 'DashBoard.Click to claim' | translate }}</a>
                 </td>
               </tr>
               </tbody>
@@ -93,5 +93,45 @@
         This account is not found
       </div>
     </div>
+  </div>
+
+  <div class="success" *ngIf="showSuccess">
+    <div class="content">
+      <div class="content-header">
+        <i class="fa fa-times" aria-hidden="true" (click)="showSuccess = false"></i>
+      </div>
+      <div class="content-desc">
+        <i class="fa fa-check-circle fa-3x"></i>
+        Congratulation! You have successfully withdrawn your rewards
+      </div>
+    </div>
+  </div>
+
+
+  <div class="select-account" *ngIf="showSelectAccount">
+    <div class="content">
+      <div class="content-header">
+        <div class="content-title">
+          <span style="color: rgb(46, 71, 101);"> Select Account</span>
+        </div>
+        <div>
+          <i class="fa fa-times" aria-hidden="true" (click)="showSelectAccount = false"></i>
+        </div>
+      </div>
+      <div class="content-body">
+        <div class="select">
+          <select [(ngModel)]="selectedAccount" (ngModelChange)="accountChange()">
+            <option *ngFor="let account of accounts" [value]="account.address">{{account.address}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="content-footer">
+        <a class="button is-small is-primary" (click)="claim()">Claim</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-loading" *ngIf="claimLoading">
+    <app-loading-box></app-loading-box>
   </div>
 </div>

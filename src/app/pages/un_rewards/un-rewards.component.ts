@@ -5,6 +5,7 @@ import {AppConfigService} from '../../services/app-config.service';
 import {HttpClient} from '@angular/common/http';
 import {ApiPromise, WsProvider} from '@polkadot/api';
 import {web3Accounts, web3Enable, web3FromAddress} from '@polkadot/extension-dapp';
+import {InjectedAccountWithMeta} from '@polkadot/extension-inject/types';
 
 @Component({
   selector: 'app-request-on-chain',
@@ -27,6 +28,11 @@ export class UnRewardsComponent implements OnInit, OnDestroy {
   public showInstallPolkadot = false;
   public showNotOnlyYour = false;
   public showError = false;
+  public showSelectAccount = false;
+  public accounts: InjectedAccountWithMeta[];
+  public selectedAccount: string;
+  public claimLoading = false;
+  public showSuccess = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -100,9 +106,7 @@ export class UnRewardsComponent implements OnInit, OnDestroy {
         });
       });
   }
-  claim = async (validatorAddress) => {
-    console.log('claim');
-    const v = this;
+  async getAccounts() {
     await web3Enable('scan').then(async res => {
       if (res.length === 0) {
         console.log('浏览器没有安装 扩展', res);
@@ -110,48 +114,49 @@ export class UnRewardsComponent implements OnInit, OnDestroy {
         return;
       }
       // tslint:disable-next-line:no-shadowed-variable
-      const accounts = await web3Accounts({ss58Format: 34 });
-      //
-      // let onlyYour = false;
-      // let address = '';
-      // // tslint:disable-next-line:prefer-for-of
-      // for (let i = 0; i < accounts.length; i++) {
-      //   if (accounts[i].address.toUpperCase() === validatorAddress.toUpperCase()) {
-      //     onlyYour = true;
-      //     address = accounts[i].address;
-      //     break;
-      //   }
-      // }
-      // if (!onlyYour) {
-      //   v.showNotOnlyYour = true;
-      //   return;
-      // }
-
+      const accounts = await web3Accounts({ss58Format: 34});
+      this.accounts = accounts;
+      this.showSelectAccount = true;
+      this.selectedAccount = accounts[0].address;
       const injector = await web3FromAddress(accounts[0].address);
-      v.polkaAPI?.setSigner(injector.signer);
-
-      const unsub = await v.polkaAPI?.tx.oracleFinance.takeAllPurchaseReward()
-        .signAndSend(accounts[0].address, {}, ({status, events, dispatchError}) => {
-          if (dispatchError) {
-            if (dispatchError.isModule) {
-              const decoded = v.polkaAPI?.registry.findMetaError(dispatchError.asModule);
-              // @ts-ignore
-              const { docs, name, section } = decoded;
-              console.log(`${section}.${name}: ${docs.join(' ')}`);
-            }
-            this.showError = true;
-            console.log(`${dispatchError}`);
-          } else if (status.isFinalized) {
-            console.log('Successfully claimed rewards');
-          }
-
-          if (status.isInBlock) {
-            console.log(`claim Transaction included at blockHash ${status.asInBlock}`);
-          } else if (status.isFinalized) {
-            console.log(`claim Transaction finalized at blockHash ${status.asFinalized}`);
-            unsub();
-          }
-        });
+      this.polkaAPI?.setSigner(injector.signer);
     });
+  }
+  async accountChange() {
+    console.log('account change', this.selectedAccount);
+    const injector = await web3FromAddress(this.selectedAccount);
+    this.polkaAPI?.setSigner(injector.signer);
+  }
+  claim = async () => {
+    console.log('claim');
+    const v = this;
+    v.showSelectAccount = false;
+    v.claimLoading = true;
+    const unsub = await v.polkaAPI?.tx.oracleFinance.takeAllPurchaseReward()
+      .signAndSend(v.selectedAccount, {}, ({status, events, dispatchError}) => {
+        if (dispatchError) {
+          if (dispatchError.isModule) {
+            const decoded = v.polkaAPI?.registry.findMetaError(dispatchError.asModule);
+            // @ts-ignore
+            const { docs, name, section } = decoded;
+            console.log(`${section}.${name}: ${docs.join(' ')}`);
+          }
+          unsub();
+          v.showError = true;
+          v.claimLoading = false;
+          console.log(`${dispatchError}`);
+        } else if (status.isFinalized) {
+          console.log('Successfully claimed rewards');
+        }
+
+        if (status.isInBlock) {
+          console.log(`claim Transaction included at blockHash ${status.asInBlock}`);
+        } else if (status.isFinalized) {
+          v.claimLoading = false;
+          v.showSuccess = true;
+          console.log(`claim Transaction finalized at blockHash ${status.asFinalized}`);
+          unsub();
+        }
+      });
   }
 }

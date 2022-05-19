@@ -30,7 +30,7 @@ table  {
 }
 
 
-.polkadot-guide {
+.polkadot-guide, .select-account {
   position: fixed;
   top: 0;
   right: 0;
@@ -96,8 +96,19 @@ table  {
   }
 }
 
+.select-account {
+  .content-footer {
+    padding-bottom: 20px;
+    .button {
+      padding: 17px;
+      font-size: 15px;
+      color: #fff;
+    }
+  }
+}
 
-.only-your, .error {
+
+.only-your, .error, .success {
   position: fixed;
   top: 0;
   right: 0;
@@ -128,4 +139,28 @@ table  {
     padding: 20px;
     text-align: center;
   }
+}
+
+.success {
+  .content-desc {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .fa {
+      color: #52c41a;
+    }
+  }
+}
+
+.app-loading {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 28, 078, 0.68);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
