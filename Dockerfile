@@ -6,6 +6,7 @@ COPY package.json yarn.lock ./
 
 ## Storing node modules on a separate layer will prevent unnecessary npm installs at each build
 RUN apk add --no-cache python2 g++ make && \
+    npm install yarn && \
     yarn install && mkdir /ng-app && mv ./node_modules ./ng-app
 
 WORKDIR /ng-app
