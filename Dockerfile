@@ -5,8 +5,7 @@ FROM node:14-alpine as builder
 COPY package.json yarn.lock ./
 
 ## Storing node modules on a separate layer will prevent unnecessary npm installs at each build
-RUN apk add --no-cache python2 g++ make && \
-    npm install yarn && \
+RUN apk add --no-cache python2 g++ make git && \
     yarn install && mkdir /ng-app && mv ./node_modules ./ng-app
 
 WORKDIR /ng-app
@@ -44,7 +43,7 @@ ENV NETWORK_TOKEN_DECIMALS=$NETWORK_TOKEN_DECIMALS
 ARG NETWORK_COLOR_CODE=d32e79
 ENV NETWORK_COLOR_CODE=$NETWORK_COLOR_CODE
 
-RUN npm run ng build -- --configuration=${ENV_CONFIG} --output-path=dist
+RUN yarn build -- --configuration=${ENV_CONFIG} --output-path=dist
 
 
 ### STAGE 2: Setup ###
