@@ -34,7 +34,7 @@
                 <td>{{ reward.era }}</td>
                 <td>{{ reward.reward }}</td>
                 <td>
-                  <a class="button is-small is-primary" (click)="getAccounts()">{{ 'DashBoard.Click to claim' | translate }}</a>
+                  <a class="button is-small is-primary" *ngIf="accounts?.includes(reward.controller)" (click)="getAccounts(reward.controller)">{{ 'DashBoard.Click to claim' | translate }}</a>
                 </td>
               </tr>
               </tbody>
@@ -121,7 +121,7 @@
       <div class="content-body">
         <div class="select">
           <select [(ngModel)]="selectedAccount" (ngModelChange)="accountChange()">
-            <option *ngFor="let account of accounts" [value]="account.address">{{account.address}}</option>
+            <option *ngFor="let account of accounts" [value]="account">{{account}}</option>
           </select>
         </div>
       </div>

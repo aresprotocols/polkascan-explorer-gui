@@ -237,6 +237,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
         res['data']['data'].forEach(item => {
           item.reward = (item.reward / 1000000000000).toFixed(2);
         });
+        this.chainReward.sort((a, b) => {
+          return b.era - a.era;
+        });
       });
   }
 

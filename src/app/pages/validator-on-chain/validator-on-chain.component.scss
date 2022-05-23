@@ -125,6 +125,13 @@ table  {
   }
 }
 
+.item-status {
+  span:first-child {
+    display: inline-block;
+    width: 185px !important;
+  }
+}
+
 
 .not-available {
   color: #DB4028;

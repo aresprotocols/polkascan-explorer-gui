@@ -29,10 +29,11 @@ export class UnRewardsComponent implements OnInit, OnDestroy {
   public showNotOnlyYour = false;
   public showError = false;
   public showSelectAccount = false;
-  public accounts: InjectedAccountWithMeta[];
+  public accounts: string[];
   public selectedAccount: string;
   public claimLoading = false;
   public showSuccess = false;
+  public stakingMap: Map<string, string>;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -78,6 +79,8 @@ export class UnRewardsComponent implements OnInit, OnDestroy {
     try {
       ApiPromise.create({provider}).then(api => {
         this.polkaAPI = api;
+        this.getStakingInfo();
+        this.getAccounts();
       });
     } catch (e) {
       console.log('init polka api error:', e);
@@ -103,23 +106,51 @@ export class UnRewardsComponent implements OnInit, OnDestroy {
         this.unRewards = res['data']['data'];
         res['data']['data'].forEach(item => {
           item.reward = (item.reward / 1000000000000).toFixed(2);
+          item.controller = this.stakingMap?.get(item.account) || 'unknown';
+        });
+        this.unRewards.sort((a, b) => {
+          return b.era - a.era;
         });
       });
   }
-  async getAccounts() {
+  async getAccounts(address?: string) {
     await web3Enable('scan').then(async res => {
       if (res.length === 0) {
         console.log('浏览器没有安装 扩展', res);
         this.showInstallPolkadot = true;
         return;
       }
+      if (address) {
+        this.showSelectAccount = true;
+      }
       // tslint:disable-next-line:no-shadowed-variable
       const accounts = await web3Accounts({ss58Format: 34});
-      this.accounts = accounts;
-      this.showSelectAccount = true;
-      this.selectedAccount = accounts[0].address;
-      const injector = await web3FromAddress(accounts[0].address);
+      this.accounts = [];
+      accounts.forEach(item => {
+        if (address) {
+          if (item.address === address) {
+            this.accounts.push(item.address);
+            this.selectedAccount = item.address;
+          }
+        } else {
+          this.accounts.push(item.address);
+          this.selectedAccount = accounts[0].address;
+        }
+      });
+      const injector = await web3FromAddress(this.selectedAccount);
       this.polkaAPI?.setSigner(injector.signer);
+    });
+  }
+  async getStakingInfo() {
+    const staking = await this.polkaAPI?.query.staking.bonded.entries();
+    const stakingMap = new Map<string, string>();
+    staking.forEach(([key, exposure]) => {
+      const tmp = key.args.map((k) => k.toHuman());
+      stakingMap.set(tmp[0], exposure.toHuman().toString());
+    });
+    this.stakingMap = stakingMap;
+    this.unRewards?.forEach(item => {
+      item.controller = this.stakingMap?.get(item.account) || 'unknown';
     });
   }
   async accountChange() {
@@ -130,33 +161,39 @@ export class UnRewardsComponent implements OnInit, OnDestroy {
   claim = async () => {
     console.log('claim');
     const v = this;
-    v.showSelectAccount = false;
     v.claimLoading = true;
-    const unsub = await v.polkaAPI?.tx.oracleFinance.takeAllPurchaseReward()
-      .signAndSend(v.selectedAccount, {}, ({status, events, dispatchError}) => {
-        if (dispatchError) {
-          if (dispatchError.isModule) {
-            const decoded = v.polkaAPI?.registry.findMetaError(dispatchError.asModule);
-            // @ts-ignore
-            const { docs, name, section } = decoded;
-            console.log(`${section}.${name}: ${docs.join(' ')}`);
+    v.showSelectAccount = false;
+    try {
+      const unsub = await v.polkaAPI?.tx.oracleFinance.takeAllPurchaseReward()
+        .signAndSend(v.selectedAccount, {}, ({status, events, dispatchError}) => {
+          console.log('status', status, 'events', events, 'dispatchError', dispatchError);
+          if (dispatchError) {
+            if (dispatchError.isModule) {
+              const decoded = v.polkaAPI?.registry.findMetaError(dispatchError.asModule);
+              // @ts-ignore
+              const { docs, name, section } = decoded;
+              console.log(`${section}.${name}: ${docs.join(' ')}`);
+            }
+            unsub();
+            v.showError = true;
+            v.claimLoading = false;
+            console.log(`${dispatchError}`);
+          } else if (status.isFinalized) {
+            console.log('Successfully claimed rewards');
           }
-          unsub();
-          v.showError = true;
-          v.claimLoading = false;
-          console.log(`${dispatchError}`);
-        } else if (status.isFinalized) {
-          console.log('Successfully claimed rewards');
-        }
 
-        if (status.isInBlock) {
-          console.log(`claim Transaction included at blockHash ${status.asInBlock}`);
-        } else if (status.isFinalized) {
-          v.claimLoading = false;
-          v.showSuccess = true;
-          console.log(`claim Transaction finalized at blockHash ${status.asFinalized}`);
-          unsub();
-        }
-      });
+          if (status.isInBlock) {
+            console.log(`claim Transaction included at blockHash ${status.asInBlock}`);
+          } else if (status.isFinalized) {
+            v.claimLoading = false;
+            v.showSuccess = true;
+            console.log(`claim Transaction finalized at blockHash ${status.asFinalized}`);
+            unsub();
+          }
+        });
+    }
+    catch (e) {
+      v.claimLoading = false;
+    }
   }
 }

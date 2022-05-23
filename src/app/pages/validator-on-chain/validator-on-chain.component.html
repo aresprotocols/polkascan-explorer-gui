@@ -24,8 +24,6 @@
                 <th>{{ 'DashBoard.Validator id' | translate }}</th>
                 <th class="is-hidden-mobile">{{ 'DashBoard.Ares-Authority' | translate }}</th>
                 <th class="is-hidden-mobile">{{ 'DashBoard.Event Block' | translate }}</th>
-                <th class="is-hidden-mobile">{{ 'DashBoard.Warehouse inspection' | translate }}</th>
-                <th class="is-hidden-mobile">{{ 'DashBoard.Node type' | translate }}</th>
                 <th>{{ 'DashBoard.Result' | translate }}</th>
                 <th></th>
               </tr>
@@ -37,13 +35,9 @@
                 <td class="is-hidden-mobile" width="20%">{{ v.ares_authority | hideMiddleStr}}</td>
                 <td ><a routerLink="{{ networkURLPrefix }}/block/{{ v.block_number}}">{{v.block_number}}</a></td>
                 <td>
-                  Available
-                  <span class="not-available">Not Available </span>
-                </td>
-                <td>Authority</td>
-                <td (click)="showUnPassInfo(v.ares_authority)">
-                  {{v.status}}
-                  <span class="not-available not-available-btn">Unpassed</span>
+                  <span *ngIf="v.status === 'Pass'">{{v.status}}</span>
+                  <span class="not-available not-available-btn" *ngIf="v.status !== 'Pass'"
+                        (click)="showUnPassInfo(v.ares_authority)">Unpassed</span>
                 </td>
               </tr>
               </tbody>
@@ -72,8 +66,21 @@
 
         <div class="item authorities">
           <span>Associated Authorities:</span>
-          <input  class="input" type="text" value="{{selectedAuthorities}}"/>
+          <input  class="input" type="text" disabled value="{{selectedAuthorities}}"/>
         </div>
+
+       <div class="item item-status" *ngIf="wareHouseStatus">
+         <span>{{'DashBoard.Warehouse inspection' | translate}}</span>
+         <span class="not-available" *ngIf="wareHouseStatus === 'Not Available'">{{wareHouseStatus}}</span>
+         <span *ngIf="wareHouseStatus === 'Available'">{{wareHouseStatus}}</span>
+       </div>
+
+       <div class="item item-status" *ngIf="wareHouseStatus">
+         <span>{{'DashBoard.Node type' | translate}}</span>
+         <span>{{nodeType ? "Authority" : "fail"}}</span>
+       </div>
+
+
 
         <div class="ft">
           <a class="button is-small is-primary" (click)="consult()">Consult</a>
@@ -91,11 +98,11 @@
 
        <div *ngIf="HostKeyError === 'feedback'">
          <div class="error">
-           Result: Submit feedback to the project party
+           Result: Submit feedback to the project
          </div>
          <div class="warning">
            <div><i class="fa fa-exclamation-circle" aria-hidden="true"></i></div>
-           <div>The locally set authority is in line with the on-chain session key,and the set time exceeded 1era; please submit feedback to the project party.</div>
+           <div>The locally set authority is in line with the on-chain session key,and the set time exceeded 1era; please submit feedback to the project.</div>
          </div>
        </div>
 

@@ -25,10 +25,12 @@ export class ValidatorOnChainComponent implements OnInit, OnDestroy {
   public validator: object [] = [];
   public isShowUnPassInfo = false;
   public selectedAuthorities: string;
-  public HostKey: string;
+  public HostKey: number;
   public HostKeyError: string;
   public consultLoading = false;
   public polkaAPI: ApiPromise;
+  public wareHouseStatus = '';
+  public nodeType: boolean;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -40,7 +42,7 @@ export class ValidatorOnChainComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.showLoading = true;
-    // this.initPolkadotApi();
+    this.initPolkadotApi();
 
     this.networkSubscription = this.appConfigService.getCurrentNetwork().subscribe( network => {
       this.networkURLPrefix = this.appConfigService.getUrlPrefix();
@@ -71,21 +73,6 @@ export class ValidatorOnChainComponent implements OnInit, OnDestroy {
       });
   }
 
-  async getWarehouse(){
-    if (!this.polkaAPI) {
-      await this.initPolkadotApi();
-    }
-    await this.polkaAPI.isReadyOrError;
-
-    this.polkaAPI.query.aresOracle.localXRay(1)
-      .then(res => {
-        console.log('warehouse:', res.toHuman());
-      })
-      .catch(err => {
-        console.log('warehouse err:', err);
-      });
-  }
-
   async initPolkadotApi() {
     if (this.polkaAPI) {
       return;
@@ -110,17 +97,57 @@ export class ValidatorOnChainComponent implements OnInit, OnDestroy {
     this.isShowUnPassInfo = false;
   }
 
-  consult() {
+  async consult() {
     console.log('consult', this.HostKey);
     this.consultLoading = true;
-    setTimeout(() => {
-      this.consultLoading = false;
-    }, 3000);
+    fetch(`${this.appConfigService.getNetworkApiUrlRoot()}/oracle/ares/author/${this.HostKey}/${this.selectedAuthorities}`)
+      .then(res => res.json())
+      .then(res => {
+        console.log('consult res:', res);
+        if (res.data === 'The set time did not exceed 1 era, please wait') {
+          this.HostKeyError = 'exceed';
+        } else if (res.data === 'Submit feedback to the project') {
+          this.HostKeyError = 'feedback';
+        } else {
+          this.HostKeyError = 'notMatch';
+        }
+        this.consultLoading = false;
+      })
+      .catch(err => {
+        console.log('consult err:', err);
+        this.consultLoading = false;
+      });
+
+    // tslint:disable-next-line:no-eval
+    const key = Number(this.HostKey).toString(10);
+    await this.polkaAPI?.query.aresOracle.localXRay(key)
+      .then(res => {
+        console.log('localXRay res:', res.toHuman());
+        const url = res.toHuman()[1];
+        this.nodeType = res.toHuman()[3];
+        fetch(url + '/api/getAresAll')
+          .then(res => res.json())
+          .then(res => {
+            if (res.code === 0) {
+              this.wareHouseStatus = 'Available';
+            } else {
+              this.wareHouseStatus = 'Not Available';
+            }
+          })
+          .catch(err => {
+            console.log('warehouse err:', err);
+          });
+      })
+      .catch(err => {
+        this.wareHouseStatus = 'Not Available';
+        console.log('warehouse err:', err);
+      });
   }
 
   ngOnDestroy(): void {
     this.networkSubscription.unsubscribe();
     this.requestSubsription.unsubscribe();
     this.fragmentSubsription.unsubscribe();
+    this.polkaAPI?.disconnect();
   }
 }
