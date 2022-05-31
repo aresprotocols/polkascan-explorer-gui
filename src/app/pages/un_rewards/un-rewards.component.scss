@@ -26,6 +26,9 @@ table  {
     font-size: 14px;
     font-weight: 400;
     color: #2E4765;
+    tr td {
+      border-top: 1px solid #d4d8ea;
+    }
   }
 }
 
@@ -163,4 +166,21 @@ table  {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.extend {
+  background-color: #FFF !important;
+  td {
+    border-bottom: none !important;
+    border-top: none !important;
+  }
+}
+
+.era {
+  .fa-plus {
+    display: inline-block;
+    margin-left: 5px;
+    transform: scale(0.7);
+    cursor: pointer;
+  }
 }

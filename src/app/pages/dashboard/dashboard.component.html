@@ -321,7 +321,9 @@
                     <tbody *ngIf="chainEraRequest">
                     <tr *ngFor="let request of chainEraRequest">
                       <td>{{ request.attributes.era }}</td>
-                      <td width="22%" class="is-hidden-mobile"><span *ngIf="request.attributes.era_total_fee" rel="tooltip" title="{{ request.attributes.era_total_fee}}">{{ request.attributes.era_total_fee}}</span></td>
+                      <td width="22%" class="is-hidden-mobile">
+                        {{ request.attributes.era_total_fee}}
+                      </td>
                       <td>{{ request.attributes.era_total_requests }}</td>
                       <td>{{ request.attributes.era_total_points }}</td>
                       <td>{{ request.attributes.total_eras }}</td>

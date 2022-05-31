@@ -34,6 +34,7 @@ export class UnRewardsComponent implements OnInit, OnDestroy {
   public claimLoading = false;
   public showSuccess = false;
   public stakingMap: Map<string, string>;
+  public extendsAccount = '';
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -64,8 +65,8 @@ export class UnRewardsComponent implements OnInit, OnDestroy {
 
       const counter = interval(60000);
       this.unRewardSubsription = counter.subscribe( n => {
-        this.showLoading = false;
-        this.getUnRewards(this.currentPage);
+        // this.showLoading = false;
+        // this.getUnRewards(this.currentPage);
       });
 
     });
@@ -103,14 +104,35 @@ export class UnRewardsComponent implements OnInit, OnDestroy {
     this.http.get(url)
       .subscribe(res => {
         console.log(res);
-        this.unRewards = res['data']['data'];
+        const unRewards = res['data']['data'];
         res['data']['data'].forEach(item => {
           item.reward = (item.reward / 1000000000000).toFixed(2);
           item.controller = this.stakingMap?.get(item.account) || 'unknown';
         });
-        this.unRewards.sort((a, b) => {
+        unRewards.sort((a, b) => {
           return b.era - a.era;
         });
+
+        let temp = null;
+        const tempAccounts = [];
+        const result = [];
+        unRewards.forEach(item => {
+          if (!tempAccounts.includes(item.account)) {
+            tempAccounts.push(item.account);
+            temp = item;
+            temp.extends = [];
+            for (const unReward of unRewards) {
+              if (unReward.account === item.account && unReward.era !== item.era) {
+                temp.extends.push(unReward);
+              }
+            }
+            const t = JSON.stringify(temp);
+            result.push(JSON.parse(t));
+            temp = null;
+          }
+        })
+        this.unRewards = result;
+        console.log(result)
       });
   }
   async getAccounts(address?: string) {
@@ -196,4 +218,27 @@ export class UnRewardsComponent implements OnInit, OnDestroy {
       v.claimLoading = false;
     }
   }
+  extends = (index, account) => {
+    if (!account) {
+      return;
+    }
+    this.unRewards = this.unRewards.filter(item => item.account !== '');
+    if (this.extendsAccount === account) {
+      this.extendsAccount = '';
+      return;
+    }
+    this.extendsAccount = account;
+
+    const temp = [];
+    this.unRewards.forEach(item => {
+      temp.push(item);
+      if (item.account === account) {
+        for (const ex of item.extends) {
+          ex.account = '';
+          temp.push(ex);
+        }
+      }
+    });
+    this.unRewards = temp;
+  };
 }

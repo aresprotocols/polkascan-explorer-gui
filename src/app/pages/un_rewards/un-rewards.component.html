@@ -17,7 +17,7 @@
         <div class="card-table">
           <div class="content">
             <app-loading-box *ngIf="showLoading && (!unRewards)"></app-loading-box>
-            <table class="table is-fullwidth is-striped" *ngIf="unRewards && unRewards.length > 0">
+            <table class="table is-fullwidth is-striped" *ngIf="unRewards && unRewards.length > 0" id="rewardTable">
               <thead>
               <tr>
                 <th></th>
@@ -28,15 +28,20 @@
               </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let reward of unRewards;">
-                <td width="5%"></td>
-                <td>{{ reward.account }}</td>
-                <td>{{ reward.era }}</td>
-                <td>{{ reward.reward }}</td>
-                <td>
-                  <a class="button is-small is-primary" *ngIf="accounts?.includes(reward.controller)" (click)="getAccounts(reward.controller)">{{ 'DashBoard.Click to claim' | translate }}</a>
-                </td>
-              </tr>
+                <tr *ngFor="let reward of unRewards; let i  = index" [ngClass]="reward.account === '' ? 'extend' : ''">
+                  <td width="5%" class="has-text-centered"></td>
+                  <td>{{ reward.account }}</td>
+                  <td class="era">
+                    {{ reward.era }}
+                    <i class="fa fa-plus" aria-hidden="true" *ngIf="reward.account && reward.extends.length > 0"
+                       (click)="extends(i, reward.account)">
+                    </i>
+                  </td>
+                  <td>{{ reward.reward }}</td>
+                  <td>
+                    <a class="button is-small is-primary" *ngIf="accounts?.includes(reward.controller)" (click)="getAccounts(reward.controller)">{{ 'DashBoard.Click to claim' | translate }}</a>
+                  </td>
+                </tr>
               </tbody>
             </table>
             <div class="no-items" *ngIf="unRewards && unRewards.length == 0">{{ 'Block-List.No items' | translate }}</div>
