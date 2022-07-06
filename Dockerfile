@@ -5,8 +5,19 @@ FROM node:14-alpine as builder
 COPY package.json yarn.lock ./
 
 ## Storing node modules on a separate layer will prevent unnecessary npm installs at each build
-RUN apk add --no-cache python2 g++ make git && \
-    yarn install && mkdir /ng-app && mv ./node_modules ./ng-app
+#RUN apk add --no-cache python2 g++ make git && \
+#    yarn install && mkdir /ng-app && mv ./node_modules ./ng-app
+
+
+RUN apk update && apk upgrade
+RUN apk --no-cache --virtual build-dependencies add \
+        python3 \
+        make \
+        git \
+        g++ \
+&& yarn install \
+&& apk del build-dependencies \
+&& mkdir /ng-app && mv ./node_modules ./ng-app
 
 WORKDIR /ng-app
 
