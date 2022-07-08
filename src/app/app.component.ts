@@ -21,15 +21,15 @@
  */
 
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, NavigationEnd, ParamMap, Router} from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
 import {NetworkService} from './services/network.service';
 import {DocumentCollection} from 'ngx-jsonapi';
 import {Network} from './classes/network.class';
 import {AppConfigService} from './services/app-config.service';
-import {delay, switchMap} from 'rxjs/operators';
+import {delay} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
-import { Angulartics2GoogleGlobalSiteTag } from 'angulartics2';
+import {Angulartics2GoogleGlobalSiteTag} from 'angulartics2';
 import {environment} from '../environments/environment';
 import {HttpClient} from '@angular/common/http';
 
@@ -84,6 +84,36 @@ export class AppComponent implements OnInit, OnDestroy {
       this.networkService.all({remotefilter: {visible: true}}).subscribe(networks => {
         this.networks = networks;
       });
+    } else {
+      const networks: any = {
+        data: [
+          {
+            attributes: {
+              name: 'Odyssey',
+              network_id: 'odyssey',
+              network_type: 'pre',
+              chain_type: 'relay',
+              token_symbol: 'ARES',
+              token_decimals: 12,
+              color_code: '1096f1',
+              api_url_root: 'https://aresscan.aresprotocol.io/odyssey/api/v1',
+            }
+          },
+          {
+            attributes: {
+              name: 'Gladios',
+              network_id: 'gladios',
+              network_type: 'pre',
+              chain_type: 'relay',
+              token_symbol: 'ARES',
+              token_decimals: 12,
+              color_code: '1096f1',
+              api_url_root: 'https://aresscan.aresprotocol.io/gladios/api/v1'
+            }
+          }
+        ]
+      };
+      this.networks = networks;
     }
 
     this.showLegalMessage = !this.appConfigService.getAgreeWithTerms();
@@ -92,6 +122,8 @@ export class AppComponent implements OnInit, OnDestroy {
       if (network) {
         this.currentNetwork = network;
         this.networkURLPrefix = this.appConfigService.getUrlPrefix();
+        console.log('networkURLPrefix', this.networkURLPrefix);
+        console.log('network', network);
       }
     });
     this.getAresData();

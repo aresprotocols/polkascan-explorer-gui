@@ -130,14 +130,14 @@ services:
       context: https://github.com/aresprotocols/polkascan-explorer-gui.git
       dockerfile: Dockerfile
       args:
-        NETWORK_NAME: Ares
-        NETWORK_ID: ares
+        NETWORK_NAME: Odyssey
+        NETWORK_ID: odyssey
         NETWORK_TYPE: pre
         CHAIN_TYPE: relay
         NETWORK_TOKEN_SYMBOL: ares
         NETWORK_TOKEN_DECIMALS: 12
         NETWORK_COLOR_CODE: d32e79
-        API_URL: http://localhost:8080/api/v1
+        API_URL: http://localhost:8080/odyssey/api/v1
         ENV_CONFIG: docker-pre
         NGINX_CONF: nginx/polkascan-prod.conf
     ports:
