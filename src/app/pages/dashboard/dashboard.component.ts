@@ -115,6 +115,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
       // this.getChainEraRequest();
       this.getChainReward();
       this.getValidator();
+      this.getAresData();
+      this.getChainData();
 
       // this.totalTransactionsDaychart$ = this.analyticsChartService.get('utcday-extrinsics_signed-sum-line-14');
       // this.cumulativeAccountsDayChart$ = this.analyticsChartService.get('utcday-accounts_new-sum-line-14');
@@ -127,9 +129,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.getBlocks();
       this.networkstats$ = this.networkstatsService.get('latest');
     });
-
-    this.getAresData();
-    this.getChainData();
 
     window.addEventListener('scroll', (event) => {
       let scrollTop = 0;
@@ -161,6 +160,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
 
   getChainData(): void {
+    console.log("getChainData", this.networkURLPrefix, this.appConfigService);
+    this.chainData = [];
     const url = this.appConfigService.getNetworkApiUrlRoot() + "/chain";
     this.http.get(url)
       .subscribe(res => {
@@ -189,6 +190,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   getChainAsset(): void {
+    this.chainAssets = [];
     const url = this.appConfigService.getNetworkApiUrlRoot() + "/oracle/symbols";
     this.http.get(url)
       .subscribe(res => {
@@ -200,6 +202,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   getChainRequest(): void {
+    this.chainRequest = [];
     const url = this.appConfigService.getNetworkApiUrlRoot() + "/oracle/requests";
     this.http.get(url)
       .subscribe(res => {
@@ -219,6 +222,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   getChainEraRequest(): void {
     this.isLoadingEraRequest = true;
+    this.chainEraRequest = [];
     const url = this.appConfigService.getNetworkApiUrlRoot() + "/oracle/era_requests";
     this.http.get(url)
       .subscribe(res => {
@@ -230,6 +234,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   getChainReward(): void {
+    this.chainReward = [];
     const url = this.appConfigService.getNetworkApiUrlRoot() + "/oracle/reward";
     this.http.get(url)
       .subscribe(res => {
@@ -244,6 +249,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   getValidator(): void {
+    this.validator = [];
     const url = this.appConfigService.getNetworkApiUrlRoot() + "/oracle/pre_check_tasks";
     this.http.get(url)
       .subscribe(res => {
