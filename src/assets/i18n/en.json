@@ -483,7 +483,8 @@
 		"item_Types": "Types",
 		"item_Upgrade_history": "Upgrade history",
 		"item_Validator Accounts": "Validators",
-    "Faucet": "Faucet"
+    "Faucet": "Faucet",
+    "Bridge": "Bridge"
 	},
 	"Network-overview": {
 		"Explore": "Explore",

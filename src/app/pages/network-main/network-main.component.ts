@@ -65,28 +65,43 @@ export class NetworkMainComponent implements OnInit, OnDestroy {
     });
 
     // Check if environment is multi- or single network
-    if (environment.jsonApiDiscoveryRootUrl) {
-
-      this.networkService.all().subscribe(networks => {
-
-        if (networks.is_loading === false) {
-
-          let networkFound = false;
-
-          for (const network of networks.data) {
-
-            if (this.route.snapshot.paramMap.get('network') === network.attributes.network_id) {
-              this.appConfigService.setNetwork(network);
-              networkFound = true;
+    const pathname = window.location.pathname;
+    if (pathname !== '/' && pathname !== '') {
+      const networks: any = {
+        data: [
+          {
+            attributes: {
+              name: 'Odyssey',
+              network_id: 'odyssey',
+              network_type: 'pre',
+              chain_type: 'relay',
+              token_symbol: 'ARES',
+              token_decimals: 12,
+              color_code: '1096f1',
+              api_url_root: 'https://aresscan.aresprotocol.io/odyssey/api/v1',
+            }
+          },
+          {
+            attributes: {
+              name: 'Gladios',
+              network_id: 'gladios',
+              network_type: 'pre',
+              chain_type: 'relay',
+              token_symbol: 'ARES',
+              token_decimals: 12,
+              color_code: '1096f1',
+              api_url_root: 'https://aresscan.aresprotocol.io/gladios/api/v1'
             }
           }
-
-          if (!networkFound) {
-            // Redirect to overview
-            this.router.navigate(['/']);
-          }
-        }
-      });
+        ]
+      };
+      if (pathname.includes('/odyssey')) {
+        console.log('switch to odyssey');
+        this.appConfigService.setNetwork(networks.data[0]);
+      } else if (pathname.includes('/gladios')) {
+        this.appConfigService.setNetwork(networks.data[1]);
+        console.log('switch to gladios');
+      }
     } else {
 
       this.singleNetworkVersion = true;
