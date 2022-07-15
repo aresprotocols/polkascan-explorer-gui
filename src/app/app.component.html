@@ -157,8 +157,11 @@
                     </ul>
                   </div>
                 </div>
-                <a class="navbar-item" href="https://t.me/AresProtocolBot" target="_blank">
+                <a class="navbar-item" href="https://t.me/AresProtocolBot" target="_blank" *ngIf='currentNetwork && currentNetwork.attributes.name === "Gladios"'>
                   {{ 'NavBar.Faucet' | translate }}
+                </a>
+                <a class="navbar-item" href="https://trojan.aresprotocol.io/bridge/odyssey/eth" target="_blank" *ngIf='currentNetwork && currentNetwork.attributes.name === "Odyssey"'>
+                  {{ 'NavBar.Bridge' | translate }}
                 </a>
             </div>
           </div>

@@ -118,16 +118,17 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.showLegalMessage = !this.appConfigService.getAgreeWithTerms();
 
-    this.networkSubscription = this.appConfigService.getCurrentNetwork().pipe(delay(0)).subscribe( network => {
-      if (network) {
-        this.currentNetwork = network;
-        this.networkURLPrefix = this.appConfigService.getUrlPrefix();
-        console.log('networkURLPrefix', this.networkURLPrefix);
-        console.log('network', network);
-      }
-    });
-    this.getAresData();
-  }
+    this.networkSubscription = this.appConfigService.getCurrentNetwork().pipe(delay(1000)).subscribe(network => {
+        if (network) {
+          this.currentNetwork = network;
+          this.networkURLPrefix = this.appConfigService.getUrlPrefix();
+          console.log('networkURLPrefix', this.networkURLPrefix);
+          console.log('network', network);
+        }
+      });
+
+      this.getAresData();
+    }
 
   agreeTerms() {
     this.appConfigService.agreeWithTerms();
