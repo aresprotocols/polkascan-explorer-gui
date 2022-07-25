@@ -39,12 +39,12 @@
                 <td class="is-hidden-mobile">{{ asset.interval }}</td>
                 <td class="is-hidden-mobile"><div class="hash-format">{{ asset.precision }}</div></td>
                 <td width="35%">
-                  <div class="result-item-key" (click)="showAuthInfo(asset.block_id + asset.created_at)">
+                  <div class="result-item-key" (click)="showAuthInfo(asset.symbol + asset.block_id + asset.created_at)">
                     <span class="symbol-title">${{ asset.price }}</span>
                     <i class="fa fa-caret-down fa-2x" *ngIf="asset.block_id + asset.created_at != showAuthInfoKey"></i>
                     <i class="fa fa-caret-up fa-2x" *ngIf="asset.block_id + asset.created_at == showAuthInfoKey"></i>
                   </div>
-                  <div class="symbol-info" *ngIf="asset.block_id + asset.created_at == showAuthInfoKey">
+                  <div class="symbol-info" *ngIf="asset.symbol + asset.block_id + asset.created_at == showAuthInfoKey">
                     <div *ngFor="let item of asset.auth">
                       <div class="auth">{{item}}</div>
                     </div>
