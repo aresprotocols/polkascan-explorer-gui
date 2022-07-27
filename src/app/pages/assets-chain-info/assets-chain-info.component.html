@@ -23,6 +23,7 @@
                 <th>{{ 'DashBoard.Trading pairs' | translate }}</th>
                 <th class="is-hidden-mobile">{{ 'DashBoard.Precision' | translate }}</th>
                 <th>{{ 'DashBoard.On-chain price' | translate }}</th>
+                <th>{{ 'DashBoard.Block' | translate }}</th>
                 <th>{{ 'DashBoard.Timestamp' | translate }}</th>
               </tr>
               </thead>
@@ -51,6 +52,12 @@
                       </div>
                     </div>
                   </div>
+                </td>
+                <td>
+
+                  <a routerLink="{{ networkURLPrefix }}/block/{{ asset.block  }}">
+                    {{ asset.block }}
+                  </a>
                 </td>
                 <td width="20%">
                   {{ asset.time }}
