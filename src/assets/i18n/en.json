@@ -320,7 +320,8 @@
     "Prepaid": "Prepaid",
     "Final Payment": "Final Payment",
     "Warehouse inspection": "Warehouse inspection",
-    "Node type": "Node type"
+    "Node type": "Node type",
+    "Block": "Block"
 	},
 	"Democracy-preimage-detail": {
 		"Author": "Author",

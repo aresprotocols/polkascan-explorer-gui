@@ -483,7 +483,8 @@
 		"item_Upgrade_history": "升级历史记录",
 		"item_Validator Accounts": "验证人",
     "Faucet": "水龙头",
-    "Bridge": "桥"
+    "Bridge": "桥",
+    "Block": "区块高度"
 	},
 	"Network-overview": {
 		"Explore": "探索",

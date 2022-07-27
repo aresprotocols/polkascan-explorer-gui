@@ -123,6 +123,7 @@ import { AddressComponent } from './components/address/address.component';
 import {MarkdownModule} from 'ngx-markdown';
 import { ExtrinsicParamDownloadComponent } from './pages/extrinsic-param-download/extrinsic-param-download.component';
 import {AssetsOnChainComponent} from './pages/assets-on-chain/assets-on-chain.component';
+import {AssetsChainInfoComponent} from './pages/assets-chain-info/assets-chain-info.component';
 import {RequestOnChainComponent} from './pages/request-on-chain/request-on-chain.component';
 import {UnRewardsComponent} from './pages/un_rewards/un-rewards.component';
 import {EraRewardsComponent} from './pages/era_rewards/era-rewards.component';
@@ -214,6 +215,7 @@ export class MyClock extends TimeagoClock {
     AddressComponent,
     ExtrinsicParamDownloadComponent,
     AssetsOnChainComponent,
+    AssetsChainInfoComponent,
     RequestOnChainComponent,
     UnRewardsComponent,
     EraRewardsComponent,
