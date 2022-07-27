@@ -85,6 +85,7 @@ import { RequestOnChainComponent } from './pages/request-on-chain/request-on-cha
 import {UnRewardsComponent} from './pages/un_rewards/un-rewards.component';
 import {EraRewardsComponent} from './pages/era_rewards/era-rewards.component';
 import {ValidatorOnChainComponent} from './pages/validator-on-chain/validator-on-chain.component';
+import {AssetsChainInfoComponent} from './pages/assets-chain-info/assets-chain-info.component';
 
 const routes: Routes = [
   { path: '', component: NetworkOverviewComponent, },
@@ -180,6 +181,7 @@ const routes: Routes = [
       { path: 'analytics/charts', component: AnalyticsChartsComponent },
       { path: 'analytics/chart/:id', component: AnalyticsChartDetailComponent },
       { path: 'onchain/assets/:num', component: AssetsOnChainComponent },
+      { path: 'onchain/assets/info/:symbol', component: AssetsChainInfoComponent },
       { path: 'onchain/request/:num', component: RequestOnChainComponent },
       { path: 'un-rewards/:num', component: UnRewardsComponent },
       { path: 'era-rewards/:num', component: EraRewardsComponent },

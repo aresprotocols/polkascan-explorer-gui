@@ -1,0 +1,69 @@
+<div class="columns">
+  <div class="column is-12">
+    <app-polkascan-header></app-polkascan-header>
+    <section>
+      <div class="card ">
+        <header class="card-header">
+          <a [routerLink]="" fragment="list" class="card-header-icon" aria-label="more options">
+              <span class="icon">
+                <i class="fa fa-database fa-2x" aria-hidden="true"></i>
+              </span>
+          </a>
+          <p class="card-header-title">
+            {{ 'DashBoard.Data of on-chain assets' | translate }}
+          </p>
+        </header>
+        <div class="card-table">
+          <div class="content">
+            <app-loading-box *ngIf="showLoading && (!assetInfo)"></app-loading-box>
+            <table class="table asset-table is-fullwidth is-striped" *ngIf="assetInfo && assetInfo.length > 0">
+              <thead>
+              <tr>
+                <th></th>
+                <th>{{ 'DashBoard.Trading pairs' | translate }}</th>
+                <th class="is-hidden-mobile">{{ 'DashBoard.Precision' | translate }}</th>
+                <th>{{ 'DashBoard.On-chain price' | translate }}</th>
+                <th>{{ 'DashBoard.Timestamp' | translate }}</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let asset of assetInfo">
+                <td width="2%"></td>
+                <td width="10%">
+                  {{ asset.symbol }}
+                </td>
+                <td class="is-hidden-mobile"><div class="hash-format">{{ asset.precision }}</div></td>
+                <td width="35%">
+                  <div class="result-item-key" (click)="showAuthInfo(asset.symbol + asset.block + asset.time)">
+                    <span class="symbol-title">${{ asset.price }}</span>
+                    <i class="fa fa-caret-down fa-2x" *ngIf="asset.block + asset.time != showAuthInfoKey"></i>
+                    <i class="fa fa-caret-up fa-2x" *ngIf="asset.block + asset.time == showAuthInfoKey"></i>
+                  </div>
+                  <div class="symbol-info" *ngIf="asset.symbol + asset.block + asset.time == showAuthInfoKey">
+                    <div *ngFor="let item of asset.auth">
+                      <div class="auth">
+                        <span>{{item[0]}}</span>
+                        <span>
+                          <a routerLink="{{ networkURLPrefix }}/block/{{ item[1] }}">
+                            {{item[1]}}
+                          </a>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td width="20%">
+                  {{ asset.time }}
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <footer class="card-footer">
+            <a routerLink="." [queryParams]="{ page: currentPage + 1}" class="card-footer-item">{{ 'Block-List.View next' | translate }}</a>
+          </footer>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

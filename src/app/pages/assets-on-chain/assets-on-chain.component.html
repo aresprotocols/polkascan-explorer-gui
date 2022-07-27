@@ -26,6 +26,7 @@
                   <th class="is-hidden-mobile">{{ 'DashBoard.Precision' | translate }}</th>
                   <th>{{ 'DashBoard.On-chain price' | translate }}</th>
                   <th>{{ 'DashBoard.Timestamp' | translate }}</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -46,12 +47,24 @@
                   </div>
                   <div class="symbol-info" *ngIf="asset.symbol + asset.block_id + asset.created_at == showAuthInfoKey">
                     <div *ngFor="let item of asset.auth">
-                      <div class="auth">{{item}}</div>
+                      <div class="auth">
+                        <span>{{item[0]}}</span>
+                        <span>
+                          <a routerLink="{{ networkURLPrefix }}/block/{{ item[1] }}">
+                            {{item[1]}}
+                          </a>
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </td>
                 <td width="20%">
                   {{ asset.created_at }}
+                </td>
+                <td width="5%">
+                  <a class="button is-small is-primary" routerLink="{{ networkURLPrefix }}/onchain/assets/info/{{asset.symbol}}">
+                    {{ 'Block-List.Details' | translate }}
+                  </a>
                 </td>
               </tr>
               </tbody>
