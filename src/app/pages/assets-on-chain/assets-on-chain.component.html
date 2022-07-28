@@ -25,6 +25,7 @@
                   <th class="is-hidden-mobile">{{ 'DashBoard.Frequency (Seconds)' | translate }}</th>
                   <th class="is-hidden-mobile">{{ 'DashBoard.Precision' | translate }}</th>
                   <th>{{ 'DashBoard.On-chain price' | translate }}</th>
+                  <th>{{ 'DashBoard.Block' | translate }}</th>
                   <th>{{ 'DashBoard.Timestamp' | translate }}</th>
                   <th></th>
                 </tr>
@@ -57,6 +58,11 @@
                       </div>
                     </div>
                   </div>
+                </td>
+                <td>
+                  <a routerLink="{{ networkURLPrefix }}/block/{{ asset.block_id  }}">
+                    {{ asset.block_id }}
+                  </a>
                 </td>
                 <td width="20%">
                   {{ asset.created_at }}
