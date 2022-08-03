@@ -288,6 +288,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.showSymbolInfoKey = id;
     }
   }
+  stakingRate(chainData: any) {
+    if (chainData) {
+      return (chainData.total_stake / chainData.total_issuance * 100).toFixed(1) ;
+    }
+    return 0;
+  }
 
   ngOnDestroy() {
     // Will clear when component is destroyed e.g. route is navigated away from.

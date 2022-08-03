@@ -42,4 +42,8 @@ export class StructComponent implements OnInit {
   checkType(obj) {
     return typeof obj;
   }
+
+  public formatBalance(balance: number) {
+    return balance / Math.pow(10, this.networkTokenDecimals);
+  }
 }

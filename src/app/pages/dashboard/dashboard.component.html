@@ -51,7 +51,7 @@
                   <div class="item-title">{{"chainData.StakedValue" | translate}}</div>
                   <div class="numbers">
                     {{chainData?.total_stake ? ((chainData.total_stake | ShiftedByLeft12 ) / 1000000).toFixed(2) : "0"}}M
-                    (45.5%)
+                    ({{stakingRate(chainData)}} %)
                   </div>
                 </div>
               </div>
@@ -244,7 +244,7 @@
               </div>
           </div>
 
-          <div class="column is-6 last-blocks">
+          <div class="column is-6 last-transfers">
             <div class="card dashboard-card">
               <a routerLink="{{ networkURLPrefix }}/onchain/validator">
                 <header class="card-header">
@@ -337,7 +337,7 @@
             </div>
           </div>
 
-          <div class="column is-6 last-blocks">
+          <div class="column is-6 last-transfers">
             <div class="card dashboard-card">
               <a routerLink="{{ networkURLPrefix }}/un-rewards/{{chainData?.total_price_requests}}">
                 <header class="card-header">
@@ -381,8 +381,8 @@
           </div>
         </section>
 
-        <section class="columns">
-          <div class="column last-blocks">
+        <section>
+          <div class="last-blocks">
             <div class="card dashboard-card">
               <a routerLink="{{ networkURLPrefix }}/onchain/request/{{chainData?.total_price_requests}}">
                 <header class="card-header">
