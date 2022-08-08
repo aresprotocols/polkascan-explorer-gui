@@ -34,7 +34,7 @@
                   {{ asset.symbol }}
                 </td>
                 <td class="is-hidden-mobile"><div class="hash-format">{{ asset.precision }}</div></td>
-                <td width="35%">
+                <td width="40%">
                   <div class="result-item-key" (click)="showAuthInfo(asset.symbol + asset.block + asset.time)">
                     <span class="symbol-title">${{ asset.price }}</span>
                     <i class="fa fa-caret-down fa-2x" *ngIf="asset.block + asset.time != showAuthInfoKey"></i>
@@ -54,7 +54,6 @@
                   </div>
                 </td>
                 <td>
-
                   <a routerLink="{{ networkURLPrefix }}/block/{{ asset.block  }}">
                     {{ asset.block }}
                   </a>

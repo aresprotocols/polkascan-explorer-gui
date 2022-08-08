@@ -52,7 +52,7 @@
 }
 
 .auth {
-  display: block;
+  //display: block;
   width: 164px;
   height: 18px;
   font-size: 14px;
@@ -61,7 +61,17 @@
   font-weight: 400;
   color: #2E4765;
   display: flex;
-  column-gap: 10px;
+  column-gap: 15px;
+  justify-content: space-between;
+  width: 100%;
+  span:first-child {
+    padding-right: 10px;
+  }
+  span:last-child {
+    text-align: right;
+    display: block;
+    padding: 0 8px;
+  }
 }
 
 .symbol-info {
