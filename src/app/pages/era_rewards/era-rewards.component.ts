@@ -2,8 +2,6 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {interval, Subscription} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import {AppConfigService} from '../../services/app-config.service';
-import {DocumentCollection} from 'ngx-jsonapi';
-import {Block} from '../../classes/block.class';
 import {HttpClient} from '@angular/common/http';
 
 
@@ -23,7 +21,6 @@ export class EraRewardsComponent implements OnInit, OnDestroy {
   private eraRequestSubsription: Subscription;
   public networkURLPrefix: string;
   public reward: object[];
-  public blocksNum: string;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -35,13 +32,6 @@ export class EraRewardsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.showLoading = true;
-
-    this.activatedRoute.paramMap.pipe().subscribe(params => {
-      if (params.get("num")) {
-        this.blocksNum = params.get("num");
-      }
-    });
-
     this.networkSubscription = this.appConfigService.getCurrentNetwork().subscribe( network => {
       this.networkURLPrefix = this.appConfigService.getUrlPrefix();
 
@@ -67,6 +57,8 @@ export class EraRewardsComponent implements OnInit, OnDestroy {
         this.reward = res['data'];
         res['data'].forEach(item => {
           item.attributes.era_total_fee = item.attributes.era_total_fee / 1000000000000;
+          item.attributes.sign_fee = item.attributes.era_total_points === 0 ? 0 :
+            item.attributes.era_total_fee / item.attributes.era_total_points;
         });
       });
   }

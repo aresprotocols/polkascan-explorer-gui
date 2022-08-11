@@ -11,7 +11,6 @@
           </a>
           <p class="card-header-title">
             {{ 'DashBoard.Rewards for era' | translate }}
-            <span class="card-header-tips" *ngIf="blocksNum">{{blocksNum}} blocks</span>
           </p>
         </header>
         <div class="card-table">
@@ -42,7 +41,7 @@
                 </td>
                 <td class="is-hidden-mobile"><div class="hash-format">{{ data.attributes.era_total_requests }}</div></td>
                 <td>{{ data.attributes.era_total_points }}</td>
-                <td>{{ data.attributes.total_eras }}</td>
+                <td>{{ data.attributes.sign_fee }}</td>
                 <!--<td width="5%"><a class="button is-small is-primary" routerLink="{{ networkURLPrefix }}/block/{{ block.id }}">{{ 'Block-List.Details' | translate }}</a></td>-->
               </tr>
               </tbody>

@@ -73,6 +73,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public chainRequest: ChainRequest[] = [];
   public chainEraRequest: {[key: string]: any}[] = [];
   public chainReward: {[key: string]: any}[] = [];
+  public chainTotalReward: number;
   isLoadingEraRequest = false;
   isLoadingChart = false;
   public validator: {[key: string]: any}[] = [];
@@ -229,6 +230,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.chainEraRequest = res['data'];
         res['data'].forEach(item => {
           item.attributes.era_total_fee = item.attributes.era_total_fee / 1000000000000;
+          item.attributes.sign_fee = item.attributes.era_total_points === 0 ? 0 :
+            item.attributes.era_total_fee / item.attributes.era_total_points;
         });
       });
   }
@@ -245,6 +248,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.chainReward.sort((a, b) => {
           return b.era - a.era;
         });
+        this.chainTotalReward = res['data'].total_reward / 1000000000000;
       });
   }
 

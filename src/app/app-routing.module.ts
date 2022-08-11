@@ -184,7 +184,7 @@ const routes: Routes = [
       { path: 'onchain/assets/info/:symbol', component: AssetsChainInfoComponent },
       { path: 'onchain/request/:num', component: RequestOnChainComponent },
       { path: 'un-rewards/:num', component: UnRewardsComponent },
-      { path: 'era-rewards/:num', component: EraRewardsComponent },
+      { path: 'era-rewards', component: EraRewardsComponent },
       { path: 'onchain/validator', component: ValidatorOnChainComponent },
     ]},
   { path: 'settings', component: SettingsComponent},
