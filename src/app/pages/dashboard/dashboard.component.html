@@ -291,14 +291,13 @@
         <section class="columns">
           <div class="column is-6 last-blocks">
             <div class="card dashboard-card">
-              <a routerLink="{{ networkURLPrefix }}/era-rewards/{{chainData?.total_price_requests}}">
+              <a routerLink="{{ networkURLPrefix }}/era-rewards">
                 <header class="card-header">
                   <a [routerLink]="" fragment="last-blocks" class="card-header-icon" aria-label="more options">
                     <i class="fa fa-database"></i>
                   </a>
                   <p class="card-header-title">
                     {{ 'DashBoard.Rewards for era' | translate }}
-                    <span class="card-header-tips">{{chainData?.total_price_requests}} blocks</span>
                   </p>
 
                   <a href="javascript:void(0)" class="card-header-right">
@@ -326,7 +325,7 @@
                       </td>
                       <td>{{ request.attributes.era_total_requests }}</td>
                       <td>{{ request.attributes.era_total_points }}</td>
-                      <td>{{ request.attributes.total_eras }}</td>
+                      <td>{{ request.attributes.sign_fee }}</td>
                     </tr>
                     </tbody>
                   </table>
@@ -339,14 +338,14 @@
 
           <div class="column is-6 last-transfers">
             <div class="card dashboard-card">
-              <a routerLink="{{ networkURLPrefix }}/un-rewards/{{chainData?.total_price_requests}}">
+              <a routerLink="{{ networkURLPrefix }}/un-rewards/{{chainTotalReward}}">
                 <header class="card-header">
                   <a [routerLink]="" fragment="last-blocks" class="card-header-icon" aria-label="more options">
                     <i class="fa fa-database"></i>
                   </a>
                   <p class="card-header-title">
                     {{ 'DashBoard.Unclaimed Rewards' | translate }}
-                    <span class="card-header-tips">{{chainData?.total_price_requests}} ARES</span>
+                    <span class="card-header-tips">{{chainTotalReward}} ARES</span>
                   </p>
 
                   <a href="javascript:void(0)" class="card-header-right">
