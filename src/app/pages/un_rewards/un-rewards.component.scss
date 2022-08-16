@@ -15,6 +15,7 @@
 
 table  {
   color: #2E4765;
+  overflow: auto;
   thead {
     tr th {
       font-size: 15px;
@@ -111,7 +112,7 @@ table  {
 }
 
 
-.only-your, .error, .success {
+.only-your, .error, .success, .no-more-data {
   position: fixed;
   top: 0;
   right: 0;
@@ -144,13 +145,21 @@ table  {
   }
 }
 
-.success {
+.success, .no-more-data {
   .content-desc {
     display: flex;
     flex-direction: column;
     justify-content: center;
     .fa {
       color: #52c41a;
+    }
+  }
+}
+
+.no-more-data {
+  .content-desc {
+    .fa {
+      color: #f59923;
     }
   }
 }

@@ -25,6 +25,7 @@ export class AssetsOnChainComponent implements OnInit, OnDestroy {
   public chainAssets: ChainAssets[] = [];
   public tradePairsNum: string;
   public showAuthInfoKey: string;
+  public showNoMoreData = false;
 
 
   constructor(
@@ -72,6 +73,9 @@ export class AssetsOnChainComponent implements OnInit, OnDestroy {
           item.price = item.price / 10000;
         });
         this.chainAssets = res['data'];
+        if (this.chainAssets.length === 0) {
+          this.showNoMoreData = true;
+        }
       });
   }
 

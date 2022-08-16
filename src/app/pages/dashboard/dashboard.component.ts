@@ -231,7 +231,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         res['data'].forEach(item => {
           item.attributes.era_total_fee = item.attributes.era_total_fee / 1000000000000;
           item.attributes.sign_fee = item.attributes.era_total_points === 0 ? 0 :
-            item.attributes.era_total_fee / item.attributes.era_total_points;
+            (item.attributes.era_total_fee / item.attributes.era_total_points).toFixed(3);
         });
       });
   }

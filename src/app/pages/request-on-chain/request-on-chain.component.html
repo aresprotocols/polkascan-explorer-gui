@@ -91,4 +91,15 @@
       </div>
     </section>
   </div>
+  <div class="no-more-data" *ngIf="showNoMoreData">
+    <div class="content">
+      <div class="content-header">
+        <i class="fa fa-times" aria-hidden="true" (click)="showNoMoreData = false"></i>
+      </div>
+      <div class="content-desc">
+        <i class="fa fa-exclamation-circle fa-3x"></i>
+        no more data
+      </div>
+    </div>
+  </div>
 </div>

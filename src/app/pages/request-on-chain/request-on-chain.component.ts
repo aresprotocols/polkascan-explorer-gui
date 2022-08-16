@@ -24,6 +24,7 @@ export class RequestOnChainComponent implements OnInit, OnDestroy {
   public chainRequest: ChainRequest [];
   public showSymbolInfoKey: string;
   public requestsNum: string;
+  public showNoMoreData = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -63,7 +64,7 @@ export class RequestOnChainComponent implements OnInit, OnDestroy {
 
   getOnChainRequest(page: number) {
     console.log('get on chain asset page:', page);
-    const url = this.appConfigService.getNetworkApiUrlRoot() + "/oracle/requests?"  + 'page[number]=' + page + '&page[size]=25';
+    const url = this.appConfigService.getNetworkApiUrlRoot() + "/oracle/requests?"  + 'page=' + page + '&pagesize=25';
     this.http.get(url)
       .subscribe(res => {
         this.chainRequest = res['data'];
@@ -77,6 +78,9 @@ export class RequestOnChainComponent implements OnInit, OnDestroy {
             item.attributes.requester = "-";
           }
         });
+        if (this.chainRequest.length === 0) {
+          this.showNoMoreData = true;
+        }
       });
   }
 
