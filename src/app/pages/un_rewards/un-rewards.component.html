@@ -2,7 +2,7 @@
   <div class="column is-12">
     <app-polkascan-header></app-polkascan-header>
     <section>
-      <div class="card ">
+      <div class="card">
         <header class="card-header">
           <a [routerLink]="" fragment="list" class="card-header-icon" aria-label="more options">
               <span class="icon">
@@ -108,6 +108,18 @@
       <div class="content-desc">
         <i class="fa fa-check-circle fa-3x"></i>
         Congratulation! You have successfully withdrawn your rewards
+      </div>
+    </div>
+  </div>
+
+  <div class="no-more-data" *ngIf="showNoMoreData">
+    <div class="content">
+      <div class="content-header">
+        <i class="fa fa-times" aria-hidden="true" (click)="showNoMoreData = false"></i>
+      </div>
+      <div class="content-desc">
+        <i class="fa fa-exclamation-circle fa-3x"></i>
+        no more data
       </div>
     </div>
   </div>

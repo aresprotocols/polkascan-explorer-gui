@@ -28,6 +28,8 @@ export class ValidatorOnChainComponent implements OnInit, OnDestroy {
   public HostKey: number;
   public HostKeyError: string;
   public consultLoading = false;
+  public showNoMoreData = false;
+  public isLoading = false;
   public polkaAPI: ApiPromise;
   public wareHouseStatus = '';
   public nodeType: boolean;
@@ -66,10 +68,16 @@ export class ValidatorOnChainComponent implements OnInit, OnDestroy {
   async getValidator(page: number) {
     console.log('get on chain validator page:', page);
     // await this.getWarehouse();
+    this.isLoading = true;
+    this.validator = [];
     const url = this.appConfigService.getNetworkApiUrlRoot() + "/oracle/pre_check_tasks?"  + 'page[number]=' + page + '&page[size]=25';
     this.http.get(url)
       .subscribe(res => {
         this.validator = res['data'];
+        this.isLoading = false;
+        if (this.validator.length === 0) {
+          this.showNoMoreData = true;
+        }
       });
   }
 

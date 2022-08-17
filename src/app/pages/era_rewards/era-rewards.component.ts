@@ -20,6 +20,7 @@ export class EraRewardsComponent implements OnInit, OnDestroy {
   private networkSubscription: Subscription;
   private eraRequestSubsription: Subscription;
   public networkURLPrefix: string;
+  public showNoMoreData = false;
   public reward: object[];
 
   constructor(
@@ -58,8 +59,11 @@ export class EraRewardsComponent implements OnInit, OnDestroy {
         res['data'].forEach(item => {
           item.attributes.era_total_fee = item.attributes.era_total_fee / 1000000000000;
           item.attributes.sign_fee = item.attributes.era_total_points === 0 ? 0 :
-            item.attributes.era_total_fee / item.attributes.era_total_points;
+            (item.attributes.era_total_fee / item.attributes.era_total_points).toFixed(3);
         });
+        if (this.reward.length === 0) {
+          this.showNoMoreData = true;
+        }
       });
   }
 

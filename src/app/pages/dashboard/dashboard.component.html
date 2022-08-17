@@ -321,11 +321,11 @@
                     <tr *ngFor="let request of chainEraRequest">
                       <td>{{ request.attributes.era }}</td>
                       <td width="22%" class="is-hidden-mobile">
-                        {{ request.attributes.era_total_fee}}
+                        {{ request.attributes.era_total_fee === 0 ? "-" : request.attributes.era_total_fee}}
                       </td>
-                      <td>{{ request.attributes.era_total_requests }}</td>
-                      <td>{{ request.attributes.era_total_points }}</td>
-                      <td>{{ request.attributes.sign_fee }}</td>
+                      <td>{{ request.attributes.era_total_requests === 0 ? "-" : request.attributes.era_total_requests}}</td>
+                      <td>{{ request.attributes.era_total_points === 0 ? "-" :  request.attributes.era_total_points}}</td>
+                      <td>{{ request.attributes.sign_fee === 0 ? "-" : request.attributes.sign_fee}}</td>
                     </tr>
                     </tbody>
                   </table>

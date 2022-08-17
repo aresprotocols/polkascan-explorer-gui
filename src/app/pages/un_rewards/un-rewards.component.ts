@@ -33,6 +33,7 @@ export class UnRewardsComponent implements OnInit, OnDestroy {
   public selectedAccount: string;
   public claimLoading = false;
   public showSuccess = false;
+  public showNoMoreData = false;
   public stakingMap: Map<string, string>;
   public extendsAccount = '';
 
@@ -47,7 +48,6 @@ export class UnRewardsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.showLoading = true;
 
-    this.initPolkadotApi();
     this.activatedRoute.paramMap.pipe().subscribe(params => {
       if (params.get('num')) {
         this.blocksNum = params.get('num');
@@ -56,6 +56,7 @@ export class UnRewardsComponent implements OnInit, OnDestroy {
 
     this.networkSubscription = this.appConfigService.getCurrentNetwork().subscribe( network => {
       this.networkURLPrefix = this.appConfigService.getUrlPrefix();
+      this.initPolkadotApi();
 
       this.fragmentSubsription = this.activatedRoute.queryParams.subscribe(params => {
         this.showLoading = true;
@@ -76,7 +77,10 @@ export class UnRewardsComponent implements OnInit, OnDestroy {
     if (this.polkaAPI) {
       return;
     }
-    const provider = new WsProvider('wss://gladios.aresprotocol.io');
+    const network = this.networkURLPrefix.replace('/', '');
+    const url = `wss://${network}.aresprotocol.io`;
+    console.log('network url', url);
+    const provider = new WsProvider(url);
     try {
       ApiPromise.create({provider}).then(api => {
         this.polkaAPI = api;
@@ -101,6 +105,7 @@ export class UnRewardsComponent implements OnInit, OnDestroy {
 
   getUnRewards(page: number) {
     const url = this.appConfigService.getNetworkApiUrlRoot() + '/oracle/reward?'  + 'page[number]=' + page + '&page[size]=25';
+    this.unRewards = [];
     this.http.get(url)
       .subscribe(res => {
         console.log(res);
@@ -132,6 +137,9 @@ export class UnRewardsComponent implements OnInit, OnDestroy {
           }
         })
         this.unRewards = result;
+        if (this.unRewards.length === 0) {
+          this.showNoMoreData = true;
+        }
         console.log(result)
       });
   }
