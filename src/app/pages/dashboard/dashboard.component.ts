@@ -241,14 +241,19 @@ export class DashboardComponent implements OnInit, OnDestroy {
     const url = this.appConfigService.getNetworkApiUrlRoot() + "/oracle/reward";
     this.http.get(url)
       .subscribe(res => {
-        this.chainReward = res['data']['data'];
-        res['data']['data'].forEach(item => {
-          item.reward = (item.reward / 1000000000000).toFixed(2);
+        let result = [];
+        res['data'].forEach(item => {
+          const sub = item.sub_data.map(t => {
+            t.reward = (t.reward / 1000000000000).toFixed(2);
+            return t;
+          });
+          result = result.concat(sub);
         });
+        this.chainReward = result;
         this.chainReward.sort((a, b) => {
           return b.era - a.era;
         });
-        this.chainTotalReward = res['data'].total_reward / 1000000000000;
+        this.chainTotalReward = res['meta'].total_reward / 1000000000000;
       });
   }
 

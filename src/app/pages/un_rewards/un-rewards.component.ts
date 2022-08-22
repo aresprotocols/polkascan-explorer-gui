@@ -108,39 +108,31 @@ export class UnRewardsComponent implements OnInit, OnDestroy {
     this.unRewards = [];
     this.http.get(url)
       .subscribe(res => {
-        console.log(res);
-        const unRewards = res['data']['data'];
-        res['data']['data'].forEach(item => {
-          item.reward = (item.reward / 1000000000000).toFixed(2);
-          item.controller = this.stakingMap?.get(item.account) || 'unknown';
-        });
-        unRewards.sort((a, b) => {
-          return b.era - a.era;
+        // const unRewards = res['data']['data'];
+        // res['data']['data'].forEach(item => {
+        //   item.reward = (item.reward / 1000000000000).toFixed(2);
+        //   item.controller = this.stakingMap?.get(item.account) || 'unknown';
+        // });
+        const result = res['data'].map(item => {
+          item.sub_data.map(t => {
+            t.reward = (t.reward / 1000000000000).toFixed(2);
+            return t;
+          });
+          item.sub_data.sort((a, b) => {
+            return a.era - b.era;
+          });
+          // item.era = item.sub_data[item.sub_data.length - 1].era;
+          item.total_reward = (item.total_reward / 1000000000000).toFixed(2);
+          item.controller = this.stakingMap?.get(item.address) || 'unknown';
+          return item;
         });
 
-        let temp = null;
-        const tempAccounts = [];
-        const result = [];
-        unRewards.forEach(item => {
-          if (!tempAccounts.includes(item.account)) {
-            tempAccounts.push(item.account);
-            temp = item;
-            temp.extends = [];
-            for (const unReward of unRewards) {
-              if (unReward.account === item.account && unReward.era !== item.era) {
-                temp.extends.push(unReward);
-              }
-            }
-            const t = JSON.stringify(temp);
-            result.push(JSON.parse(t));
-            temp = null;
-          }
-        })
+
+        console.log("unRewards", result);
         this.unRewards = result;
         if (this.unRewards.length === 0) {
           this.showNoMoreData = true;
         }
-        console.log(result)
       });
   }
   async getAccounts(address?: string) {
@@ -180,7 +172,7 @@ export class UnRewardsComponent implements OnInit, OnDestroy {
     });
     this.stakingMap = stakingMap;
     this.unRewards?.forEach(item => {
-      item.controller = this.stakingMap?.get(item.account) || 'unknown';
+      item.controller = this.stakingMap?.get(item.address) || 'unknown';
     });
   }
   async accountChange() {
@@ -230,7 +222,7 @@ export class UnRewardsComponent implements OnInit, OnDestroy {
     if (!account) {
       return;
     }
-    this.unRewards = this.unRewards.filter(item => item.account !== '');
+    this.unRewards = this.unRewards.filter(item => item.address !== '');
     if (this.extendsAccount === account) {
       this.extendsAccount = '';
       return;
@@ -240,9 +232,9 @@ export class UnRewardsComponent implements OnInit, OnDestroy {
     const temp = [];
     this.unRewards.forEach(item => {
       temp.push(item);
-      if (item.account === account) {
-        for (const ex of item.extends) {
-          ex.account = '';
+      if (item.address === account) {
+        for (const ex of item.sub_data) {
+          ex.address = '';
           temp.push(ex);
         }
       }

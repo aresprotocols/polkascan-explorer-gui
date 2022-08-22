@@ -64,7 +64,7 @@ export class RequestOnChainComponent implements OnInit, OnDestroy {
 
   getOnChainRequest(page: number) {
     console.log('get on chain asset page:', page);
-    const url = this.appConfigService.getNetworkApiUrlRoot() + "/oracle/requests?"  + 'page=' + page + '&pagesize=25';
+    const url = this.appConfigService.getNetworkApiUrlRoot() + "/oracle/requests?"  + 'page[number]=' + page + '&page[size]=25';
     this.http.get(url)
       .subscribe(res => {
         this.chainRequest = res['data'];

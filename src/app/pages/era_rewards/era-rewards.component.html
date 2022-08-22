@@ -36,12 +36,12 @@
                 </td>
                 <td class="is-hidden-mobile">
                   <span rel="tooltip" title="{{ data.attributes.era_total_fee | date:'medium'}}">
-                    {{ data.attributes.era_total_fee}}
+                    {{ data.attributes.era_total_fee === 0 ? '-' : data.attributes.era_total_fee | number }}
                   </span>
                 </td>
                 <td class="is-hidden-mobile"><div class="hash-format">{{ data.attributes.era_total_requests }}</div></td>
-                <td>{{ data.attributes.era_total_points }}</td>
-                <td>{{ data.attributes.sign_fee}}</td>
+                <td>{{ data.attributes.era_total_points === 0 ? "-" : data.attributes.era_total_points }}</td>
+                <td>{{ data.attributes.sign_fee === 0 ? "-" : data.attributes.sign_fee}}</td>
                 <!--<td width="5%"><a class="button is-small is-primary" routerLink="{{ networkURLPrefix }}/block/{{ block.id }}">{{ 'Block-List.Details' | translate }}</a></td>-->
               </tr>
               </tbody>
