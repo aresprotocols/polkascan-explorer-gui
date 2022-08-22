@@ -28,16 +28,18 @@
               </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let reward of unRewards; let i  = index" [ngClass]="reward.account === '' ? 'extend' : ''">
+                <tr *ngFor="let reward of unRewards; let i  = index" [ngClass]="reward.address === '' ? 'extend' : ''">
                   <td width="5%" class="has-text-centered"></td>
-                  <td>{{ reward.account }}</td>
+                  <td>{{ reward.address }}</td>
                   <td class="era">
                     {{ reward.era }}
-                    <i class="fa fa-plus" aria-hidden="true" *ngIf="reward.account && reward.extends.length > 0"
-                       (click)="extends(i, reward.account)">
-                    </i>
+                    <div class="button is-small is-primary" *ngIf="reward.address && reward.sub_data.length > 0"
+                         (click)="extends(i, reward.address)">
+                      expand
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                    </div>
                   </td>
-                  <td>{{ reward.reward }}</td>
+                  <td>{{ reward.address !== '' ? reward.total_reward : reward.reward}}</td>
                   <td>
                     <a class="button is-small is-primary" *ngIf="accounts?.includes(reward.controller)" (click)="getAccounts(reward.controller)">{{ 'DashBoard.Click to claim' | translate }}</a>
                   </td>
