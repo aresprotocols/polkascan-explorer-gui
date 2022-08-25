@@ -36,7 +36,11 @@
               <tr *ngFor="let request of chainRequest">
                 <td></td>
                 <td >
-                  {{ request.attributes.order_id | hideMiddleStr}}
+                  <div (click)="copyOrderID(request.attributes.order_id)" style="cursor: pointer">
+                    {{ request.attributes.order_id | hideMiddleStr}}
+                    <i *ngIf="copySuccessOrderId !== request.attributes.order_id" class="fa fa-clone" aria-hidden="true" (click)="copyOrderID(request.attributes.order_id)"></i>
+                    <i *ngIf="copySuccessOrderId === request.attributes.order_id" class="fa fa-check-circle has-text-success" aria-hidden="true"></i>
+                  </div>
                 </td>
                 <td>{{request.attributes.requester}}</td>
                 <td>
@@ -44,14 +48,14 @@
                     {{request.attributes.created_at}}
                   </a>
                 </td>
-                <td>{{request.attributes.ended_at}}</td>
+                <td>{{request.attributes.symbols.length}}</td>
                 <td width="20%">
                   <span *ngFor="let pair of request.attributes.symbols" class="pair-item">
                     {{pair}}
                   </span>
                 </td>
-                <td>{{request.attributes.prepayment}}</td>
-                <td>{{request.attributes.payment}}</td>
+                <td>{{request.attributes.prepayment}} ARES</td>
+                <td>{{request.attributes.payment}} ARES</td>
                 <td class="is-hidden-mobile">
                   <div *ngIf="request.attributes.result" class="result-item">
                     <div *ngFor="let key of request.attributes.keys">

@@ -25,6 +25,7 @@ export class RequestOnChainComponent implements OnInit, OnDestroy {
   public showSymbolInfoKey: string;
   public requestsNum: string;
   public showNoMoreData = false;
+  public copySuccessOrderId = '';
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -90,6 +91,18 @@ export class RequestOnChainComponent implements OnInit, OnDestroy {
     } else {
       this.showSymbolInfoKey = id;
     }
+  }
+
+  copyOrderID(orderID: string) {
+    navigator.clipboard.writeText(orderID).then(()=>{
+      console.log('copy success');
+      this.copySuccessOrderId = orderID;
+      setTimeout(() => {
+        this.copySuccessOrderId = '';
+      }, 1000);
+    },()=>{
+      console.log('copy failed');
+    });
   }
 
   ngOnDestroy(): void {
