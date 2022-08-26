@@ -68,7 +68,7 @@ export class AssetsChainInfoComponent implements OnInit, OnDestroy {
         axisPointer: {
           type: 'cross',
           label: {
-            backgroundColor: '#6a7985'
+            backgroundColor: '#5a8ff8'
           }
         }
       },
@@ -96,18 +96,18 @@ export class AssetsChainInfoComponent implements OnInit, OnDestroy {
           symbol: 'none',
           lineStyle: {
             width: 1,
-            color: '#11ff53'
+            color: '#5a8ff8'
           },
           areaStyle: {
             opacity: 0.8,
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
               {
                 offset: 0,
-                color: 'rgba(128,255,165,0.85)'
+                color: 'rgba(219, 229, 254 ,0.95)'
               },
               {
                 offset: 1,
-                color: 'rgba(1,191,236,0.68)'
+                color: 'rgba(219, 229, 254 ,0.35)'
               }
             ])
           },
