@@ -39,7 +39,10 @@
                       <i class="fa fa-plus" aria-hidden="true"></i>
                     </div>
                   </td>
-                  <td>{{ reward.address !== '' ? reward.total_reward : reward.reward}}</td>
+                  <td>
+                    <span *ngIf="reward.address !== ''">{{reward.total_reward}} ARES</span>
+                    <span *ngIf="reward.address === ''">{{reward.reward}} ARES</span>
+                  </td>
                   <td>
                     <a class="button is-small is-primary" *ngIf="accounts?.includes(reward.controller)" (click)="getAccounts(reward.controller)">{{ 'DashBoard.Click to claim' | translate }}</a>
                   </td>

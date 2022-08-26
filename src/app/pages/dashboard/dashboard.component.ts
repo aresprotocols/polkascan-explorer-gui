@@ -78,6 +78,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   isLoadingChart = false;
   public validator: {[key: string]: any}[] = [];
   public showSymbolInfoKey: string;
+  public copySuccessOrderId = '';
+  public totalValidators = '';
 
   constructor(
     private blockService: BlockService,
@@ -263,6 +265,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.http.get(url)
       .subscribe(res => {
         this.validator = res['data'];
+        this.totalValidators = res['meta'].total_audit_count;
       });
   }
 
@@ -302,6 +305,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
       return (chainData.total_stake / chainData.total_issuance * 100).toFixed(1) ;
     }
     return 0;
+  }
+
+  copyOrderID(orderID: string) {
+    navigator.clipboard.writeText(orderID).then(()=>{
+      console.log('copy success');
+      this.copySuccessOrderId = orderID;
+      setTimeout(() => {
+        this.copySuccessOrderId = '';
+      }, 1000);
+    },()=>{
+      console.log('copy failed');
+    });
   }
 
   ngOnDestroy() {
