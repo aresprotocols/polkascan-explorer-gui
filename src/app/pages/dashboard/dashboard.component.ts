@@ -266,6 +266,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
       .subscribe(res => {
         this.validator = res['data'];
         this.totalValidators = res['meta'].total_audit_count;
+        if (this.validator.length > 0) {
+          this.validator.sort((a, b) => {
+            return b['block_number'] - a['block_number'];
+          })
+        }
       });
   }
 
