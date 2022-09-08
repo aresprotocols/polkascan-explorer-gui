@@ -21,9 +21,9 @@
  */
 
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Observable, Subscription} from 'rxjs';
+import {Observable, of, Subscription} from 'rxjs';
 import {ActivatedRoute, ParamMap} from '@angular/router';
-import {switchMap} from 'rxjs/operators';
+import {switchMap, tap} from 'rxjs/operators';
 import {Extrinsic} from '../../classes/extrinsic.class';
 import {ExtrinsicService} from '../../services/extrinsic.service';
 import {AppConfigService} from '../../services/app-config.service';
@@ -68,6 +68,26 @@ export class TransactionDetailComponent implements OnInit, OnDestroy {
         switchMap((params: ParamMap) => {
           this.transactionHash = params.get('id');
           return this.extrinsicService.get(params.get('id'), { include: ['events'] });
+        })
+      ).pipe(
+        tap((extrinsic: Extrinsic) => {
+          let fee;
+          // console.log("extrinsic", extrinsic);
+          extrinsic['relationships']['events']['data'].forEach((item) => {
+            if (item['attributes']['event_id'] === 'Withdraw') {
+              try {
+                // console.log("item", item['attributes']['attributes']);
+                fee = item['attributes']['attributes'][1]['value'];
+              } catch (e) {
+                console.log('parse fee error');
+              }
+            }
+          });
+          // console.log("fee", fee);
+          if (fee) {
+            extrinsic['attributes']['fee'] = fee;
+          }
+          return extrinsic;
         })
       );
 
