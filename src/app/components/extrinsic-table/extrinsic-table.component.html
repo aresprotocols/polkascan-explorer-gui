@@ -66,6 +66,12 @@
                           <td width="15%">{{ 'extrinsic-table.Signature' | translate }}</td>
                           <td><div class="address-mobile-format">0x{{ extrinsic.attributes.signature }}</div></td>
                         </tr>
+                        <tr *ngIf="extrinsic.attributes.fee">
+                          <td width="15%">{{ 'extrinsic-table.Fee' | translate }}</td>
+                          <td><div class="address-mobile-format">
+                            {{ formatBalance(extrinsic.attributes.fee) | number:'1.0-15'}} ARES
+                          </div></td>
+                        </tr>
                         <tr>
                           <td width="15%">{{ 'extrinsic-table.Result' | translate }}</td>
                           <td>

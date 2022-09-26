@@ -123,7 +123,7 @@ export class AssetsChainInfoComponent implements OnInit, OnDestroy {
   }
 
   getHistoryPrice(pageIndex) {
-    const url = this.appConfigService.getNetworkApiUrlRoot() + '/oracle/symbol/' + this.symbolInfo + '?' + 'page[number]=' + pageIndex + '&page[size]=' + 25 * pageIndex;
+    const url = this.appConfigService.getNetworkApiUrlRoot() + '/oracle/symbol/' + this.symbolInfo + '?' + 'page[number]=1&page[size]=' + 25 * pageIndex;
     this.http.get(url)
       .subscribe(res => {
         const historyDate = [];
