@@ -22,7 +22,7 @@
                 <th></th>
                 <th>{{ 'DashBoard.Era' | translate }}</th>
                 <th class="is-hidden-mobile">{{ 'DashBoard.Request fee' | translate }}</th>
-                <th class="is-hidden-mobile">{{ 'DashBoard.Quotation node' | translate }}</th>
+                <th class="is-hidden-mobile">{{ 'DashBoard.Total request' | translate }}</th>
                 <th>{{ 'DashBoard.Generated points' | translate }}</th>
                 <th>{{ 'DashBoard.Reward/each point' | translate }}</th>
                 <th></th>
@@ -35,13 +35,21 @@
                     {{ data.attributes.era }}
                 </td>
                 <td class="is-hidden-mobile">
-                  <span rel="tooltip" title="{{ data.attributes.era_total_fee | date:'medium'}}">
-                    {{ data.attributes.era_total_fee}}
-                  </span>
+                  <div rel="tooltip" title="{{ data.attributes.era_total_fee | date:'medium'}}">
+                    <span *ngIf="data.attributes.era_total_fee === 0">-</span>
+                    <span *ngIf="data.attributes.era_total_fee !== 0">
+                      {{data.attributes.era_total_fee | number: '1.2-2'}} ARES
+                    </span>
+                  </div>
                 </td>
                 <td class="is-hidden-mobile"><div class="hash-format">{{ data.attributes.era_total_requests }}</div></td>
-                <td>{{ data.attributes.era_total_points }}</td>
-                <td>{{ data.attributes.sign_fee}}</td>
+                <td>{{ data.attributes.era_total_points === 0 ? "-" : data.attributes.era_total_points }}</td>
+                <td>
+                  <span *ngIf="data.attributes.sign_fee === 0">-</span>
+                  <span *ngIf="data.attributes.sign_fee !== 0">
+                      {{data.attributes.sign_fee | number: '1.2-3'}} ARES
+                    </span>
+                </td>
                 <!--<td width="5%"><a class="button is-small is-primary" routerLink="{{ networkURLPrefix }}/block/{{ block.id }}">{{ 'Block-List.Details' | translate }}</a></td>-->
               </tr>
               </tbody>

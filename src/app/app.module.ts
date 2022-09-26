@@ -130,7 +130,7 @@ import {EraRewardsComponent} from './pages/era_rewards/era-rewards.component';
 import {ShiftedByLeft12} from './pipes/shifted';
 import {HideMiddleStr} from './pipes/hide-middle-str';
 import {ValidatorOnChainComponent} from './pages/validator-on-chain/validator-on-chain.component';
-
+import { NgxEchartsModule } from 'ngx-echarts';
 
 export class MyClock extends TimeagoClock {
   tick(then: number): Observable<number> {
@@ -227,6 +227,7 @@ export class MyClock extends TimeagoClock {
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    NgxEchartsModule,
     HttpClientJsonpModule,
     MarkdownModule.forRoot(),
     TranslateModule.forRoot({

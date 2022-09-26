@@ -77,6 +77,10 @@ export class ValidatorOnChainComponent implements OnInit, OnDestroy {
         this.isLoading = false;
         if (this.validator.length === 0) {
           this.showNoMoreData = true;
+        } else {
+          this.validator.sort((a, b) => {
+            return b['block_number'] - a['block_number'];
+          })
         }
       });
   }

@@ -62,6 +62,7 @@
 		"Renounced candidacy": "Renounced candidacy",
 		"Reported offline": "Reported offline",
 		"Reserved Balance": "Reserved Balance",
+		"Transfer Balance": "Transfer Balance",
 		"Riot": "Riot",
 		"Role": "Role",
 		"Role_Council member": "Council member",
@@ -298,6 +299,7 @@
     "Era": "Era",
     "Request fee": "Request fee",
     "Quotation node": "Quotation node",
+    "Total request": "Total request",
     "Generated points": "Generated points",
     "Reward/each point": "Reward/each point",
     "Data of on-chain request": "Data of on-chain request",
@@ -579,7 +581,8 @@
 		"Parameters": "Parameters",
 		"Result": "Result",
 		"Signature": "Signature",
-		"Timestamp": "Timestamp"
+		"Timestamp": "Timestamp",
+    "Fee": "Fee"
 	},
 	"log-table": {
 		"Block": "Block",

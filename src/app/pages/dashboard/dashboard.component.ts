@@ -78,6 +78,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   isLoadingChart = false;
   public validator: {[key: string]: any}[] = [];
   public showSymbolInfoKey: string;
+  public copySuccessOrderId = '';
+  public totalValidators = '';
 
   constructor(
     private blockService: BlockService,
@@ -241,14 +243,19 @@ export class DashboardComponent implements OnInit, OnDestroy {
     const url = this.appConfigService.getNetworkApiUrlRoot() + "/oracle/reward";
     this.http.get(url)
       .subscribe(res => {
-        this.chainReward = res['data']['data'];
-        res['data']['data'].forEach(item => {
-          item.reward = (item.reward / 1000000000000).toFixed(2);
+        let result = [];
+        res['data'].forEach(item => {
+          const sub = item.sub_data.map(t => {
+            t.reward = (t.reward / 1000000000000).toFixed(2);
+            return t;
+          });
+          result = result.concat(sub);
         });
+        this.chainReward = result;
         this.chainReward.sort((a, b) => {
           return b.era - a.era;
         });
-        this.chainTotalReward = res['data'].total_reward / 1000000000000;
+        this.chainTotalReward = res['meta'].total_reward / 1000000000000;
       });
   }
 
@@ -258,6 +265,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.http.get(url)
       .subscribe(res => {
         this.validator = res['data'];
+        this.totalValidators = res['meta'].total_audit_count;
+        if (this.validator.length > 0) {
+          this.validator.sort((a, b) => {
+            return b['block_number'] - a['block_number'];
+          })
+        }
       });
   }
 
@@ -297,6 +310,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
       return (chainData.total_stake / chainData.total_issuance * 100).toFixed(1) ;
     }
     return 0;
+  }
+
+  copyOrderID(orderID: string) {
+    navigator.clipboard.writeText(orderID).then(()=>{
+      console.log('copy success');
+      this.copySuccessOrderId = orderID;
+      setTimeout(() => {
+        this.copySuccessOrderId = '';
+      }, 1000);
+    },()=>{
+      console.log('copy failed');
+    });
   }
 
   ngOnDestroy() {

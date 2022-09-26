@@ -60,6 +60,10 @@
                                 <td>{{ 'AccountDetail.Reserved Balance' | translate }}</td>
                                 <td>{{ formatBalance(account.attributes.balance_reserved) | number:'1.0-15' }} {{ networkTokenSymbol }}</td>
                               </tr>
+                              <tr *ngIf="transferBalance">
+                                <td>{{ 'AccountDetail.Transfer Balance' | translate }}</td>
+                                <td>{{ formatBalance(transferBalance) | number:'1.0-15' }} {{ networkTokenSymbol }}</td>
+                              </tr>
                               <tr *ngIf="account.attributes.index_address">
                                 <td>{{ 'AccountDetail.Account index' | translate }}</td>
                                 <td><a routerLink="{{ networkURLPrefix }}/indices/account/{{ account.attributes.index_address }}">{{ account.attributes.index_address}}</a></td>

@@ -25,6 +25,7 @@ export class RequestOnChainComponent implements OnInit, OnDestroy {
   public showSymbolInfoKey: string;
   public requestsNum: string;
   public showNoMoreData = false;
+  public copySuccessOrderId = '';
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -64,7 +65,7 @@ export class RequestOnChainComponent implements OnInit, OnDestroy {
 
   getOnChainRequest(page: number) {
     console.log('get on chain asset page:', page);
-    const url = this.appConfigService.getNetworkApiUrlRoot() + "/oracle/requests?"  + 'page=' + page + '&pagesize=25';
+    const url = this.appConfigService.getNetworkApiUrlRoot() + "/oracle/requests?"  + 'page[number]=' + page + '&page[size]=25';
     this.http.get(url)
       .subscribe(res => {
         this.chainRequest = res['data'];
@@ -90,6 +91,18 @@ export class RequestOnChainComponent implements OnInit, OnDestroy {
     } else {
       this.showSymbolInfoKey = id;
     }
+  }
+
+  copyOrderID(orderID: string) {
+    navigator.clipboard.writeText(orderID).then(()=>{
+      console.log('copy success');
+      this.copySuccessOrderId = orderID;
+      setTimeout(() => {
+        this.copySuccessOrderId = '';
+      }, 1000);
+    },()=>{
+      console.log('copy failed');
+    });
   }
 
   ngOnDestroy(): void {

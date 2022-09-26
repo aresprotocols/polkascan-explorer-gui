@@ -38,6 +38,7 @@ import {EventService} from '../../services/event.service';
 import {BlockTotal} from '../../classes/block-total.class';
 import {BlockTotalService} from '../../services/block-total.service';
 import {Chart} from 'angular-highcharts';
+import {ApiPromise, WsProvider} from '@polkadot/api';
 
 @Component({
   selector: 'app-account-detail',
@@ -84,10 +85,12 @@ export class AccountDetailComponent implements OnInit, OnDestroy {
   public techcommActivityPage = 1;
   public authoredBlocksPage = 1;
   public accountLifecyclePage = 1;
+  public polkaAPI: ApiPromise;
 
   public accountId: string;
 
   public account$: Observable<Account>;
+  public transferBalance: number;
 
   public resourceNotFound: boolean;
 
@@ -135,7 +138,7 @@ export class AccountDetailComponent implements OnInit, OnDestroy {
     this.networkSubscription = this.appConfigService.getCurrentNetwork().subscribe( network => {
 
       this.networkURLPrefix = this.appConfigService.getUrlPrefix();
-
+      this.initPolkadotApi();
       this.networkTokenDecimals = +network.attributes.token_decimals;
       this.networkTokenSymbol = network.attributes.token_symbol;
 
@@ -202,7 +205,10 @@ export class AccountDetailComponent implements OnInit, OnDestroy {
         })
       );
 
+
+
       this.account$.subscribe(val => {
+        console.log('account info:', val);
         if (val.attributes.address) {
 
           this.accountId = val.attributes.address;
@@ -292,6 +298,37 @@ export class AccountDetailComponent implements OnInit, OnDestroy {
         }
       });
     });
+  }
+
+  async initPolkadotApi() {
+    if (this.polkaAPI) {
+      return;
+    }
+    const network = this.networkURLPrefix.replace('/', '');
+    const url = `wss://${network}.aresprotocol.io`;
+    console.log('network url', url);
+    const provider = new WsProvider(url);
+    try {
+      ApiPromise.create({provider}).then(api => {
+        this.polkaAPI = api;
+        this.getAccountInfo();
+      });
+    } catch (e) {
+      console.log('init polka api error:', e);
+    }
+  }
+
+  public async getAccountInfo() {
+    const accountInfo = await this.polkaAPI?.query.system.account(this.accountId);
+    const result = accountInfo.toHuman();
+    console.log('account info:', result);
+    const bal = this.formatData(result.data['free']) - this.formatData(result.data['feeFrozen'])
+      - this.formatData(result.data['reserved']);
+    this.transferBalance = bal;
+  }
+
+  public formatData(data: string) {
+    return Number(data.replace(/,/g, ''));
   }
 
   public renderChart() {
@@ -461,6 +498,12 @@ export class AccountDetailComponent implements OnInit, OnDestroy {
     }
     if (this.queryParamsSubsription) {
       this.queryParamsSubsription.unsubscribe();
+    }
+
+    if (this.polkaAPI) {
+      this.polkaAPI.disconnect().then(() => {
+        console.log('disconnect polk api');
+      });
     }
   }
 

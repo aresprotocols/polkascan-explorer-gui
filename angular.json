@@ -34,7 +34,8 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "node_modules/marked/marked.min.js"
+              "node_modules/marked/marked.min.js",
+              "node_modules/echarts/dist/echarts.js"
             ]
           },
           "configurations": {
@@ -66,7 +67,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "5mb",
-                  "maximumError": "6mb"
+                  "maximumError": "7mb"
                 }
               ]
             },
@@ -90,7 +91,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "5mb",
-                  "maximumError": "6mb"
+                  "maximumError": "7mb"
                 }
               ]
             },
@@ -114,7 +115,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "5mb",
-                  "maximumError": "6mb"
+                  "maximumError": "7mb"
                 }
               ]
             }
