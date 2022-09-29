@@ -39,7 +39,7 @@ import localeZh from '@angular/common/locales/zh';
 
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { NgxJsonapiModule } from 'ngx-jsonapi';
+import { JsonapiBootstrap } from 'ngx-jsonapi';
 
 import { BlockListComponent } from './pages/block-list/block-list.component';
 import { BlockDetailComponent } from './pages/block-detail/block-detail.component';
@@ -243,9 +243,6 @@ export class MyClock extends TimeagoClock {
     }),
     FormsModule,
     ChartModule,
-    NgxJsonapiModule.forRoot({
-        url: ''
-    }),
     TimeagoModule.forRoot({
       clock: {provide: TimeagoClock, useClass: MyClock},
     }),
@@ -254,7 +251,11 @@ export class MyClock extends TimeagoClock {
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  public constructor() {
+    JsonapiBootstrap.bootstrap({user_config: {url: ''}});
+  }
+}
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {

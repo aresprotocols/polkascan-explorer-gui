@@ -3,6 +3,7 @@ import {interval, Subscription} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import {AppConfigService} from '../../services/app-config.service';
 import {HttpClient} from '@angular/common/http';
+import '@polkadot/api-augment'
 import {ApiPromise, WsProvider} from '@polkadot/api';
 import {web3Accounts, web3Enable, web3FromAddress} from '@polkadot/extension-dapp';
 import {InjectedAccountWithMeta} from '@polkadot/extension-inject/types';
@@ -167,7 +168,7 @@ export class UnRewardsComponent implements OnInit, OnDestroy {
     const staking = await this.polkaAPI?.query.staking.bonded.entries();
     const stakingMap = new Map<string, string>();
     staking.forEach(([key, exposure]) => {
-      const tmp = key.args.map((k) => k.toHuman());
+      const tmp: any = key.args.map((k) => k.toHuman());
       stakingMap.set(tmp[0], exposure.toHuman().toString());
     });
     this.stakingMap = stakingMap;
@@ -215,6 +216,7 @@ export class UnRewardsComponent implements OnInit, OnDestroy {
         });
     }
     catch (e) {
+      console.log('claim error', e);
       v.claimLoading = false;
     }
   }

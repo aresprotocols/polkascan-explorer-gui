@@ -322,8 +322,8 @@ export class AccountDetailComponent implements OnInit, OnDestroy {
     const accountInfo = await this.polkaAPI?.query.system.account(this.accountId);
     const result = accountInfo.toHuman();
     console.log('account info:', result);
-    const bal = this.formatData(result.data['free']) - this.formatData(result.data['feeFrozen'])
-      - this.formatData(result.data['reserved']);
+    const bal = this.formatData(result['data']['free']) - this.formatData(result['data']['feeFrozen'])
+      - this.formatData(result['data']['reserved']);
     this.transferBalance = bal;
   }
 
