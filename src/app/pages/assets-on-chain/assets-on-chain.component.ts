@@ -71,6 +71,7 @@ export class AssetsOnChainComponent implements OnInit, OnDestroy {
       .subscribe(res => {
         res['data'].forEach(item => {
           item.price = item.price / 10000;
+          item.created_at = new Date(item.created_at * 1000).toLocaleString();
         });
         this.chainAssets = res['data'];
         if (this.chainAssets.length === 0) {
